@@ -257,7 +257,7 @@
         // 탭 2: 나이스 오픈 API 실시간 자동화 핵심부
         // ==========================================
         // 외대부고 식별 정보 (경기도교육청 J10 / 학교코드 7530851)
-        const NEIS_API_KEY = "SampleKey123456789"; // 본인의 나이스 API 키가 있다면 교체하세요. 기본 키로도 작동 가능합니다.
+        const NEIS_API_KEY = "d64d275be7a74a40a2bf66ee79d6c0ba"; // 본인의 나이스 API 키가 있다면 교체하세요. 기본 키로도 작동 가능합니다.
         const ATPT_OFCDC_SC_CODE = "J10";
         const SD_SCHUL_CODE = "7530851";
 
@@ -282,7 +282,7 @@
             content.innerHTML = `<p class="text-xs text-zinc-500 animate-pulse">나이스 서버에서 실시간 급식 데이터를 조회하는 중입니다...</p>`;
 
             // 나이스 오픈 API 요청 URL 생성
-            const url = `https://open.neis.go.kr/open/api/mealServiceDietInfo?KEY=${d64d275be7a74a40a2bf66ee79d6c0ba}&Type=json&ATPT_OFCDC_SC_CODE=${ATPT_OFCDC_SC_CODE}&SD_SCHUL_CODE=${SD_SCHUL_CODE}&MLSV_YMD=${pureDate}&MMEAL_SC_CODE=${mealCode}`;
+            const url = `https://open.neis.go.kr/open/api/mealServiceDietInfo?KEY=${ NEIS_API_KEY}&Type=json&ATPT_OFCDC_SC_CODE=${ATPT_OFCDC_SC_CODE}&SD_SCHUL_CODE=${SD_SCHUL_CODE}&MLSV_YMD=${pureDate}&MMEAL_SC_CODE=${mealCode}`;
 
             try {
                 const response = await fetch(url);
