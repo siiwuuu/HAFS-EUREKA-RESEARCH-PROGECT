@@ -30,7 +30,7 @@
                     식단 맞춤 진단툴
                 </button>
                 <button onclick="switchTab('deodorant')" id="link-deodorant" class="py-1 sm:py-2 text-zinc-400 hover:text-zinc-900 border-b-2 border-transparent cursor-pointer whitespace-nowrap transition-all">
-                    탈취제 시뮬레이션
+                    맞춤형 QSI 솔루션
                 </button>
             </div>
         </div>
@@ -45,8 +45,8 @@
                     급식실 내 휘발성 물질의 확산 및 잔류 동역학과 구조·환기 조건에 따른 분과별 탈취 전략 분석
                 </h1>
                 <div class="pt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] sm:text-xs text-zinc-500 font-medium">
-                    <span class="text-zinc-800 bg-zinc-100 px-2 py-1 rounded-md">용인한국외국어대학교부설고등학교</span>
-                    <span>MEMBER: 김민솔, 김연아, 박새온, 박시우, 이홍주</span>
+                    <span class="text-zinc-800 bg-zinc-100 px-2 py-1 rounded-md">용인한국외국어대학교부속고등학교</span>
+                    <span>연구진: 김민솔, 김연아, 박새온, 박시우, 이홍주</span>
                 </div>
             </div>
 
@@ -88,16 +88,6 @@
                         </p>
                     </div>
                 </div>
-            </div>
-
-            <div class="pt-6 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 bg-zinc-50 p-4 sm:p-0 sm:bg-transparent rounded-xl">
-                <div class="space-y-0.5 text-center sm:text-left">
-                    <p class="text-xs font-semibold text-zinc-900">실생활 응용: HAFS 식단 연동 시스템</p>
-                    <p class="text-[11px] text-zinc-500">당일 식단표 데이터를 기반으로 최적의 의류와 행동 강령을 추천합니다.</p>
-                </div>
-                <button onclick="switchTab('simulator')" class="w-full sm:w-auto px-4 py-3 sm:py-2 bg-zinc-900 hover:bg-zinc-800 text-white text-[13px] sm:text-xs font-medium rounded-lg sm:rounded-md transition-all shadow-sm cursor-pointer shrink-0">
-                    진단 시스템 실행하기
-                </button>
             </div>
         </section>
 
@@ -157,37 +147,122 @@
                     </div>
                 </div>
 
-                <button onclick="diagnoseSystem()" class="w-full bg-zinc-900 hover:bg-zinc-800 active:scale-[0.99] text-white font-medium py-3.5 sm:py-3 rounded-lg text-[13px] sm:text-xs tracking-wider transition-all cursor-pointer">
+                <button onclick="diagnoseMenu()" class="w-full bg-zinc-900 hover:bg-zinc-800 active:scale-[0.99] text-white font-medium py-3.5 sm:py-3 rounded-lg text-[13px] sm:text-xs tracking-wider transition-all cursor-pointer">
                     해당 식단 분석 및 의류 추천받기
                 </button>
             </div>
 
-            <div id="resultContainer" class="hidden bg-white border border-zinc-900 rounded-xl p-5 sm:p-8 space-y-5 transition-all shadow-md">
+            <div id="menuResultContainer" class="hidden bg-white border border-zinc-900 rounded-xl p-5 sm:p-8 space-y-5 transition-all shadow-md">
                 <div class="flex items-center justify-between border-b border-zinc-100 pb-3">
                     <h3 class="text-xs font-bold tracking-wider text-zinc-900 uppercase">Diagnosis & Action</h3>
-                    <div id="resultBadge"></div>
+                    <div id="menuResultBadge"></div>
                 </div>
-                <div id="resultContent" class="space-y-4"></div>
+                <div id="menuResultContent" class="space-y-4"></div>
             </div>
         </section>
 
-        <section id="tab-deodorant" class="tab-content hidden space-y-4 sm:space-y-6">
+        <section id="tab-deodorant" class="tab-content hidden space-y-6 sm:space-y-8">
             <div class="space-y-1">
-                <h2 class="text-lg font-bold tracking-tight text-zinc-900">분자 도킹 시뮬레이터</h2>
-                <p class="text-zinc-500 text-[11px] sm:text-xs break-keep">조원이 별도로 배포한 웹 애플리케이션을 연동하여 제공합니다.</p>
+                <h2 class="text-lg font-bold tracking-tight text-zinc-900">개인 맞춤형 QSI 탈취제 합성 알고리즘</h2>
+                <p class="text-zinc-500 text-xs break-keep">연구팀의 데이터를 바탕으로 주취 유형, 심각도, 피부 타입 등에 맞춘 최적의 성분비를 계산합니다.</p>
             </div>
 
-            <div class="w-full h-[600px] md:h-[750px] bg-zinc-50 border border-zinc-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-inner flex flex-col">
-                <div class="h-8 bg-zinc-200/50 border-b border-zinc-200 flex items-center px-4 gap-1.5 shrink-0">
-                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
-                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
-                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
+            <div class="bg-white border border-zinc-200/80 rounded-xl p-5 sm:p-6 space-y-6 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                    <div class="space-y-1.5 md:col-span-2">
+                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">1. 섬유에서 감지되는 주취 유형</label>
+                        <select id="qsiOdor" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
+                            <option value="1">시큼하고 쿰쿰한 쉰내 (포도상구균 대사 땀 냄새)</option>
+                            <option value="2">강하고 톡 쏘는 암내 (코리네박테리움 피지 분해 취)</option>
+                            <option value="3">꿉꿉한 냄새 및 섬유의 황변 현상 (미크로코쿠스 유래)</option>
+                            <option value="4">급식실 잔류 취기 (슈도모나스균 유래 음식물 바이오필름 향)</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">2. 악취 및 세균 증식 심각도</label>
+                        <select id="qsiSeverity" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
+                            <option value="1">경미함 (가까운 거리에서 미세 감지)</option>
+                            <option value="2" selected>보통 (일반적인 활동 반경 내 인지 가능)</option>
+                            <option value="3">심각함 (섬유 흡착 및 주변 확산 유의 수준)</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">3. 적용 대상 의류 재질</label>
+                        <select id="qsiFabric" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
+                            <option value="1">생활체육복 (폴리에스테르 고흡착성 섬유)</option>
+                            <option value="2">교복 셔츠 (면·합성섬유 혼방)</option>
+                            <option value="3">교복 자켓 (모직 및 부직포 혼방 구조)</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1.5 md:col-span-2">
+                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">4. 학생 피부 타입 및 알코올 민감도</label>
+                        <select id="qsiSkinType" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
+                            <option value="normal">일반 타입 (에탄올 기반 급속 휘발 포뮬러 가능)</option>
+                            <option value="sensitive">민감성 피부 / 알코올 향 민감 (저자극 수성 포뮬러 조정)</option>
+                        </select>
+                    </div>
                 </div>
-                <iframe 
-                    src="https://hafsdeod2.netlify.app/" 
-                    class="w-full h-full flex-grow border-0" 
-                    title="Teammate Deodorant App">
-                </iframe>
+
+                <button onclick="calculateFormula()" class="w-full bg-zinc-900 hover:bg-zinc-800 active:scale-[0.99] text-white font-medium py-3.5 sm:py-3 rounded-lg text-[13px] sm:text-xs tracking-wider transition-all cursor-pointer">
+                    분석 및 최적 성분비 도출
+                </button>
+            </div>
+
+            <div id="qsiResultContainer" class="hidden bg-white border border-zinc-900 rounded-xl p-5 sm:p-8 space-y-6 transition-all shadow-md">
+                <div class="flex items-center justify-between border-b border-zinc-100 pb-3">
+                    <h3 class="text-xs font-bold tracking-wider text-zinc-900 uppercase">Prescription Report</h3>
+                    <div id="qsiBadge" class="text-[9px] sm:text-[10px] font-mono font-bold px-2 py-1 rounded"></div>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="text-[13px] sm:text-sm text-zinc-600">
+                        <strong>동정 원인 미생물:</strong> <span id="out-bacteria" class="text-zinc-900"></span>
+                    </div>
+                    <div class="text-[13px] sm:text-sm text-zinc-600">
+                        <strong>최적 매칭 QSI 물질:</strong> <span id="out-qsi" class="font-bold text-zinc-900"></span>
+                    </div>
+                </div>
+
+                <div class="border border-zinc-200 rounded-lg overflow-hidden">
+                    <table class="w-full text-left text-[12px] sm:text-xs">
+                        <thead class="bg-zinc-50 border-b border-zinc-200 text-zinc-500 uppercase">
+                            <tr>
+                                <th class="px-4 py-3 font-semibold">배합 성분명</th>
+                                <th class="px-4 py-3 font-semibold text-right">중량 비율 (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-100 text-zinc-800">
+                            <tr>
+                                <td class="px-4 py-3">정밀 매칭 QSI 차단제 (활성 성분)</td>
+                                <td class="px-4 py-3 text-right font-mono font-bold" id="out-qsi-pct">0.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">가용화제 (유기 성분 안정화 계면활성제)</td>
+                                <td class="px-4 py-3 text-right font-mono font-bold" id="out-surfactant-pct">0.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">악취 중화제 (화학적 소취제)</td>
+                                <td class="px-4 py-3 text-right font-mono font-bold" id="out-neutral-pct">0.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">식물성 발효 에탄올 (휘발성 용매)</td>
+                                <td class="px-4 py-3 text-right font-mono font-bold" id="out-ethanol-pct">0.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">초순수 정제수 (Purified Water)</td>
+                                <td class="px-4 py-3 text-right font-mono font-bold" id="out-water-pct">0.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-[#fafafa] border-l-2 border-zinc-900 p-4 rounded-r-lg">
+                    <p class="text-[11px] sm:text-xs font-bold text-zinc-900 mb-1.5">분자 수준 작동 메커니즘</p>
+                    <p id="out-principle" class="text-[12px] sm:text-xs text-zinc-600 leading-relaxed text-justify break-keep"></p>
+                </div>
             </div>
         </section>
 
@@ -198,34 +273,7 @@
     </footer>
 
     <script>
-        // HAFS 6월 1달치(평일) 실제 식단표 데이터베이스
-        const hafsMenuDB = {
-            "0601": { dateLabel: "6월 1일 (월)", breakfast: "쌀밥, 맑은오징어국, 돈사태묵은지찜, 마늘햄구이", lunch: "쌀밥, 김치찌개, 치즈스테이크볼꼬지, 쫄뱅이", dinner: "쌀밥, 닭갈비, 순두부, 열무나물" },
-            "0602": { dateLabel: "6월 2일 (화)", breakfast: "쌀밥, 열무된장국, 닭볶음탕, 파프리카맛살조림", lunch: "수제치킨마요덮밥, 미역장국, 언양식불고기", dinner: "쌀밥, 닭곰탕, 미트볼채소조림, 꽃맛살샐러드" },
-            "0603": { dateLabel: "6월 3일 (수)", breakfast: "칼슘강화밥, 쇠고기무국, 갈치카레구이, 베이컨스크램블", lunch: "바지락칼국수, 갈릭닭다리구이, 순대강정", dinner: "쌀밥, 볶음우동, 돈육김치볶음, 납작만두" },
-            "0604": { dateLabel: "6월 4일 (목)", breakfast: "쌀밥, 된장찌개, 바베큐삼겹살, 두부볼간장조림", lunch: "고구마영양밥, 순두부맑은국, 치즈매운등갈비", dinner: "탄탄면, 후르츠탕수육, 파바오" },
-            "0605": { dateLabel: "6월 5일 (금)", breakfast: "쌀밥, 감자양파국, 쇠고기장조림, 미나리감자전", lunch: "김가루비빔밥, 국물가래떡볶이, 김말이, 군만두", dinner: "곤드레밥, 된장찌개, 코다리강정, 너비아니" },
-            "0608": { dateLabel: "6월 8일 (월)", breakfast: "쌀밥, 쇠고기미역국밥, 목살양념불고기", lunch: "쌀밥, 콩나물국, 주꾸미삼겹살", dinner: "쌀밥, 호박고추장찌개, 소고기버섯볶음" },
-            "0609": { dateLabel: "6월 9일 (화)", breakfast: "쌀밥, 북어채계란국, 떡갈비피망조림", lunch: "쌀밥, 근대된장국, 왕갈비통닭", dinner: "쌀밥, 소고기무국, 버터플라이고등어구이" },
-            "0610": { dateLabel: "6월 10일 (수)", breakfast: "칼슘강화밥, 사골파국, 훈제오리볶음", lunch: "쉬림프아라비아따, 바베큐백립", dinner: "나시고랭볶음밥, 쌀국수국물, 팟타이, 월남짜조" },
-            "0611": { dateLabel: "6월 11일 (목)", breakfast: "쌀밥, 순두부맑은국, 닭윙매콤조림", lunch: "쌀밥, 부대찌개, 쇠고기떡찜", dinner: "셀프김밥, 유부주머니우동, 새우튀김" },
-            "0612": { dateLabel: "6월 12일 (금)", breakfast: "쌀밥, 팽이된장국, 해물야채볶음", lunch: "김가루비빔밥, 국물가래떡볶이, 김말이", dinner: "쌀밥, 콩가루배추된장국, 지코바양념구이" },
-            "0615": { dateLabel: "6월 15일 (월)", breakfast: "쌀밥, 건새우아욱국, 쇠고기불고기", lunch: "자장면, 꿔바로우", dinner: "후리가깨밥, 잔치국수, 한식떡갈비" },
-            "0616": { dateLabel: "6월 16일 (화)", breakfast: "칼슘강화밥, 짜글이찌개, 데판만조풍기", lunch: "스팸김치볶음밥, 미소장국, 새우볼꼬치", dinner: "장터국밥, 임연수오븐구이" },
-            "0617": { dateLabel: "6월 17일 (수)", breakfast: "쌀밥, 들깨무국, 고구마닭갈비", lunch: "쌀밥, 감자양파국, 해물떡찜", dinner: "돈까스김치나베, 프리타타" },
-            "0618": { dateLabel: "6월 18일 (목)", breakfast: "쌀밥, 쇠고기감자국, 돈육간장불고기", lunch: "쌀밥, 어묵국, 양념치킨", dinner: "소고기미역국, 오동불고기" },
-            "0619": { dateLabel: "6월 19일 (금)", breakfast: "미역국", lunch: "낙지볶음", dinner: "귀가의 날 (급식 없음)" },
-            "0622": { dateLabel: "6월 22일 (월)", breakfast: "시금치고추장국, 닭고기장조림", lunch: "돈육수육, 계란찜", dinner: "오징어채소볶음, 깻잎완자전" },
-            "0623": { dateLabel: "6월 23일 (화)", breakfast: "얼큰버섯찌개, 코다리감자조림", lunch: "바베큐닭다리구이, 웨지감자튀김", dinner: "참치김치찌개, 삼치구이" },
-            "0624": { dateLabel: "6월 24일 (수)", breakfast: "시래기된장국, 떡갈비", lunch: "깐풍육, 애호박전", dinner: "불닭마요덮밥, 마요소스" },
-            "0625": { dateLabel: "6월 25일 (목)", breakfast: "오징어쑥갓국, 돈육두루치기", lunch: "미역국, 돼지갈비구이", dinner: "투움바파스타, 바베큐폭립" },
-            "0626": { dateLabel: "6월 26일 (금)", breakfast: "육개장, 낙지굴소스볶음", lunch: "해물야채볶음", dinner: "강황밥, 코다리강정" },
-            "0629": { dateLabel: "6월 29일 (월)", breakfast: "돼지국밥, 수제완자전", lunch: "미나리삼겹비빔밥, 파닭", dinner: "김치말이국수, 바싹불고기" },
-            "0630": { dateLabel: "6월 30일 (화)", breakfast: "호박새우젓국, 갈릭돈육찹스테이크", lunch: "오징어다리튀김, 마파두부조림", dinner: "짬뽕순두부찌개, 새서미두부카츠" }
-        };
-
-        const fattyKeywords = ['튀김', '볶음', '전', '삼겹살', '돈까스', '강정', '치킨', '구이', '카츠', '스테이크', '마요', '갈비', '고기', '바베큐', '만두', '탕수육'];
-
+        // 공통: 탭 전환 함수
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
@@ -242,40 +290,62 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 로직: 날짜와 끼니를 기반으로 식단을 분석하고 의류/데드존 설명 제공
-        function diagnoseSystem() {
+        // ==========================================
+        // 탭 2: HAFS 식단 분석 로직
+        // ==========================================
+        const hafsMenuDB = {
+            "0601": { dateLabel: "6월 1일 (월)", breakfast: "쌀밥, 맑은오징어국, 돈사태묵은지찜, 마늘햄구이", lunch: "쌀밥, 김치찌개, 치즈스테이크볼꼬지, 쫄뱅이", dinner: "불닭마요덮밥, 투움바파스타, 오지치즈구이" },
+            "0602": { dateLabel: "6월 2일 (화)", breakfast: "쌀밥, 열무된장국, 닭볶음탕, 파프리카맛살조림", lunch: "수제치킨마요덮밥, 미역장국, 언양식불고기", dinner: "쌀밥, 닭곰탕, 미트볼채소조림, 꽃맛살샐러드" },
+            "0603": { dateLabel: "6월 3일 (수)", breakfast: "칼슘강화밥, 쇠고기무국, 갈치카레구이, 베이컨스크램블", lunch: "바지락칼국수, 갈릭닭다리구이, 순대강정", dinner: "쌀밥, 볶음우동, 돈육김치볶음, 납작만두" },
+            "0604": { dateLabel: "6월 4일 (목)", breakfast: "쌀밥, 된장찌개, 바베큐삼겹살, 두부볼간장조림", lunch: "고구마영양밥, 순두부맑은국, 치즈매운등갈비", dinner: "탄탄면, 후르츠탕수육, 파바오" },
+            "0605": { dateLabel: "6월 5일 (금)", breakfast: "쌀밥, 감자양파국, 쇠고기장조림, 미나리감자전", lunch: "김가루비빔밥, 국물가래떡볶이, 김말이, 군만두", dinner: "곤드레밥, 된장찌개, 코다리강정, 너비아니" },
+            "0608": { dateLabel: "6월 8일 (월)", breakfast: "쌀밥, 쇠고기미역국밥, 목살양념불고기", lunch: "로제떡볶이, 김말이강정, 양상추샐러드", dinner: "쌀밥, 호박고추장찌개, 소고기버섯볶음" },
+            "0609": { dateLabel: "6월 9일 (화)", breakfast: "쌀밥, 북어채계란국, 떡갈비피망조림", lunch: "쌀밥, 근대된장국, 왕갈비통닭", dinner: "쌀밥, 소고기무국, 버터플라이고등어구이" },
+            "0610": { dateLabel: "6월 10일 (수)", breakfast: "칼슘강화밥, 사골파국, 훈제오리볶음", lunch: "쉬림프아라비아따, 바베큐백립", dinner: "나시고랭볶음밥, 쌀국수국물, 팟타이" },
+            "0611": { dateLabel: "6월 11일 (목)", breakfast: "쌀밥, 순두부맑은국, 닭윙매콤조림", lunch: "반미샌드위치, 감자스프, 샐러드", dinner: "셀프김밥, 유부주머니우동, 새우튀김" },
+            "0612": { dateLabel: "6월 12일 (금)", breakfast: "쌀밥, 팽이된장국, 해물야채볶음", lunch: "김가루비빔밥, 국물가래떡볶이, 김말이", dinner: "쌀밥, 콩가루배추된장국, 지코바양념구이" },
+            "0615": { dateLabel: "6월 15일 (월)", breakfast: "쌀밥, 건새우아욱국, 쇠고기불고기", lunch: "자장면, 꿔바로우", dinner: "후리가깨밥, 잔치국수, 한식떡갈비" },
+            "0616": { dateLabel: "6월 16일 (화)", breakfast: "칼슘강화밥, 짜글이찌개, 데판만조풍기", lunch: "스팸김치볶음밥, 미소장국, 새우볼꼬치", dinner: "장터국밥, 임연수오븐구이" },
+            "0617": { dateLabel: "6월 17일 (수)", breakfast: "쌀밥, 들깨무국, 고구마닭갈비", lunch: "쌀밥, 감자양파국, 해물떡찜", dinner: "돈까스김치나베, 프리타타" },
+            "0618": { dateLabel: "6월 18일 (목)", breakfast: "쌀밥, 쇠고기감자국, 돈육간장불고기", lunch: "쌀밥, 어묵국, 양념치킨", dinner: "소고기미역국, 오동불고기" },
+            "0619": { dateLabel: "6월 19일 (금)", breakfast: "미역국, 참나물무침", lunch: "낙지볶음, 계란말이", dinner: "귀가의 날 (급식 없음)" },
+            "0622": { dateLabel: "6월 22일 (월)", breakfast: "시금치고추장국, 닭고기장조림", lunch: "돈육수육, 계란찜", dinner: "오징어채소볶음, 깻잎완자전" },
+            "0623": { dateLabel: "6월 23일 (화)", breakfast: "얼큰버섯찌개, 코다리감자조림", lunch: "바베큐닭다리구이, 웨지감자튀김", dinner: "참치김치찌개, 삼치구이" },
+            "0624": { dateLabel: "6월 24일 (수)", breakfast: "시래기된장국, 떡갈비", lunch: "깐풍육, 애호박전", dinner: "불닭마요덮밥, 마요소스" },
+            "0625": { dateLabel: "6월 25일 (목)", breakfast: "오징어쑥갓국, 돈육두루치기", lunch: "미역국, 돼지갈비구이", dinner: "투움바파스타, 바베큐폭립" },
+            "0626": { dateLabel: "6월 26일 (금)", breakfast: "육개장, 낙지굴소스볶음", lunch: "해물야채볶음", dinner: "강황밥, 코다리강정" },
+            "0629": { dateLabel: "6월 29일 (월)", breakfast: "돼지국밥, 수제완자전", lunch: "미나리삼겹비빔밥, 파닭", dinner: "조계국수, 돈육고추장강정" },
+            "0630": { dateLabel: "6월 30일 (화)", breakfast: "호박새우젓국, 갈릭돈육찹스테이크", lunch: "오징어다리튀김, 마파두부조림", dinner: "짬뽕순두부찌개, 새서미두부카츠" }
+        };
+
+        const fattyKeywords = ['튀김', '볶음', '전', '삼겹살', '돈까스', '강정', '치킨', '구이', '카츠', '스테이크', '마요', '갈비', '고기', '바베큐', '만두', '탕수육', '꿔바로우', '폭립', '백립'];
+
+        function diagnoseMenu() {
             const dateId = document.getElementById('dateSelect').value;
             const meal = document.getElementById('mealSelect').value;
             
             const selectedDayData = hafsMenuDB[dateId];
             const currentMenu = selectedDayData[meal];
             const dateLabel = selectedDayData.dateLabel;
-            
             const mealLabel = meal === 'breakfast' ? '조식' : meal === 'lunch' ? '중식' : '석식';
 
-            let isFatty = false;
-            let detectedWords = [];
-            
-            // 귀가의 날 등 식단이 없는 경우 예외처리
             if (!currentMenu || currentMenu.includes("급식 없음")) {
                 alert("선택하신 날짜의 해당 끼니에는 식단 정보가 없습니다.");
                 return;
             }
 
+            let isFatty = false;
+            let detectedWords = [];
             fattyKeywords.forEach(keyword => {
                 if (currentMenu.includes(keyword)) {
-                    isFatty = true;
-                    detectedWords.push(keyword);
+                    isFatty = true; detectedWords.push(keyword);
                 }
             });
 
-            const container = document.getElementById('resultContainer');
-            const content = document.getElementById('resultContent');
-            const badge = document.getElementById('resultBadge');
-            
+            const container = document.getElementById('menuResultContainer');
+            const content = document.getElementById('menuResultContent');
+            const badge = document.getElementById('menuResultBadge');
             container.classList.remove('hidden');
-            
-            let badgeText = ''; let badgeClass = ''; let warningText = ''; let actionText = '';
             
             const menuDisplayHtml = `
                 <div class="bg-zinc-100/50 border border-zinc-200 p-3 sm:p-4 rounded-lg mb-4">
@@ -283,58 +353,110 @@
                     <p class="text-[13px] sm:text-sm font-bold text-zinc-900 break-keep">${currentMenu}</p>
                 </div>
             `;
-
             const keywordListStr = detectedWords.map(w => `#${w}`).join(', ');
 
-            // 지용성(유분성) 메뉴일 경우의 처리 + 데드존 해설 추가
             if (isFatty) {
-                badgeText = 'HIGH RISK MENU';
-                badgeClass = 'bg-red-50 text-red-700 border border-red-200';
-                warningText = `분석 결과, 선택하신 날짜의 식단에는 유분성 악취 물질을 다량 발생시키는 <strong>지용성 메뉴(${keywordListStr})</strong>가 포함되어 있습니다. 공기 중에 비산하는 지용성 분자는 소수성 상호작용에 의해 특정 합성 섬유에 극도로 강하게 고착화됩니다.`;
-                
-                actionText = `
-                    <div class="mb-3 p-3 bg-white border border-red-100 rounded text-red-900">
-                        <p class="font-bold text-[12px] sm:text-xs mb-1">✨ 시스템 추천 의류 매칭</p>
-                        <p class="mb-1">✔️ <strong>안전: 친수성 레이온 혼방 (교복 셔츠 등)</strong></p>
-                        <p>❌ <strong>위험: 폴리에스터 100% (체육복, 외투 등)</strong></p>
-                    </div>
-                    유분성 악취 방어를 위해 <strong>교복 셔츠 단독 착용 상태로 취식</strong>하는 것이 가장 안전합니다. 소수성인 폴리에스터 체육복이나 외투는 분자 간 강력한 인력으로 89.16%의 높은 흡착률을 보이므로 <strong>식사 전 반드시 탈의</strong>하여 보관하십시오. 아울러 환기가 불량한 공기 정체 구역인 Z6 구역(Dead Zone) 착석을 원천적으로 피하시길 권고합니다.
-                    
-                    <div class="mt-4 p-3.5 bg-zinc-800 rounded text-zinc-100 shadow-inner">
-                        <div class="flex items-center gap-2 mb-1.5">
-                            <span class="text-sm">🔬</span>
-                            <p class="font-bold text-[12px] sm:text-xs text-white">연구팀 추가 해설: Z6 Dead Zone 이란?</p>
+                badge.className = `text-[9px] sm:text-[10px] font-mono font-bold px-2 py-1 rounded bg-red-50 text-red-700 border border-red-200`;
+                badge.innerText = 'HIGH RISK MENU';
+                content.innerHTML = `
+                    ${menuDisplayHtml}
+                    <p class="text-[12px] sm:text-xs text-zinc-600 leading-relaxed text-justify break-keep">분석 결과, 식단에 유분성 악취 물질을 다량 발생시키는 <strong>지용성 메뉴(${keywordListStr})</strong>가 포함되어 있습니다. 공기 중에 비산하는 지용성 분자는 소수성 상호작용에 의해 합성 섬유에 극도로 강하게 고착화됩니다.</p>
+                    <div class="bg-zinc-50 p-3 sm:p-4 rounded-lg border border-zinc-200 mt-4 space-y-4">
+                        <div class="p-3 bg-white border border-red-100 rounded text-red-900">
+                            <p class="font-bold text-[12px] sm:text-xs mb-1">✨ 추천 의류 매칭 및 행동 강령</p>
+                            <p class="mb-1">✔️ <strong>안전: 친수성 레이온 혼방 (교복 셔츠 등) 단독 착용</strong></p>
+                            <p class="mb-2">❌ <strong>위험: 소수성 폴리에스터 (체육복/외투) 식사 전 탈의 요망</strong></p>
+                            <p class="text-[11px]">👉 폴리에스터는 분자 간 강력한 인력으로 89.16%의 높은 흡착률을 보이므로 입고 식사 시 악취가 강하게 뱁니다.</p>
                         </div>
-                        <p class="text-[11px] sm:text-[12px] leading-relaxed text-zinc-300 break-keep">
-                            본 연구팀이 진행한 스모크 테스터 및 CO₂ 정량 측정 실험 결과, 급식실 내부 Z6 구역은 기류 단락 현상(Short Circuit)으로 인해 환기가 거의 이루어지지 않는 <strong>치명적 사각지대(Dead Zone)</strong>임이 밝혀졌습니다. 이 구역의 최고 CO₂ 농도는 2395ppm으로 전체 평균(1188ppm)의 약 2배에 달하며, 식사 중 발생한 악취 분자 역시 대기 중에 가장 짙고 오래 체류하므로 유분성 식단 제공 시 접근을 절대 삼가야 합니다.
-                        </p>
+                        <div class="p-3.5 bg-zinc-800 rounded text-zinc-100 shadow-inner">
+                            <div class="flex items-center gap-2 mb-1.5"><span class="text-sm">🚨</span><p class="font-bold text-[12px] sm:text-xs text-white">공간 경고: Z6 구역 (Dead Zone) 착석 금지</p></div>
+                            <p class="text-[11px] sm:text-[12px] leading-relaxed text-zinc-300 break-keep">급식실 내부 <strong>Z6 구역</strong>은 기류 단락 현상으로 환기가 이루어지지 않는 <strong>치명적 사각지대</strong>입니다. 최고 CO₂ 농도가 평균의 약 2배인 2395ppm에 달하며 악취 분자가 오래 체류하므로 유분성 식단 제공 시 접근을 절대 삼가야 합니다.</p>
+                        </div>
                     </div>
                 `;
             } else {
-                badgeText = 'SAFE MENU';
-                badgeClass = 'bg-zinc-100 text-zinc-800 border border-zinc-200';
-                warningText = `분석 결과, 해당 날짜의 식단은 수용성 악취 중심이므로 의류 표면에 대한 유분성 분자의 대량 고착화 위험도가 상대적으로 매우 낮습니다.`;
-                
-                actionText = `
-                    <div class="mb-3 p-3 bg-white border border-zinc-200 rounded text-zinc-800">
-                        <p class="font-bold text-[12px] sm:text-xs mb-1">✨ 시스템 추천 의류 매칭</p>
-                        <p>✔️ <strong>제한 없음 (체육복 및 교복 셔츠 모두 양호)</strong></p>
+                badge.className = `text-[9px] sm:text-[10px] font-mono font-bold px-2 py-1 rounded bg-zinc-100 text-zinc-800 border border-zinc-200`;
+                badge.innerText = 'SAFE MENU';
+                content.innerHTML = `
+                    ${menuDisplayHtml}
+                    <p class="text-[12px] sm:text-xs text-zinc-600 leading-relaxed text-justify break-keep">분석 결과, 해당 날짜의 식단은 수용성 악취 중심이므로 의류 표면에 대한 유분성 분자의 대량 고착화 위험도가 상대적으로 매우 낮습니다.</p>
+                    <div class="bg-zinc-50 p-3 sm:p-4 rounded-lg border border-zinc-200 mt-4">
+                        <div class="p-3 bg-white border border-zinc-200 rounded text-zinc-800">
+                            <p class="font-bold text-[12px] sm:text-xs mb-1">✨ 추천 의류 매칭 및 행동 강령</p>
+                            <p>✔️ <strong>제한 없음 (체육복 및 교복 셔츠 모두 양호)</strong></p>
+                        </div>
+                        <p class="text-[12px] sm:text-xs mt-3 text-zinc-700 break-keep">의류 재질에 따른 화합물 고착화 위험도가 미미하므로, <strong>어떤 복장이든 쾌적하게 착용하셔도 좋습니다.</strong> 다만 식사 직후 개방 공간에서 의류 표면을 가볍게 털어주는 환기 조치를 권장합니다.</p>
                     </div>
-                    의류 재질에 따른 유기 화합물 고착화 위험도가 미미하므로, <strong>체육복이나 교복 모두 쾌적하게 착용하셔도 좋습니다.</strong> 다만 식사 직후 개방 공간에서 의류 표면을 가볍게 털어주는 환기 조치를 권장합니다.
                 `;
             }
+            setTimeout(() => { container.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+        }
+
+        // ==========================================
+        // 탭 3: 부원 코드 로직 (QSI 알고리즘) 이식부
+        // ==========================================
+        const qsi_db = {
+            "1": { bacteria: "포도상구균 (Staphylococcus)", qsi: "하마멜리탄닌 (Hamamelitannin)", principle: "세균의 Agr 표적 시스템을 하향 조절하여, 땀 속 노폐물을 쉰내 물질로 전환하는 유전자 발현 신호 체계를 차단합니다." },
+            "2": { bacteria: "코리네박테리움 (Corynebacterium)", qsi: "파네솔(Farnesol) + 카바크롤(Carvacrol)", principle: "아포크린샘 피지 분해 효소 활성 신호를 교란하여, 액취증 특유의 단쇄 지방산 유발 물질 생성을 근본적으로 봉쇄합니다." },
+            "3": { bacteria: "미크로코쿠스 (Micrococcus luteus)", qsi: "퀘르세틴 (Quercetin)", principle: "휴면 상태의 균을 깨우는 RPF(휴면 타파 인자) 수용체를 억제하여 섬유 내 군락 형성과 특유의 노란 색소 합성을 억제합니다." },
+            "4": { bacteria: "슈도모나스균 (Pseudomonas aeruginosa)", qsi: "녹차 추출 EGCG (Epigallocatechin Gallate)", principle: "EGCG의 8개 수산화기(-OH)가 LasR 수용체와 수소 결합을 형성하고 다환성 구조에 의한 '입체 장애'를 유발합니다. 이로 인해 LasR 이량체 활성화가 차단되어 바이오필름에 의한 찌든 잔류취 형성을 억제합니다." }
+        };
+
+        function calculateFormula() {
+            const odorChoice = document.getElementById("qsiOdor").value;
+            const severity = parseInt(document.getElementById("qsiSeverity").value);
+            const fabric = document.getElementById("qsiFabric").value;
+            const skinType = document.getElementById("qsiSkinType").value;
+
+            const solution = qsi_db[odorChoice];
+
+            const qsi_base_pct = 0.5 * severity;
+            const neutralizer_pct = 1.0 * severity;
+            let surfactant_pct = 1.5; 
+            let ethanol_pct = 5.0;
             
-            badge.className = `text-[9px] sm:text-[10px] font-mono font-bold px-2 py-1 rounded ${badgeClass}`;
-            badge.innerText = badgeText;
+            if (fabric === '1') {
+                surfactant_pct = 3.0; 
+                ethanol_pct = 5.0;
+            } else if (fabric === '3') {
+                surfactant_pct = 2.0; 
+                ethanol_pct = 15.0;
+            } else {
+                surfactant_pct = 1.5; 
+                ethanol_pct = 5.0;
+            }
+
+            const badgeElement = document.getElementById("qsiBadge");
+            if (skinType === "sensitive") {
+                if (ethanol_pct > 5.0) {
+                    ethanol_pct = 1.5;
+                    surfactant_pct += 1.0;
+                } else {
+                    ethanol_pct = 1.0;
+                }
+                badgeElement.className = "text-[9px] sm:text-[10px] font-mono font-bold px-2 py-1 rounded bg-amber-50 text-amber-800 border border-amber-200";
+                badgeElement.innerText = "저자극 포뮬러 적용";
+            } else {
+                badgeElement.className = "text-[9px] sm:text-[10px] font-mono font-bold px-2 py-1 rounded bg-zinc-100 text-zinc-800 border border-zinc-200";
+                badgeElement.innerText = "일반 포뮬러 적용";
+            }
+
+            const water_pct = 100.0 - (qsi_base_pct + neutralizer_pct + ethanol_pct + surfactant_pct);
+
+            // 결과 텍스트 바인딩
+            document.getElementById("out-bacteria").innerText = solution.bacteria;
+            document.getElementById("out-qsi").innerText = solution.qsi;
+            document.getElementById("out-principle").innerText = solution.principle;
             
-            content.innerHTML = `
-                ${menuDisplayHtml}
-                <p class="text-[12px] sm:text-xs text-zinc-600 leading-relaxed text-justify break-keep">${warningText}</p>
-                <div class="bg-zinc-50 p-3 sm:p-4 rounded-lg border border-zinc-200 mt-4">
-                    <p class="text-[11px] sm:text-xs font-bold text-zinc-900 mb-2">행동 강령 및 의류 추천 (Action Plan)</p>
-                    <div class="text-[12px] sm:text-xs text-zinc-700 leading-relaxed text-justify break-keep">${actionText}</div>
-                </div>
-            `;
+            document.getElementById("out-qsi-pct").innerText = qsi_base_pct.toFixed(1) + "%";
+            document.getElementById("out-surfactant-pct").innerText = surfactant_pct.toFixed(1) + "%";
+            document.getElementById("out-neutral-pct").innerText = neutralizer_pct.toFixed(1) + "%";
+            document.getElementById("out-ethanol-pct").innerText = ethanol_pct.toFixed(1) + "%";
+            document.getElementById("out-water-pct").innerText = water_pct.toFixed(1) + "%";
+
+            // 결과창 표시
+            const container = document.getElementById("qsiResultContainer");
+            container.classList.remove('hidden');
             
             setTimeout(() => {
                 container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
