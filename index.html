@@ -46,7 +46,7 @@
                 </h1>
                 <div class="pt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] sm:text-xs text-zinc-500 font-medium">
                     <span class="text-zinc-800 bg-zinc-100 px-2 py-1 rounded-md">용인한국외국어대학교부설고등학교</span>
-                    <span>MEMBER : 김민솔, 김연아, 박새온, 박시우, 이홍주</span>
+                    <span>MEMBER: 김민솔, 김연아, 박새온, 박시우, 이홍주</span>
                 </div>
             </div>
 
@@ -93,7 +93,7 @@
             <div class="pt-6 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 bg-zinc-50 p-4 sm:p-0 sm:bg-transparent rounded-xl">
                 <div class="space-y-0.5 text-center sm:text-left">
                     <p class="text-xs font-semibold text-zinc-900">실생활 응용: HAFS 식단 연동 시스템</p>
-                    <p class="text-[11px] text-zinc-500">당일 식단표 데이터와 의류를 대조해 최적의 강령을 계산합니다.</p>
+                    <p class="text-[11px] text-zinc-500">당일 식단표 데이터를 기반으로 최적의 의류와 행동 강령을 추천합니다.</p>
                 </div>
                 <button onclick="switchTab('simulator')" class="w-full sm:w-auto px-4 py-3 sm:py-2 bg-zinc-900 hover:bg-zinc-800 text-white text-[13px] sm:text-xs font-medium rounded-lg sm:rounded-md transition-all shadow-sm cursor-pointer shrink-0">
                     진단 시스템 실행하기
@@ -103,20 +103,47 @@
 
         <section id="tab-simulator" class="tab-content hidden space-y-6 sm:space-y-8">
             <div class="space-y-1">
-                <h2 class="text-lg font-bold tracking-tight text-zinc-900">HAFS 식단 기반 악취 경고 시스템</h2>
-                <p class="text-zinc-500 text-xs break-keep">실제 6월 식단표(Database)와 착용 의류를 분석하여 과학적 행동 지침을 자동 도출합니다.</p>
+                <h2 class="text-lg font-bold tracking-tight text-zinc-900">HAFS 식단 기반 맞춤형 의류/행동 추천 시스템</h2>
+                <p class="text-zinc-500 text-xs break-keep">조회하고자 하는 날짜와 끼니를 선택하시면, 6월 식단표를 분석하여 과학적 행동 지침을 자동 도출합니다.</p>
             </div>
 
             <div class="bg-white border border-zinc-200/80 rounded-xl p-5 sm:p-6 space-y-6 shadow-sm">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                     <div class="space-y-1.5">
-                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">조회 요일</label>
-                        <select id="daySelect" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
-                            <option value="monday">월요일</option>
-                            <option value="tuesday">화요일</option>
-                            <option value="wednesday">수요일</option>
-                            <option value="thursday">목요일</option>
-                            <option value="friday">금요일</option>
+                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">조회 날짜 선택 (6월 전체)</label>
+                        <select id="dateSelect" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
+                            <optgroup label="1주차">
+                                <option value="0601">6월 1일 (월요일)</option>
+                                <option value="0602">6월 2일 (화요일)</option>
+                                <option value="0603">6월 3일 (수요일)</option>
+                                <option value="0604">6월 4일 (목요일)</option>
+                                <option value="0605">6월 5일 (금요일)</option>
+                            </optgroup>
+                            <optgroup label="2주차">
+                                <option value="0608">6월 8일 (월요일)</option>
+                                <option value="0609">6월 9일 (화요일)</option>
+                                <option value="0610">6월 10일 (수요일)</option>
+                                <option value="0611">6월 11일 (목요일)</option>
+                                <option value="0612">6월 12일 (금요일)</option>
+                            </optgroup>
+                            <optgroup label="3주차">
+                                <option value="0615">6월 15일 (월요일)</option>
+                                <option value="0616">6월 16일 (화요일)</option>
+                                <option value="0617">6월 17일 (수요일)</option>
+                                <option value="0618">6월 18일 (목요일)</option>
+                                <option value="0619">6월 19일 (금요일)</option>
+                            </optgroup>
+                            <optgroup label="4주차">
+                                <option value="0622">6월 22일 (월요일)</option>
+                                <option value="0623">6월 23일 (화요일)</option>
+                                <option value="0624">6월 24일 (수요일)</option>
+                                <option value="0625">6월 25일 (목요일)</option>
+                                <option value="0626">6월 26일 (금요일)</option>
+                            </optgroup>
+                            <optgroup label="5주차">
+                                <option value="0629">6월 29일 (월요일)</option>
+                                <option value="0630">6월 30일 (화요일)</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -128,18 +155,10 @@
                             <option value="dinner">석식</option>
                         </select>
                     </div>
-
-                    <div class="space-y-1.5">
-                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">착용 의류</label>
-                        <select id="clothingSelect" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
-                            <option value="polyester">폴리에스터 100% (체육복/외투)</option>
-                            <option value="rayon">레이온 혼방 25% (교복 셔츠)</option>
-                        </select>
-                    </div>
                 </div>
 
                 <button onclick="diagnoseSystem()" class="w-full bg-zinc-900 hover:bg-zinc-800 active:scale-[0.99] text-white font-medium py-3.5 sm:py-3 rounded-lg text-[13px] sm:text-xs tracking-wider transition-all cursor-pointer">
-                    실시간 식단 분석 및 강령 생성
+                    해당 식단 분석 및 의류 추천받기
                 </button>
             </div>
 
@@ -179,36 +198,32 @@
     </footer>
 
     <script>
-        // HAFS 6월 1주차 실제 식단표 데이터베이스 연동
+        // HAFS 6월 1달치(평일) 실제 식단표 데이터베이스
         const hafsMenuDB = {
-            monday: {
-                breakfast: "쌀밥, 맑은오징어국, 돈사태묵은지찜, 마늘햄구이",
-                lunch: "쌀밥, 김치찌개, 치즈스테이크볼꼬지, 쫄뱅이",
-                dinner: "쌀밥, 닭갈비, 순두부, 열무나물"
-            },
-            tuesday: {
-                breakfast: "쌀밥, 열무된장국, 닭볶음탕, 파프리카맛살조림",
-                lunch: "수제치킨마요덮밥, 미역장국, 언양식불고기",
-                dinner: "쌀밥, 닭곰탕, 미트볼채소조림, 꽃맛살샐러드"
-            },
-            wednesday: {
-                breakfast: "칼슘강화밥, 쇠고기무국, 갈치카레구이, 베이컨스크램블",
-                lunch: "바지락칼국수, 갈릭닭다리구이, 순대강정",
-                dinner: "쌀밥, 볶음우동, 돈육김치볶음, 납작만두"
-            },
-            thursday: {
-                breakfast: "쌀밥, 된장찌개, 바베큐삼겹살, 두부볼간장조림",
-                lunch: "고구마영양밥, 순두부맑은국, 치즈매운등갈비",
-                dinner: "탄탄면, 후르츠탕수육, 파바오"
-            },
-            friday: {
-                breakfast: "쌀밥, 감자양파국, 쇠고기장조림, 미나리감자전",
-                lunch: "김가루비빔밥, 국물가래떡볶이, 김말이, 군만두",
-                dinner: "곤드레밥, 된장찌개, 코다리강정, 너비아니"
-            }
+            "0601": { dateLabel: "6월 1일 (월)", breakfast: "쌀밥, 맑은오징어국, 돈사태묵은지찜, 마늘햄구이", lunch: "쌀밥, 김치찌개, 치즈스테이크볼꼬지, 쫄뱅이", dinner: "쌀밥, 닭갈비, 순두부, 열무나물" },
+            "0602": { dateLabel: "6월 2일 (화)", breakfast: "쌀밥, 열무된장국, 닭볶음탕, 파프리카맛살조림", lunch: "수제치킨마요덮밥, 미역장국, 언양식불고기", dinner: "쌀밥, 닭곰탕, 미트볼채소조림, 꽃맛살샐러드" },
+            "0603": { dateLabel: "6월 3일 (수)", breakfast: "칼슘강화밥, 쇠고기무국, 갈치카레구이, 베이컨스크램블", lunch: "바지락칼국수, 갈릭닭다리구이, 순대강정", dinner: "쌀밥, 볶음우동, 돈육김치볶음, 납작만두" },
+            "0604": { dateLabel: "6월 4일 (목)", breakfast: "쌀밥, 된장찌개, 바베큐삼겹살, 두부볼간장조림", lunch: "고구마영양밥, 순두부맑은국, 치즈매운등갈비", dinner: "탄탄면, 후르츠탕수육, 파바오" },
+            "0605": { dateLabel: "6월 5일 (금)", breakfast: "쌀밥, 감자양파국, 쇠고기장조림, 미나리감자전", lunch: "김가루비빔밥, 국물가래떡볶이, 김말이, 군만두", dinner: "곤드레밥, 된장찌개, 코다리강정, 너비아니" },
+            "0608": { dateLabel: "6월 8일 (월)", breakfast: "쌀밥, 쇠고기미역국밥, 목살양념불고기", lunch: "쌀밥, 콩나물국, 주꾸미삼겹살", dinner: "쌀밥, 호박고추장찌개, 소고기버섯볶음" },
+            "0609": { dateLabel: "6월 9일 (화)", breakfast: "쌀밥, 북어채계란국, 떡갈비피망조림", lunch: "쌀밥, 근대된장국, 왕갈비통닭", dinner: "쌀밥, 소고기무국, 버터플라이고등어구이" },
+            "0610": { dateLabel: "6월 10일 (수)", breakfast: "칼슘강화밥, 사골파국, 훈제오리볶음", lunch: "쉬림프아라비아따, 바베큐백립", dinner: "나시고랭볶음밥, 쌀국수국물, 팟타이, 월남짜조" },
+            "0611": { dateLabel: "6월 11일 (목)", breakfast: "쌀밥, 순두부맑은국, 닭윙매콤조림", lunch: "쌀밥, 부대찌개, 쇠고기떡찜", dinner: "셀프김밥, 유부주머니우동, 새우튀김" },
+            "0612": { dateLabel: "6월 12일 (금)", breakfast: "쌀밥, 팽이된장국, 해물야채볶음", lunch: "김가루비빔밥, 국물가래떡볶이, 김말이", dinner: "쌀밥, 콩가루배추된장국, 지코바양념구이" },
+            "0615": { dateLabel: "6월 15일 (월)", breakfast: "쌀밥, 건새우아욱국, 쇠고기불고기", lunch: "자장면, 꿔바로우", dinner: "후리가깨밥, 잔치국수, 한식떡갈비" },
+            "0616": { dateLabel: "6월 16일 (화)", breakfast: "칼슘강화밥, 짜글이찌개, 데판만조풍기", lunch: "스팸김치볶음밥, 미소장국, 새우볼꼬치", dinner: "장터국밥, 임연수오븐구이" },
+            "0617": { dateLabel: "6월 17일 (수)", breakfast: "쌀밥, 들깨무국, 고구마닭갈비", lunch: "쌀밥, 감자양파국, 해물떡찜", dinner: "돈까스김치나베, 프리타타" },
+            "0618": { dateLabel: "6월 18일 (목)", breakfast: "쌀밥, 쇠고기감자국, 돈육간장불고기", lunch: "쌀밥, 어묵국, 양념치킨", dinner: "소고기미역국, 오동불고기" },
+            "0619": { dateLabel: "6월 19일 (금)", breakfast: "미역국", lunch: "낙지볶음", dinner: "귀가의 날 (급식 없음)" },
+            "0622": { dateLabel: "6월 22일 (월)", breakfast: "시금치고추장국, 닭고기장조림", lunch: "돈육수육, 계란찜", dinner: "오징어채소볶음, 깻잎완자전" },
+            "0623": { dateLabel: "6월 23일 (화)", breakfast: "얼큰버섯찌개, 코다리감자조림", lunch: "바베큐닭다리구이, 웨지감자튀김", dinner: "참치김치찌개, 삼치구이" },
+            "0624": { dateLabel: "6월 24일 (수)", breakfast: "시래기된장국, 떡갈비", lunch: "깐풍육, 애호박전", dinner: "불닭마요덮밥, 마요소스" },
+            "0625": { dateLabel: "6월 25일 (목)", breakfast: "오징어쑥갓국, 돈육두루치기", lunch: "미역국, 돼지갈비구이", dinner: "투움바파스타, 바베큐폭립" },
+            "0626": { dateLabel: "6월 26일 (금)", breakfast: "육개장, 낙지굴소스볶음", lunch: "해물야채볶음", dinner: "강황밥, 코다리강정" },
+            "0629": { dateLabel: "6월 29일 (월)", breakfast: "돼지국밥, 수제완자전", lunch: "미나리삼겹비빔밥, 파닭", dinner: "김치말이국수, 바싹불고기" },
+            "0630": { dateLabel: "6월 30일 (화)", breakfast: "호박새우젓국, 갈릭돈육찹스테이크", lunch: "오징어다리튀김, 마파두부조림", dinner: "짬뽕순두부찌개, 새서미두부카츠" }
         };
 
-        // 분과 실험에 따른 유분성 악취 유발 핵심 키워드군
         const fattyKeywords = ['튀김', '볶음', '전', '삼겹살', '돈까스', '강정', '치킨', '구이', '카츠', '스테이크', '마요', '갈비', '고기', '바베큐', '만두', '탕수육'];
 
         function switchTab(tabId) {
@@ -227,15 +242,26 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // 로직: 날짜와 끼니를 기반으로 식단을 분석하고 의류/데드존 설명 제공
         function diagnoseSystem() {
-            const day = document.getElementById('daySelect').value;
+            const dateId = document.getElementById('dateSelect').value;
             const meal = document.getElementById('mealSelect').value;
-            const clothing = document.getElementById('clothingSelect').value;
             
-            const currentMenu = hafsMenuDB[day][meal];
+            const selectedDayData = hafsMenuDB[dateId];
+            const currentMenu = selectedDayData[meal];
+            const dateLabel = selectedDayData.dateLabel;
+            
+            const mealLabel = meal === 'breakfast' ? '조식' : meal === 'lunch' ? '중식' : '석식';
+
             let isFatty = false;
             let detectedWords = [];
             
+            // 귀가의 날 등 식단이 없는 경우 예외처리
+            if (!currentMenu || currentMenu.includes("급식 없음")) {
+                alert("선택하신 날짜의 해당 끼니에는 식단 정보가 없습니다.");
+                return;
+            }
+
             fattyKeywords.forEach(keyword => {
                 if (currentMenu.includes(keyword)) {
                     isFatty = true;
@@ -253,38 +279,49 @@
             
             const menuDisplayHtml = `
                 <div class="bg-zinc-100/50 border border-zinc-200 p-3 sm:p-4 rounded-lg mb-4">
-                    <p class="text-[10px] sm:text-xs text-zinc-500 font-semibold mb-1">🍽️ 오늘 조회하신 HAFS 식단</p>
+                    <p class="text-[10px] sm:text-xs text-zinc-500 font-semibold mb-1">🍽️ ${dateLabel} ${mealLabel} 식단</p>
                     <p class="text-[13px] sm:text-sm font-bold text-zinc-900 break-keep">${currentMenu}</p>
                 </div>
             `;
 
-            // 다중 키워드가 발견되었을 때 쉼표로 연결하여 보여주도록 로직 개선
             const keywordListStr = detectedWords.map(w => `#${w}`).join(', ');
 
+            // 지용성(유분성) 메뉴일 경우의 처리 + 데드존 해설 추가
             if (isFatty) {
-                if (clothing === 'polyester') {
-                    badgeText = 'CRITICAL RISK';
-                    badgeClass = 'bg-red-50 text-red-700 border border-red-200';
-                    warningText = `시스템 분석 결과, 오늘의 메뉴에는 유분성 악취 물질을 다량 발생시키는 <strong>지용성 식단(${keywordListStr})</strong> 성분이 포함되어 있습니다. 착용하신 합성 섬유(폴리에스터 100%)는 지용성 악취 분자와 강력한 반데르발스 인력을 형성하여 높은 고착화 경향성을 보입니다.`;
-                    actionText = `🚨 식사 전 <strong>외투 레이어를 미리 탈의</strong>하여 사후 보관하십시오. 아울러 공기 정체 구역인 <strong>Z6 구역(Dead Zone)</strong>은 VOC 잔류량이 평균의 2배 이상(최고 2395ppm) 축적되므로 해당 위치의 좌석 배치를 기피할 것을 권고합니다.`;
-                } else {
-                    badgeText = 'STABLE DEFENSE';
-                    badgeClass = 'bg-zinc-100 text-zinc-800 border border-zinc-200';
-                    warningText = `시스템 분석 결과, 유분성 악취가 우세한 식단(${keywordListStr})입니다. 다행히 착용 중인 <strong>레이온 25% 혼방 직물</strong>은 표면이 친수성을 띠어 지용성 성분에 대해 상대적으로 매우 낮은 흡착 경향성을 유지합니다.`;
-                    actionText = `👍 악취 방어에 유리합니다. <strong>교복 셔츠 단독 착용 상태로 취식</strong>하는 것이 섬유 내 잔류취를 최소화하는 데 안전합니다.`;
-                }
+                badgeText = 'HIGH RISK MENU';
+                badgeClass = 'bg-red-50 text-red-700 border border-red-200';
+                warningText = `분석 결과, 선택하신 날짜의 식단에는 유분성 악취 물질을 다량 발생시키는 <strong>지용성 메뉴(${keywordListStr})</strong>가 포함되어 있습니다. 공기 중에 비산하는 지용성 분자는 소수성 상호작용에 의해 특정 합성 섬유에 극도로 강하게 고착화됩니다.`;
+                
+                actionText = `
+                    <div class="mb-3 p-3 bg-white border border-red-100 rounded text-red-900">
+                        <p class="font-bold text-[12px] sm:text-xs mb-1">✨ 시스템 추천 의류 매칭</p>
+                        <p class="mb-1">✔️ <strong>안전: 친수성 레이온 혼방 (교복 셔츠 등)</strong></p>
+                        <p>❌ <strong>위험: 폴리에스터 100% (체육복, 외투 등)</strong></p>
+                    </div>
+                    유분성 악취 방어를 위해 <strong>교복 셔츠 단독 착용 상태로 취식</strong>하는 것이 가장 안전합니다. 소수성인 폴리에스터 체육복이나 외투는 분자 간 강력한 인력으로 89.16%의 높은 흡착률을 보이므로 <strong>식사 전 반드시 탈의</strong>하여 보관하십시오. 아울러 환기가 불량한 공기 정체 구역인 Z6 구역(Dead Zone) 착석을 원천적으로 피하시길 권고합니다.
+                    
+                    <div class="mt-4 p-3.5 bg-zinc-800 rounded text-zinc-100 shadow-inner">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="text-sm">🔬</span>
+                            <p class="font-bold text-[12px] sm:text-xs text-white">연구팀 추가 해설: Z6 Dead Zone 이란?</p>
+                        </div>
+                        <p class="text-[11px] sm:text-[12px] leading-relaxed text-zinc-300 break-keep">
+                            본 연구팀이 진행한 스모크 테스터 및 CO₂ 정량 측정 실험 결과, 급식실 내부 Z6 구역은 기류 단락 현상(Short Circuit)으로 인해 환기가 거의 이루어지지 않는 <strong>치명적 사각지대(Dead Zone)</strong>임이 밝혀졌습니다. 이 구역의 최고 CO₂ 농도는 2395ppm으로 전체 평균(1188ppm)의 약 2배에 달하며, 식사 중 발생한 악취 분자 역시 대기 중에 가장 짙고 오래 체류하므로 유분성 식단 제공 시 접근을 절대 삼가야 합니다.
+                        </p>
+                    </div>
+                `;
             } else {
-                if (clothing === 'polyester') {
-                    badgeText = 'CAUTION';
-                    badgeClass = 'bg-amber-50 text-amber-800 border border-amber-200';
-                    warningText = `제공 식단은 수용성 악취 중심으로 비교적 안전하나, 폴리에스터 특성상 대기 중 기본 VOCs가 미세 기공에 포집되어 잔류할 소지가 미량 존재합니다.`;
-                    actionText = `🏃 식사 직후 넓은 개방 공간에서 의류 표면을 털어 강제 탈착을 유도하고, 교실 복귀 후 주기적인 환기를 수행하십시오.`;
-                } else {
-                    badgeText = 'CLEAR';
-                    badgeClass = 'bg-zinc-50 text-zinc-500 border border-zinc-200';
-                    warningText = `수용성 중심 메뉴와 친수성 섬유(레이온 혼방) 조합으로 악취 고착화 확률이 매우 미미합니다.`;
-                    actionText = `🌱 추가 대처 없이 쾌적한 일상 활동을 유지하셔도 좋습니다.`;
-                }
+                badgeText = 'SAFE MENU';
+                badgeClass = 'bg-zinc-100 text-zinc-800 border border-zinc-200';
+                warningText = `분석 결과, 해당 날짜의 식단은 수용성 악취 중심이므로 의류 표면에 대한 유분성 분자의 대량 고착화 위험도가 상대적으로 매우 낮습니다.`;
+                
+                actionText = `
+                    <div class="mb-3 p-3 bg-white border border-zinc-200 rounded text-zinc-800">
+                        <p class="font-bold text-[12px] sm:text-xs mb-1">✨ 시스템 추천 의류 매칭</p>
+                        <p>✔️ <strong>제한 없음 (체육복 및 교복 셔츠 모두 양호)</strong></p>
+                    </div>
+                    의류 재질에 따른 유기 화합물 고착화 위험도가 미미하므로, <strong>체육복이나 교복 모두 쾌적하게 착용하셔도 좋습니다.</strong> 다만 식사 직후 개방 공간에서 의류 표면을 가볍게 털어주는 환기 조치를 권장합니다.
+                `;
             }
             
             badge.className = `text-[9px] sm:text-[10px] font-mono font-bold px-2 py-1 rounded ${badgeClass}`;
@@ -293,9 +330,9 @@
             content.innerHTML = `
                 ${menuDisplayHtml}
                 <p class="text-[12px] sm:text-xs text-zinc-600 leading-relaxed text-justify break-keep">${warningText}</p>
-                <div class="bg-[#fafafa] p-3 sm:p-4 rounded-lg border border-zinc-100 mt-4">
-                    <p class="text-[11px] sm:text-xs font-bold text-zinc-900 mb-1.5">Action Plan</p>
-                    <p class="text-[12px] sm:text-xs text-zinc-600 leading-relaxed text-justify break-keep">${actionText}</p>
+                <div class="bg-zinc-50 p-3 sm:p-4 rounded-lg border border-zinc-200 mt-4">
+                    <p class="text-[11px] sm:text-xs font-bold text-zinc-900 mb-2">행동 강령 및 의류 추천 (Action Plan)</p>
+                    <div class="text-[12px] sm:text-xs text-zinc-700 leading-relaxed text-justify break-keep">${actionText}</div>
                 </div>
             `;
             
