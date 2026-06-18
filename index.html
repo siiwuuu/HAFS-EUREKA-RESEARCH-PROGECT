@@ -2,22 +2,307 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAFS EUREKA RESEARCH PORTFOLIO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HAFS EUREKA RESEARCH</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
         body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; letter-spacing: -0.02em; }
         .tab-content { transition: opacity 0.2s ease-in-out; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-[#fcfcfc] text-zinc-900 flex flex-col min-h-screen antialiased">
 
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-100">
-        <div class="max-w-4xl mx-auto px-6 flex justify-between items-center h-16">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center h-auto sm:h-16 py-3 sm:py-0 gap-3 sm:gap-0">
+            <div class="flex items-center gap-2 sm:gap-3 cursor-pointer w-full sm:w-auto justify-center sm:justify-start" onclick="switchTab('home')">
                 <span class="font-bold tracking-tight text-sm text-zinc-900">HAFS EUREKA</span>
                 <span class="w-[1px] h-3 bg-zinc-200"></span>
-                <span class="text-xs text-zinc-400 font-medium tracking-wider uppercase">Research Archive</span>
+                <span class="text-xs text-zinc-400 font-medium tracking-wider uppercase">Project Archive</span>
             </div>
-            <div id="navLinks
+            <div id="navLinks" class="flex gap-3 sm:gap-6 text-xs font-medium tracking-tight w-full sm:w-auto overflow-x-auto hide-scrollbar justify-center sm:justify-end px-2">
+                <button onclick="switchTab('home')" id="link-home" class="py-1 sm:py-2 text-zinc-900 border-b-2 border-zinc-900 cursor-pointer whitespace-nowrap transition-all">
+                    개요 및 연구
+                </button>
+                <button onclick="switchTab('simulator')" id="link-simulator" class="py-1 sm:py-2 text-zinc-400 hover:text-zinc-900 border-b-2 border-transparent cursor-pointer whitespace-nowrap transition-all">
+                    식단 맞춤 진단툴
+                </button>
+                <button onclick="switchTab('deodorant')" id="link-deodorant" class="py-1 sm:py-2 text-zinc-400 hover:text-zinc-900 border-b-2 border-transparent cursor-pointer whitespace-nowrap transition-all">
+                    탈취제 시뮬레이션
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-3xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16">
+
+        <section id="tab-home" class="tab-content space-y-12 sm:space-y-16">
+            <div class="space-y-4 border-b border-zinc-200 pb-8 sm:pb-10">
+                <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-zinc-400 uppercase">HAFS Eureka Research Project</p>
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 leading-tight break-keep">
+                    급식실 내 휘발성 물질의 확산 및 잔류 동역학과 구조·환기 조건에 따른 분과별 탈취 전략 분석
+                </h1>
+                <div class="pt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] sm:text-xs text-zinc-500 font-medium">
+                    <span class="text-zinc-800 bg-zinc-100 px-2 py-1 rounded-md">용인한국외국어대학교부설고등학교</span>
+                    <span>MEMBER : 김민솔, 김연아, 박새온, 박시우, 이홍주</span>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <h2 class="text-xs font-bold tracking-wider text-zinc-400 uppercase">Abstract</h2>
+                <p class="text-zinc-600 text-[13px] sm:text-sm leading-relaxed text-justify break-keep">
+                    본 연구는 학교 급식실 내부 환경과 의류 섬유의 특성을 융합적으로 고찰하여, 악취 문제를 과학적 도구로 규명하고자 기획되었습니다. 공간의 구조적 특성, 재료공학적 분자 결합 메커니즘, 미생물학적 변질 제어, 통계학적 인지 시뮬레이션에 이르는 4대 핵심 분과 데이터를 통합 관리하는 실질적인 솔루션 프로토타입을 제안합니다.
+                </p>
+            </div>
+
+            <div class="space-y-6 pt-2">
+                <h2 class="text-xs font-bold tracking-wider text-zinc-400 uppercase border-b border-zinc-100 pb-2">Academic Portfolio</h2>
+                <div class="divide-y divide-zinc-100">
+                    <div class="py-5 first:pt-0 space-y-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                            <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 01</span>
+                            <h3 class="font-semibold text-[13px] sm:text-sm text-zinc-900">구조 및 환기 동역학: Dead Zone 입증</h3>
+                        </div>
+                        <p class="text-zinc-500 text-[11px] sm:text-xs leading-relaxed text-justify break-keep">
+                            스모크 테스터 실험 및 CO₂ 정량 측정을 연계하여 배기 시스템 불량 구역을 시뮬레이션했습니다. Z6 구역의 최고 CO₂ 농도가 평균의 약 2배에 달하는 2395ppm을 기록하며 전형적인 환기 사각지대(Dead Zone)임을 증명했습니다.
+                        </p>
+                    </div>
+                    <div class="py-5 space-y-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                            <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 02</span>
+                            <h3 class="font-semibold text-[13px] sm:text-sm text-zinc-900">화학적 친화도: 섬유 구조별 흡착 메커니즘</h3>
+                        </div>
+                        <p class="text-zinc-500 text-[11px] sm:text-xs leading-relaxed text-justify break-keep">
+                            소수성 합성 섬유(폴리에스터)는 지용성 악취 물질과 강력한 반데르발스 인력을 형성하여 높은 초기 흡착률을 기록했습니다. 반면 친수성 레이온 25% 혼방은 상대적으로 매우 낮은 유분 흡착 경향성을 보였습니다.
+                        </p>
+                    </div>
+                    <div class="py-5 space-y-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                            <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 03</span>
+                            <h3 class="font-semibold text-[13px] sm:text-sm text-zinc-900">생물학적 악취 변질: Quorum Sensing 차단</h3>
+                        </div>
+                        <p class="text-zinc-500 text-[11px] sm:text-xs leading-relaxed text-justify break-keep">
+                            다환성 화합물인 녹차 추출 성분(EGCG)이 미생물 신호 물질 수용체(LasR)의 포켓에 결합하여 강력한 입체 장애를 유발합니다. 이를 통해 미생물의 집단 정족수 인식(Quorum Sensing)을 차단해 시큼한 2차 잔류취를 제어합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 bg-zinc-50 p-4 sm:p-0 sm:bg-transparent rounded-xl">
+                <div class="space-y-0.5 text-center sm:text-left">
+                    <p class="text-xs font-semibold text-zinc-900">실생활 응용: HAFS 식단 연동 시스템</p>
+                    <p class="text-[11px] text-zinc-500">당일 식단표 데이터와 의류를 대조해 최적의 강령을 계산합니다.</p>
+                </div>
+                <button onclick="switchTab('simulator')" class="w-full sm:w-auto px-4 py-3 sm:py-2 bg-zinc-900 hover:bg-zinc-800 text-white text-[13px] sm:text-xs font-medium rounded-lg sm:rounded-md transition-all shadow-sm cursor-pointer shrink-0">
+                    진단 시스템 실행하기
+                </button>
+            </div>
+        </section>
+
+        <section id="tab-simulator" class="tab-content hidden space-y-6 sm:space-y-8">
+            <div class="space-y-1">
+                <h2 class="text-lg font-bold tracking-tight text-zinc-900">HAFS 식단 기반 악취 경고 시스템</h2>
+                <p class="text-zinc-500 text-xs break-keep">실제 6월 식단표(Database)와 착용 의류를 분석하여 과학적 행동 지침을 자동 도출합니다.</p>
+            </div>
+
+            <div class="bg-white border border-zinc-200/80 rounded-xl p-5 sm:p-6 space-y-6 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                    <div class="space-y-1.5">
+                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">조회 요일</label>
+                        <select id="daySelect" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
+                            <option value="monday">월요일</option>
+                            <option value="tuesday">화요일</option>
+                            <option value="wednesday">수요일</option>
+                            <option value="thursday">목요일</option>
+                            <option value="friday">금요일</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">끼니 선택</label>
+                        <select id="mealSelect" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
+                            <option value="breakfast">조식</option>
+                            <option value="lunch" selected>중식</option>
+                            <option value="dinner">석식</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider">착용 의류</label>
+                        <select id="clothingSelect" class="w-full p-3 sm:p-2.5 bg-[#fafafa] border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 text-[13px] sm:text-xs text-zinc-800 appearance-none">
+                            <option value="polyester">폴리에스터 100% (체육복/외투)</option>
+                            <option value="rayon">레이온 혼방 25% (교복 셔츠)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="diagnoseSystem()" class="w-full bg-zinc-900 hover:bg-zinc-800 active:scale-[0.99] text-white font-medium py-3.5 sm:py-3 rounded-lg text-[13px] sm:text-xs tracking-wider transition-all cursor-pointer">
+                    실시간 식단 분석 및 강령 생성
+                </button>
+            </div>
+
+            <div id="resultContainer" class="hidden bg-white border border-zinc-900 rounded-xl p-5 sm:p-8 space-y-5 transition-all shadow-md">
+                <div class="flex items-center justify-between border-b border-zinc-100 pb-3">
+                    <h3 class="text-xs font-bold tracking-wider text-zinc-900 uppercase">Diagnosis & Action</h3>
+                    <div id="resultBadge"></div>
+                </div>
+                <div id="resultContent" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <section id="tab-deodorant" class="tab-content hidden space-y-4 sm:space-y-6">
+            <div class="space-y-1">
+                <h2 class="text-lg font-bold tracking-tight text-zinc-900">분자 도킹 시뮬레이터</h2>
+                <p class="text-zinc-500 text-[11px] sm:text-xs break-keep">조원이 별도로 배포한 웹 애플리케이션을 연동하여 제공합니다.</p>
+            </div>
+
+            <div class="w-full h-[600px] md:h-[750px] bg-zinc-50 border border-zinc-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-inner flex flex-col">
+                <div class="h-8 bg-zinc-200/50 border-b border-zinc-200 flex items-center px-4 gap-1.5 shrink-0">
+                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
+                </div>
+                <iframe 
+                    src="https://hafsdeod2.netlify.app/" 
+                    class="w-full h-full flex-grow border-0" 
+                    title="Teammate Deodorant App">
+                </iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-zinc-100 text-zinc-400 text-[10px] sm:text-[11px] font-mono text-center py-6 sm:py-8 mt-auto">
+        <p>© 2026 HAFS EUREKA PROJECT. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        // HAFS 6월 1주차 실제 식단표 데이터베이스 연동
+        const hafsMenuDB = {
+            monday: {
+                breakfast: "쌀밥, 맑은오징어국, 돈사태묵은지찜, 마늘햄구이",
+                lunch: "쌀밥, 김치찌개, 치즈스테이크볼꼬지, 쫄뱅이",
+                dinner: "쌀밥, 닭갈비, 순두부, 열무나물"
+            },
+            tuesday: {
+                breakfast: "쌀밥, 열무된장국, 닭볶음탕, 파프리카맛살조림",
+                lunch: "수제치킨마요덮밥, 미역장국, 언양식불고기",
+                dinner: "쌀밥, 닭곰탕, 미트볼채소조림, 꽃맛살샐러드"
+            },
+            wednesday: {
+                breakfast: "칼슘강화밥, 쇠고기무국, 갈치카레구이, 베이컨스크램블",
+                lunch: "바지락칼국수, 갈릭닭다리구이, 순대강정",
+                dinner: "쌀밥, 볶음우동, 돈육김치볶음, 납작만두"
+            },
+            thursday: {
+                breakfast: "쌀밥, 된장찌개, 바베큐삼겹살, 두부볼간장조림",
+                lunch: "고구마영양밥, 순두부맑은국, 치즈매운등갈비",
+                dinner: "탄탄면, 후르츠탕수육, 파바오"
+            },
+            friday: {
+                breakfast: "쌀밥, 감자양파국, 쇠고기장조림, 미나리감자전",
+                lunch: "김가루비빔밥, 국물가래떡볶이, 김말이, 군만두",
+                dinner: "곤드레밥, 된장찌개, 코다리강정, 너비아니"
+            }
+        };
+
+        // 분과 실험에 따른 유분성 악취 유발 핵심 키워드군
+        const fattyKeywords = ['튀김', '볶음', '전', '삼겹살', '돈까스', '강정', '치킨', '구이', '카츠', '스테이크', '마요', '갈비', '고기', '바베큐', '만두', '탕수육'];
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            
+            document.querySelectorAll('#navLinks button').forEach(lnk => {
+                lnk.classList.remove('text-zinc-900', 'border-zinc-900');
+                lnk.classList.add('text-zinc-400', 'border-transparent');
+            });
+            
+            const activeLnk = document.getElementById('link-' + tabId);
+            activeLnk.classList.remove('text-zinc-400', 'border-transparent');
+            activeLnk.classList.add('text-zinc-900', 'border-zinc-900');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function diagnoseSystem() {
+            const day = document.getElementById('daySelect').value;
+            const meal = document.getElementById('mealSelect').value;
+            const clothing = document.getElementById('clothingSelect').value;
+            
+            const currentMenu = hafsMenuDB[day][meal];
+            let isFatty = false;
+            let detectedWords = [];
+            
+            fattyKeywords.forEach(keyword => {
+                if (currentMenu.includes(keyword)) {
+                    isFatty = true;
+                    detectedWords.push(keyword);
+                }
+            });
+
+            const container = document.getElementById('resultContainer');
+            const content = document.getElementById('resultContent');
+            const badge = document.getElementById('resultBadge');
+            
+            container.classList.remove('hidden');
+            
+            let badgeText = ''; let badgeClass = ''; let warningText = ''; let actionText = '';
+            
+            const menuDisplayHtml = `
+                <div class="bg-zinc-100/50 border border-zinc-200 p-3 sm:p-4 rounded-lg mb-4">
+                    <p class="text-[10px] sm:text-xs text-zinc-500 font-semibold mb-1">🍽️ 오늘 조회하신 HAFS 식단</p>
+                    <p class="text-[13px] sm:text-sm font-bold text-zinc-900 break-keep">${currentMenu}</p>
+                </div>
+            `;
+
+            // 다중 키워드가 발견되었을 때 쉼표로 연결하여 보여주도록 로직 개선
+            const keywordListStr = detectedWords.map(w => `#${w}`).join(', ');
+
+            if (isFatty) {
+                if (clothing === 'polyester') {
+                    badgeText = 'CRITICAL RISK';
+                    badgeClass = 'bg-red-50 text-red-700 border border-red-200';
+                    warningText = `시스템 분석 결과, 오늘의 메뉴에는 유분성 악취 물질을 다량 발생시키는 <strong>지용성 식단(${keywordListStr})</strong> 성분이 포함되어 있습니다. 착용하신 합성 섬유(폴리에스터 100%)는 지용성 악취 분자와 강력한 반데르발스 인력을 형성하여 높은 고착화 경향성을 보입니다.`;
+                    actionText = `🚨 식사 전 <strong>외투 레이어를 미리 탈의</strong>하여 사후 보관하십시오. 아울러 공기 정체 구역인 <strong>Z6 구역(Dead Zone)</strong>은 VOC 잔류량이 평균의 2배 이상(최고 2395ppm) 축적되므로 해당 위치의 좌석 배치를 기피할 것을 권고합니다.`;
+                } else {
+                    badgeText = 'STABLE DEFENSE';
+                    badgeClass = 'bg-zinc-100 text-zinc-800 border border-zinc-200';
+                    warningText = `시스템 분석 결과, 유분성 악취가 우세한 식단(${keywordListStr})입니다. 다행히 착용 중인 <strong>레이온 25% 혼방 직물</strong>은 표면이 친수성을 띠어 지용성 성분에 대해 상대적으로 매우 낮은 흡착 경향성을 유지합니다.`;
+                    actionText = `👍 악취 방어에 유리합니다. <strong>교복 셔츠 단독 착용 상태로 취식</strong>하는 것이 섬유 내 잔류취를 최소화하는 데 안전합니다.`;
+                }
+            } else {
+                if (clothing === 'polyester') {
+                    badgeText = 'CAUTION';
+                    badgeClass = 'bg-amber-50 text-amber-800 border border-amber-200';
+                    warningText = `제공 식단은 수용성 악취 중심으로 비교적 안전하나, 폴리에스터 특성상 대기 중 기본 VOCs가 미세 기공에 포집되어 잔류할 소지가 미량 존재합니다.`;
+                    actionText = `🏃 식사 직후 넓은 개방 공간에서 의류 표면을 털어 강제 탈착을 유도하고, 교실 복귀 후 주기적인 환기를 수행하십시오.`;
+                } else {
+                    badgeText = 'CLEAR';
+                    badgeClass = 'bg-zinc-50 text-zinc-500 border border-zinc-200';
+                    warningText = `수용성 중심 메뉴와 친수성 섬유(레이온 혼방) 조합으로 악취 고착화 확률이 매우 미미합니다.`;
+                    actionText = `🌱 추가 대처 없이 쾌적한 일상 활동을 유지하셔도 좋습니다.`;
+                }
+            }
+            
+            badge.className = `text-[9px] sm:text-[10px] font-mono font-bold px-2 py-1 rounded ${badgeClass}`;
+            badge.innerText = badgeText;
+            
+            content.innerHTML = `
+                ${menuDisplayHtml}
+                <p class="text-[12px] sm:text-xs text-zinc-600 leading-relaxed text-justify break-keep">${warningText}</p>
+                <div class="bg-[#fafafa] p-3 sm:p-4 rounded-lg border border-zinc-100 mt-4">
+                    <p class="text-[11px] sm:text-xs font-bold text-zinc-900 mb-1.5">Action Plan</p>
+                    <p class="text-[12px] sm:text-xs text-zinc-600 leading-relaxed text-justify break-keep">${actionText}</p>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
