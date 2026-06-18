@@ -6,119 +6,220 @@
     <title>HAFS EUREKA RESEARCH PROJECT</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        html { scroll-behavior: smooth; }
         body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
-    <header class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white py-16 px-4 text-center border-b border-indigo-500/20 shadow-lg">
-        <p class="text-indigo-400 font-bold tracking-widest text-xs uppercase mb-2">HAFS Eureka Research Project</p>
-        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">급식실 악취 시뮬레이터 및 맞춤형 솔루션</h1>
-        <p class="text-slate-300 max-w-2xl mx-auto text-sm md:text-base">
-            급식실 내 휘발성 물질의 확산 동역학과 섬유별 오염 물질 흡착 데이터를 기반으로 한 <br class="hidden md:inline">개인 맞춤형 악취 경고 및 대처 가이드 시스템
-        </p>
+    <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md text-white border-b border-slate-800 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center py-3 sm:py-4 gap-3">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="switchTab('simulator')">
+                <span class="text-indigo-400 font-black tracking-wider text-sm sm:text-base">HAFS EUREKA</span>
+                <span class="text-slate-500 text-xs hidden sm:inline">| PROJECT</span>
+            </div>
+            <div id="navButtons" class="flex gap-1 sm:gap-2 text-xs sm:text-sm font-medium">
+                <button onclick="switchTab('simulator')" id="btn-simulator" class="px-3 py-1.5 rounded-lg transition-all bg-indigo-600 text-white font-semibold cursor-pointer">
+                    🔍 맞춤형 진단 툴
+                </button>
+                <button onclick="switchTab('research1')" id="btn-research1" class="px-3 py-1.5 rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer">
+                    💨 구조·환기 분석
+                </button>
+                <button onclick="switchTab('research2')" id="btn-research2" class="px-3 py-1.5 rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer">
+                    🧪 화학·재료공학
+                </button>
+                <button onclick="switchTab('research3')" id="btn-research3" class="px-3 py-1.5 rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer">
+                    🦠 생물·인지과학
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-slate-900 text-white py-6 px-4 text-center border-b border-slate-800">
+        <p class="text-indigo-400 font-bold tracking-widest text-xs uppercase mb-1">HAFS Eureka Research Project Report</p>
+        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">급식실 휘발성 물질 확산 동역학 및 섬유별 탈취 전략</h1>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-12">
-        
-        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-slate-100 mb-12">
-            <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-indigo-950">
-                <span>👕</span> 오늘의 등교 조건 설정
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div>
-                    <label class="block text-sm font-semibold text-slate-600 mb-2">현재 착용 중인 의류 (상의/외투/체육복)</label>
-                    <select id="clothingSelect" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm">
-                        <option value="polyester">폴리에스터 100% (체육복/활동복 재질)</option>
-                        <option value="rayon">레이온 혼방 25% (교복 셔츠 재질)</option>
-                    </select>
-                </div>
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8">
+
+        <section id="tab-simulator" class="tab-content transition-all duration-300">
+            <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 border border-slate-100 mb-8">
+                <h2 class="text-lg font-bold mb-5 flex items-center gap-2 text-slate-950">
+                    <span>👕</span> 오늘의 등교 조건 및 급식 설정
+                </h2>
                 
-                <div>
-                    <label class="block text-sm font-semibold text-slate-600 mb-2">오늘의 메인 급식 식단 유형</label>
-                    <select id="menuSelect" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm">
-                        <option value="fatty">튀김류 / 볶음류 (지용성·유분성 악취 강함)</option>
-                        <option value="watery">일반 국물류 / 한식 (수용성 악취 중심)</option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1.5">현재 착용 중인 의류 (상의/외투/체육복)</label>
+                        <select id="clothingSelect" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm">
+                            <option value="polyester">폴리에스터 100% (체육복/활동복 재질)</option>
+                            <option value="rayon">레이온 혼방 25% (교복 셔츠 재질)</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1.5">오늘의 메인 급식 식단 유형</label>
+                        <select id="menuSelect" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm">
+                            <option value="fatty">튀김류 / 볶음류 (지용성·유분성 악취 강함)</option>
+                            <option value="watery">일반 국물류 / 한식 (수용성 악취 중심)</option>
+                        </select>
+                    </div>
                 </div>
+
+                <button onclick="diagnoseSystem()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-md transition-all text-sm tracking-wide cursor-pointer">
+                    실험 데이터 기반 맞춤형 진단 및 행동 강령 출력
+                </button>
             </div>
 
-            <button onclick="diagnoseSystem()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-md hover:shadow-indigo-500/20 transition-all text-base tracking-wide cursor-pointer">
-                실험 데이터 기반 맞춤형 진단 및 행동 강령 출력
-            </button>
-        </div>
-
-        <div id="resultContainer" class="hidden bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-slate-100 mb-12 transition-all">
-            <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                <span>📊</span> 분석 결과 및 과학적 행동 강령
-            </h2>
-            <div id="resultContent" class="space-y-4">
-                </div>
-            
-            <div class="mt-6 pt-6 border-t border-slate-100">
-                <h3 class="text-sm font-bold text-slate-700 mb-2">💡 사후 오염 발생 시 과학적 관리 요령</h3>
-                <p class="text-xs text-slate-500 leading-relaxed">
-                    단순 물세탁보다는 섬유에 결합된 지용성 오염 물질을 분리할 수 있는 <strong>에탄올 기반 탈취제</strong> 사용을 적극 추천합니다. 시간이 지나 미생물 증식에 의해 발생하는 시큼하고 꿉꿉한 2차 잔류취를 막기 위해, 미생물의 정족수 인식(Quorum Sensing)을 화학적으로 차단하는 <strong>녹차 성분(EGCG 등 다환성 화합물) 배합 탈취제</strong>를 살포하는 것이 입체 장애 유발을 통한 악취 억제에 가장 효과적입니다.
-                </p>
-            </div>
-        </div>
-
-        <div class="text-center mb-12">
-            <p class="text-xs text-slate-400 mb-2">⬇️ 아래로 스크롤하면 자세한 탐구 포트폴리오를 확인할 수 있습니다.</p>
-            <div class="text-indigo-500 animate-bounce text-lg">↓</div>
-        </div>
-
-        <hr class="border-slate-200 my-12">
-        
-        <section id="portfolio" class="space-y-12">
-            <div class="text-center">
-                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-950 tracking-tight">OUR RESEARCH JOURNEY</h2>
-                <p class="text-slate-500 text-xs md:text-sm mt-1">학술적 데이터 및 분야별 연구 요약</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">01. 구조 및 환기 동역학</span>
-                    <h3 class="text-base font-bold mb-2 text-slate-900">급식실 환기 사각지대 (Dead Zone) 입증</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        스모크 테스터 실험 및 이산화탄소(CO₂) 정량 측정을 통해 환기 시스템 설계 불량 구역을 도출했습니다. <strong>Z6 구역</strong>의 경우 최고 CO₂ 농도가 2395ppm에 달해 평균(1188ppm)의 약 2배를 기록하였으며, 환기 후 300초가 지난 시점에도 공기 정체가 지속되는 전형적인 Dead Zone 형태를 보여 해당 구역의 공기 우회 필요성을 규명했습니다.
-                    </p>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">02. 화학적 친화도 분석</span>
-                    <h3 class="text-base font-bold mb-2 text-slate-900">섬유 구조에 따른 분자 간 상호작용</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        소수성을 띠는 폴리에스터(합성 섬유)는 올레산 등 유분성 악취 분자와 강력한 <strong>반데르발스 힘 및 소수성 상호작용</strong>을 형성하여 89.16%라는 극도로 높은 초기 흡착률을 나타냈습니다. 반면 친수성을 보유한 레이온 25% 혼방 직물은 지용성 악취 물질과 분자 간 인력이 약해 상대적으로 매우 낮은 37.17%의 흡착률을 기록함을 정량화하였습니다.
-                    </p>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">03. 생물학적 악취 변질 제어</span>
-                    <h3 class="text-base font-bold mb-2 text-slate-900">미생물 정족수 인식(Quorum Sensing) 억제</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        취식 직후 발생하는 초기 음식 냄새와 달리, 시간이 지나면서 미생물 화학 작용에 의해 시큼한 잔류취로 변질되는 현상에 주목했습니다. 미생물 신호 물질 수용체(LasR 등)의 포켓에 결합하여 강력한 입체 장애를 유발할 수 있는 다환성 화합물인 <strong>녹차 추출 성분(EGCG)</strong>을 활용하여, 2차 악취 유발 원인 물질 생성을 선제 차단하는 메커니즘을 확립했습니다.
-                    </p>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">04. 인지적 통계 제어</span>
-                    <h3 class="text-base font-bold mb-2 text-slate-900">몬테카를로 메서드(Monte Carlo) 연산</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        동일 공간에서 학생 개개인이 체감하는 불쾌감과 후각 민감도의 편차를 정밀 해석하기 위해 하향식 인지 필터와 가우스 난수를 도입했습니다. 가상 학생 100명의 실험 세트를 총 1,000회 연속 자동 실행하는 <strong>몬테카를로 시뮬레이션</strong> 알고리즘을 최적화하여 총 10만 번의 누적 데이터를 확보했고, 특정 무작위 오차를 상쇄한 신뢰성 높은 인지 편차 경향성을 도출했습니다.
+            <div id="resultContainer" class="hidden bg-white rounded-2xl shadow-md p-6 md:p-8 border border-indigo-100 mb-8 transition-all">
+                <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-slate-900">
+                    <span>📊</span> 실시간 분석 결과 및 과학적 행동 지침
+                </h2>
+                <div id="resultContent" class="space-y-4">
+                    </div>
+                
+                <div class="mt-5 pt-5 border-t border-slate-100">
+                    <h3 class="text-xs font-bold text-slate-700 mb-1.5">💡 사후 오염 발생 시 과학적 관리 요령</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        단순 물세탁보다는 섬유에 결합된 지용성 오염 물질을 분리할 수 있는 <strong>에탄올 기반 탈취제</strong> 사용을 적극 추천합니다. 시간이 지나 미생물 증식에 의해 발생하는 시큼하고 꿉꿉한 2차 잔류취를 막기 위해, 미생물의 정족수 인식(Quorum Sensing)을 화학적으로 차단하는 <strong>녹차 성분(EGCG 등 다환성 화합물) 배합 탈취제</strong>를 살포하는 것이 입체 장애 유발을 통한 악취 억제에 가장 효과적입니다.
                     </p>
                 </div>
             </div>
         </section>
+
+
+        <section id="tab-research1" class="tab-content hidden transition-all duration-300">
+            <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-slate-100 space-y-6">
+                <div>
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Chapter 01. 구조 및 환기 동역학</span>
+                    <h2 class="text-xl font-extrabold text-slate-950">급식실 환기 사각지대 (Dead Zone) 입증</h2>
+                </div>
+                <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+                    <p>
+                        본 연구에서는 학교 급식실 내부 환경을 구조적으로 정밀 분석하기 위해 스모크 테스터 실험 및 이산화탄소(CO₂) 농도 정량 측정을 연계하여 실시하였습니다. 그 결과 환기 시스템의 설계 불량 및 구조적 한계로 인해 공기가 흐르지 않고 정체되는 <strong>'환기 사각지대(Dead Zone)'</strong>를 명확히 규명하였습니다.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-2">핵심 도출 데이터 요약</h4>
+                        <ul class="list-disc list-inside space-y-1 text-xs text-slate-700">
+                            <li><strong>최고 오염 구역:</strong> Z6 구역 (배기 효율 극하 지역)</li>
+                            <li><strong>CO₂ 최고 농도:</strong> 2395 ppm 기록 (전체 평균 1188 ppm 대비 약 2배 폭증)</li>
+                            <li><strong>정체 지속 시간:</strong> 환기 가동 후 300초 경과 시점에도 타 구역(297 ppm) 대비 월등히 높은 407 ppm 유지</li>
+                        </ul>
+                    </div>
+                    <p>
+                        이러한 데이터는 급식실 내 환기구 배치가 기류의 단락(Short-circuiting) 현상을 유발하고 있음을 시사하며, 악취 분자가 외부로 신속하게 배출되지 못하고 실내에 누적·순환하는 구조적 원인을 뒷받침합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="tab-research2" class="tab-content hidden transition-all duration-300">
+            <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-slate-100 space-y-6">
+                <div>
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Chapter 02. 화학적 친화도 및 재료공학</span>
+                    <h2 class="text-xl font-extrabold text-slate-950">섬유 구조에 따른 분자 간 상호작용 메커니즘</h2>
+                </div>
+                <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+                    <p>
+                        급식실 악취 분자가 의류에 달라붙는 현상은 섬유 고유의 친수성·소수성 표면 특성과 악취 유기 화합물 간의 <strong>화학적 친화도(Chemical Affinity)</strong>에 좌우됩니다. 본 실험에서는 대표적인 교복 재질과 체육복 재질을 대상으로 유분성 악취 유발 화합물(올레산 등)의 흡착 및 용출 데이터를 정량화하였습니다.
+                    </p>
+                    
+                    <div class="overflow-x-auto my-4">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 text-white font-bold">
+                                    <th class="p-3 rounded-l-lg">섬유 재질 및 유형</th>
+                                    <th class="p-3">화학적 상호작용 특성</th>
+                                    <th class="p-3 rounded-r-lg text-right">초기 악취 흡착률</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-semibold text-slate-900">폴리에스터 100% (체육복)</td>
+                                    <td class="p-3 text-slate-500">강한 소수성, 반데르발스 힘 및 소수성 상호작용 발달</td>
+                                    <td class="p-3 text-right font-bold text-red-600">89.16%</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-semibold text-slate-900">레이온 혼방 25% (교복 셔츠)</td>
+                                    <td class="p-3 text-slate-500">친수성 수산기보유, 지용성 분자와 인력 미형성</td>
+                                    <td class="p-3 text-right font-bold text-emerald-600">37.17%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        실험 결과, 비극성 유분은 극성을 띠는 친수성 섬유와 상호작용이 적다는 <strong>'유사성의 원리'</strong>가 완벽히 입증되었습니다. 폴리에스터와 같은 합성 섬유는 지용성 튀김/볶음 메뉴 악취를 자석처럼 끌어당기는 반면, 레이온 혼방은 이를 선제적으로 방어하는 특성을 가짐이 밝혀졌습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="tab-research3" class="tab-content hidden transition-all duration-300">
+            <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-slate-100 space-y-8">
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Chapter 03. 생물학적 악취 변질 제어</span>
+                        <h2 class="text-xl font-extrabold text-slate-950">미생물 정족수 인식(Quorum Sensing) 차단 메커니즘</h2>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        식사 직후 발생하는 식품 고유의 '초기 취기'와 달리, 시간이 지나면서 의류에서 발생하는 시큼하고 불쾌한 '잔류취'는 <strong>섬유 내 미생물의 화학적 대사 작용</strong>에 의해 생성됩니다. 본 연구는 미생물 간의 집단 신호 전달 체계인 정족수 인식(Quorum Sensing) 메커니즘을 억제하는 친환경 제어 방안을 수립했습니다.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-xs text-slate-700 leading-relaxed">
+                        <strong>천연 다환성 화합물(EGCG)의 수용체 불활성화:</strong><br>
+                        녹차 추출 성분인 EGCG는 8개의 수산화기(-OH)를 보유하여 미생물 신호 물질 수용체(LasR 등)의 폐쇄형 포켓 내 핵심 아미노산들과 강력한 수소 결합을 대치 형성합니다. 기존 신호 물질(AHL)보다 분자 크기가 거대하여 강력한 <strong>입체 장애(Steric Hindrance)</strong>를 유발, 단백질 이량체 활성화를 차단함으로써 악취 전구 물질 생성을 원천 억제합니다.
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-6 border-t border-slate-100">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Chapter 04. 인지적 통계 제어</span>
+                        <h2 class="text-xl font-extrabold text-slate-950">몬테카를로 메서드(Monte Carlo) 기반 인지 편차 연산</h2>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        "왜 같은 공간에서 식사를 해도 개인마다 체감하는 악취 불쾌감의 편차가 큰가?"라는 질문에 해답을 구하고자 하향식 인지 필터 가중치를 수치화했습니다. 인간 후각 수용체의 개인차와 통제 불가능한 행동 노이즈를 정밀 모델링하기 위해 수학적 시뮬레이션을 도입했습니다.
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        가상 학생 100명의 실험 매트릭스를 구성하고, 개별 민감도 가중치를 가우스 난수로 분산 처리하여 **총 1,000회의 연속 반복 연산(총 10만 번의 누적 데이터 생성)**을 수행하는 <strong>몬테카를로 알고리즘</strong>을 구동했습니다. 이를 통해 중앙한계정리에 수렴하는 정규분포 곡선을 도출함으로써 소수 표본이 가질 수 있는 극단적인 난수 오차와 인지적 편차를 통계적으로 정제하고 분석의 신뢰성을 확보하였습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="bg-slate-900 text-slate-500 text-center py-8 text-xs border-t border-slate-800 mt-20">
+    <footer class="bg-slate-900 text-slate-500 text-center py-6 text-xs border-t border-slate-800">
         <p>© 2026 HAFS EUREKA PROJECT. All Research Rights Reserved.</p>
     </footer>
 
     <script>
+        // [탭 전환 함수] 메뉴를 누르면 실행됩니다.
+        function switchTab(tabId) {
+            // 1. 모든 컨텐츠 섹션 숨기기
+            const sections = document.querySelectorAll('.tab-content');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            // 2. 선택한 컨텐츠 섹션만 보이기
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            
+            // 3. 네비게이션 버튼들의 활성화 상태 디자인 초기화
+            const buttons = document.querySelectorAll('#navButtons button');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'font-semibold');
+                btn.classList.add('text-slate-400', 'hover:text-white');
+            });
+            
+            // 4. 클릭한 버튼만 하이라이트(Indigo 색상) 주기
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('text-slate-400', 'hover:text-white');
+            activeBtn.classList.add('bg-indigo-600', 'text-white', 'font-semibold');
+
+            // 탭 전환 시 화면 맨 위로 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // [시뮬레이터 진단 함수]
         function diagnoseSystem() {
             const clothing = document.getElementById('clothingSelect').value;
             const menu = document.getElementById('menuSelect').value;
@@ -133,18 +234,15 @@
             
             if (menu === 'fatty') {
                 if (clothing === 'polyester') {
-                    // 최악의 조합
                     badgeHtml = `<span class="inline-block bg-red-100 text-red-700 font-bold text-xs px-2.5 py-1 rounded-full border border-red-200">⚠️ 위험도 최고 (악취 흡착 위험 심각)</span>`;
                     warningText = `소수성 합성 섬유(폴리에스터 100%)는 오늘 급식의 튀김/볶음류에서 발생하는 올레산 등 유분성 악취 물질과 강력한 <strong>반데르발스 힘 및 소수성 상호작용</strong>을 형성합니다. 본 실험 결과 해당 섬유의 <strong>초기 흡착률은 89.16%</strong>에 달해 악취가 매우 빠르고 강하게 옷에 배게 됩니다.`;
                     actionText = `🚨 <strong>식사 중 체육복이나 겉옷(가디건 등)을 미리 탈의한 후 입장</strong>하시는 것을 강력 권장합니다. 또한, 공기 정체도가 높은 급식실 내 <strong>Z6 구역(Dead Zone)</strong> 자리는 배기 효율이 낮아 VOC 농도가 평소 2배 이상 지속되므로 해당 구역의 좌석 배치는 절대 피하십시오.`;
                 } else {
-                    // 레이온 + 기름진 메뉴
                     badgeHtml = `<span class="inline-block bg-emerald-100 text-emerald-700 font-bold text-xs px-2.5 py-1 rounded-full border border-emerald-200">✨ 위험도 보통 (선제적 방어 성공)</span>`;
                     warningText = `오늘 급식은 유분성 악취가 강한 메뉴이지만, 현재 착용하신 <strong>레이온 25% 혼방 셔츠</strong>는 수용성 친수성 성질을 띠고 있습니다. 비극성 유분 물질은 친수성 섬유와 상호작용이 적다는 '유사성의 원리'에 의해 분자 간 인력이 제대로 형성되지 않아, 폴리에스터 대비 상대적으로 현저히 낮은 <strong>37.17%의 흡착률</strong>을 기록하므로 냄새 방어에 유리합니다.`;
                     actionText = `👍 오늘 같은 날에는 외투를 벗고 <strong>교복 셔츠 단독 착용 상태로 식사</strong>하시는 것이 가장 안전합니다. 추가 예방을 위해 식사 후 통풍이 잘되는 창가 구역에서 가벼운 환기를 진행해 주세요.`;
                 }
             } else {
-                // 수용성/일반 식단인 경우
                 if (clothing === 'polyester') {
                     badgeHtml = `<span class="inline-block bg-orange-100 text-orange-700 font-bold text-xs px-2.5 py-1 rounded-full border border-orange-200">⚡ 위험도 주의 (잔류취 주의)</span>`;
                     warningText = `오늘 급식 메뉴는 수용성 물질 중심이지만, 폴리에스터 섬유 특성상 공기 중 기본 VOCs 분자가 섬유 표면에 장시간 잔류할 수 있습니다. 당장 흡착률이 89%까지 치솟지는 않으나 미세 오염 물질이 누적될 위험이 있습니다.`;
@@ -158,14 +256,14 @@
             
             content.innerHTML = `
                 <div>${badgeHtml}</div>
-                <p class="text-sm text-slate-700 leading-relaxed mt-2">${warningText}</p>
+                <p class="text-sm text-slate-700 leading-relaxed mt-1.5">${warningText}</p>
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm text-slate-800">
                     <p class="font-bold text-indigo-950 mb-1">🎯 실시간 대처 지침</p>
-                    <p class="leading-relaxed">${actionText}</p>
+                    <p class="leading-relaxed text-xs sm:text-sm">${actionText}</p>
                 </div>
             `;
             
-            // 결과창으로 스무스하게 스크롤 이동
+            // 결과창 위치를 부드럽게 보여줍니다.
             container.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     </script>
