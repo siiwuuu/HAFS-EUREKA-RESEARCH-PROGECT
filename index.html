@@ -57,39 +57,66 @@
                 </p>
             </div>
 
-            <div class="space-y-6 pt-2">
-                <h2 class="text-xs font-bold tracking-wider text-zinc-400 uppercase border-b border-zinc-100 pb-2">Academic Portfolio</h2>
-                <div class="divide-y divide-zinc-100">
-                    <div class="py-5 first:pt-0 space-y-2">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                            <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 01</span>
-                            <h3 class="font-semibold text-[13px] sm:text-sm text-zinc-900">구조 및 환기 동역학: Dead Zone 입증</h3>
+            <div class="space-y-8 pt-2">
+                            <h2 class="text-xs font-bold tracking-wider text-zinc-400 uppercase border-b border-zinc-100 pb-2">Academic Portfolio</h2>
+                            <div class="divide-y divide-zinc-100">
+                                
+                                <div class="py-6 first:pt-0 space-y-3">
+                                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                                        <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 01</span>
+                                        <h3 class="font-semibold text-[14px] sm:text-base text-zinc-900">구조 및 환기 동역학: Dead Zone 정량 분석</h3>
+                                    </div>
+                                    <p class="text-zinc-600 text-[12px] sm:text-sm leading-relaxed text-justify break-keep">
+                                        급식실 내부 공간의 구조적 한계와 기류 정체 현상을 규명하기 위해 이산화탄소(CO₂) 농도 실측 및 implicit.sparse 행렬 기반의 확산 솔버 시뮬레이션을 연계 수행했습니다. 배기구 전면 구역(Z1~Z3)은 평균 950ppm 수준의 안정적인 확산 패턴을 보인 반면, 구조물로 가로막힌 <strong>우측 후방 구역(Z6)</strong>은 기류 단락 현상(Short Circuiting)으로 인해 최고 농도 <strong>2,395ppm</strong>을 기록하며 전체 평균(1,188ppm)의 약 2배에 달하는 심각한 환기 사각지대(Dead Zone)임이 입증되었습니다. 환기 시작 300초 이후에도 Z6 구역은 407ppm을 유지하며 가장 유의미하게 냄새 분자가 밀집·잔류하는 공간적 원인임을 시각화했습니다.
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 pt-1">
+                                        <div class="bg-zinc-50 p-3 rounded-lg border border-zinc-150">
+                                            <p class="text-[10px] font-medium text-zinc-400">배기 정상 구역 (Z1-Z3)</p>
+                                            <p class="text-sm font-bold text-zinc-700">~950 ppm <span class="text-[10px] font-normal text-zinc-400">(확산 원활)</span></p>
+                                        </div>
+                                        <div class="bg-red-50/50 p-3 rounded-lg border border-red-100">
+                                            <p class="text-[10px] font-medium text-red-500">환기 사각지대 (Z6 피크)</p>
+                                            <p class="text-sm font-bold text-red-700">2,395 ppm <span class="text-[10px] font-normal text-red-400">(정체·밀집)</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="py-6 space-y-3">
+                                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                                        <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 02</span>
+                                        <h3 class="font-semibold text-[14px] sm:text-base text-zinc-900">화학적 친화도: 섬유 구조별 유분 흡착 제어 실험</h3>
+                                    </div>
+                                    <p class="text-zinc-600 text-[12px] sm:text-sm leading-relaxed text-justify break-keep">
+                                        조리 중 비산되는 고온의 지용성 유분 에어로졸(올레산 등 VOCs 모델 물질)이 교복 섬유에 포집되는 친화도 메커니즘을 비교 분석했습니다. 강력한 소수성 벤젠 고리 구조를 가진 <strong>폴리에스터 100%(생활체육복 재질)</strong> 섬유는 지용성 악취 물질과 강한 반데르발스 인력 및 에스테르 결합을 형성하여 <strong>89.16%의 높은 유분 흡착률</strong>(평균 용출량 0.37g)을 나타냈습니다. 반면, 친수성 하이드록시기를 보유한 레이온 25% 혼방 섬유는 소수성 인력을 상쇄하여 유분 흡착률을 <strong>31.42% 수준</strong>으로 억제시킴으로써 주취 현상을 원천 차단하는 재료공학적 대안을 도출했습니다.
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 pt-1">
+                                        <div class="bg-zinc-50 p-3 rounded-lg border border-zinc-150">
+                                            <p class="text-[10px] font-medium text-zinc-400">폴리에스터 100% (소수성)</p>
+                                            <p class="text-sm font-bold text-zinc-800">89.16% <span class="text-[10px] font-normal text-red-500">주취 취약</span></p>
+                                        </div>
+                                        <div class="bg-zinc-50 p-3 rounded-lg border border-zinc-150">
+                                            <p class="text-[10px] font-medium text-zinc-400">레이온 25% 혼방 (친수성)</p>
+                                            <p class="text-sm font-bold text-zinc-800">31.42% <span class="text-[10px] font-normal text-green-600">흡착 억제</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="py-6 space-y-3">
+                                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                                        <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 03</span>
+                                        <h3 class="font-semibold text-[14px] sm:text-base text-zinc-900">생물학적 악취 변질: LasR 표적 Quorum Sensing 차단</h3>
+                                    </div>
+                                    <p class="text-zinc-600 text-[12px] sm:text-sm leading-relaxed text-justify break-keep">
+                                        식사 후 시간 경과에 따라 발생하는 시큼하고 꿉꿉한 2차 잔류취(이소발레르산 등 변질취)의 유발 기전이 섬유 내 슈도모나스 및 황색포도상구균의 화학 작용에 있음을 검증했습니다. 연구팀은 다환성 천연 화합물인 <strong>EGCG(녹차 추출 성분)</strong>의 8개 수산화기(-OH)가 미생물의 집단 정족수 인식(Quorum Sensing) 핵심 수용체인 <strong>LasR 단백질의 폐쇄형 신호 물질 결합 포켓과 대신 강력한 수소 결합</strong>을 형성함을 밝혀냈습니다. 이는 기존 신호 물질인 AHL 대비 큰 분자 크기로 인해 극심한 입체 장애(Steric Hindrance)를 유발하여, 이량체 활성화를 근본적으로 차단하고 미생물 바이오필름 및 악취 분비 유전자 발현을 억제합니다.
+                                    </p>
+                                    <div class="bg-zinc-50 p-3 rounded-lg border border-zinc-150 text-[11px] sm:text-xs text-zinc-500 space-y-1">
+                                        <p class="font-semibold text-zinc-700">🔬 분자 생물학적 제어 메커니즘</p>
+                                        <p class="leading-relaxed">미생물 신호 물질(AHL) 방출 ➔ EGCG 성분의 LasR 단백질 포켓 선점 ➔ 수소 결합 유도 및 입체 장애(Steric Hindrance) 형성 ➔ 이량체 불활성화를 통한 잔류 악취 생성 억제</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
                         </div>
-                        <p class="text-zinc-500 text-[11px] sm:text-xs leading-relaxed text-justify break-keep">
-                            스모크 테스터 실험 및 CO₂ 정량 측정을 연계하여 배기 시스템 불량 구역을 시뮬레이션했습니다. Z6 구역의 최고 CO₂ 농도가 평균의 약 2배에 달하는 2395ppm을 기록하며 전형적인 환기 사각지대(Dead Zone)임을 증명했습니다.
-                        </p>
-                    </div>
-                    <div class="py-5 space-y-2">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                            <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 02</span>
-                            <h3 class="font-semibold text-[13px] sm:text-sm text-zinc-900">화학적 친화도: 섬유 구조별 흡착 메커니즘</h3>
-                        </div>
-                        <p class="text-zinc-500 text-[11px] sm:text-xs leading-relaxed text-justify break-keep">
-                            소수성 합성 섬유(폴리에스터)는 지용성 악취 물질과 강력한 반데르발스 인력을 형성하여 높은 초기 흡착률을 기록했습니다. 반면 친수성 레이온 25% 혼방은 상대적으로 매우 낮은 유분 흡착 경향성을 보였습니다.
-                        </p>
-                    </div>
-                    <div class="py-5 space-y-2">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                            <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">Section 03</span>
-                            <h3 class="font-semibold text-[13px] sm:text-sm text-zinc-900">생물학적 악취 변질: Quorum Sensing 차단</h3>
-                        </div>
-                        <p class="text-zinc-500 text-[11px] sm:text-xs leading-relaxed text-justify break-keep">
-                            다환성 화합물인 녹차 추출 성분(EGCG)이 미생물 신호 물질 수용체(LasR)의 포켓에 결합하여 강력한 입체 장애를 유발합니다. 이를 통해 미생물의 집단 정족수 인식(Quorum Sensing)을 차단해 시큼한 2차 잔류취 제어합니다.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section id="tab-simulator" class="tab-content hidden space-y-6 sm:space-y-8">
             <div class="space-y-1">
