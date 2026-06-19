@@ -301,7 +301,7 @@
     <main id="tab-deodorant" class="tab-content max-w-3xl mx-auto px-4 sm:px-6 py-24">
         <div class="space-y-2 mb-10 text-center">
             <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">맞춤형 QSI 솔루션</h2>
-            <p class="text-zinc-500 text-sm font-medium">취기 분자 및 미생물 대사량에 따른 정밀 소취 배합비 산출</p>
+            <p class="text-zinc-500 text-sm font-medium">취기 분자 및 미생물 대사량에 따른 개인 맞춤형 탈취 포뮬러 계산기</p>
         </div>
 
         <div class="bg-white border border-zinc-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-sm">
@@ -331,7 +331,7 @@
                             <option value="shirt">교복 셔츠 (폴리에스터 75% / 레이온 25%)</option>
                             <option value="jacket">교복 자켓 (울 60% / 폴리에스터 40%)</option>
                             <option value="cardigan">교복 가디건 (울 50% / 아크릴 50%)</option>
-                            <option value="gym" selected>체육복 (폴리에스 100%)</option>
+                            <option value="gym" selected>체육복 (폴리에스터 100%)</option>
                         </select>
                     </div>
                 </div>
@@ -488,10 +488,12 @@
             "0630": { dateLabel: "6월 30일 (화)", breakfast: "쌀밥, 돼지국밥, 수제완자전, 고추참치볶음, 치커리생채, 포기김치", lunch: "쌀밥, 근대고추장국, 파닭, 마파두부조림, 감자채볶음, 실곤약냉채, 포기김치", dinner: "김치말이국수, 쌀밥, 불고기, 청포묵무침, 아몬드멸치볶음, 무말랭이무침, 열무김치", snack: "찹쌀도넛, 매실주스" }
         };
 
-        const fattyKeywords = ['튀김', '볶음', '전', '삼겹살', '돈가스', '돈까스', '강정', '치킨', '구이', '카츠', '까스', '스테이크', '마요', '갈비', '고기', '바베큐', '만두', '탕수육', '꿔바로우', '폭립', '백립', '핫도그', '너겟', '스팸', '설렁탕', '부침'];
+        // 지용성 강도에 따른 키워드 분류
+        const criticalKeywords = ['튀김', '돈가스', '돈까스', '강정', '치킨', '카츠', '까스', '폭립', '백립', '핫도그', '너겟', '크로켓', '삼겹살', '마요'];
+        const cautionKeywords = ['볶음', '구이', '스테이크', '갈비', '고기', '바베큐', '떡갈비', '불고기', '만두', '탕수육', '꿔바로우', '스팸', '전', '부침', '설렁탕'];
 
         // ---------------------------------------------------------
-        // Recommendation Logic
+        // Recommendation Logic (지용성 3단계 진단)
         // ---------------------------------------------------------
         function diagnoseMenu() {
             const dateId = document.getElementById('dateSelect').value;
@@ -515,42 +517,75 @@
                 menuDisplayHtml += `<p class="mt-2 text-zinc-800 font-bold break-keep"><span class="inline-block px-1.5 py-0.5 bg-zinc-200 text-zinc-600 rounded text-[10px] font-bold tracking-widest uppercase mr-1">야식</span> ${selectedDayData.snack}</p>`;
             }
 
-            let isFatty = false; 
+            let riskLevel = 0; 
             let detectedWords = [];
-            fattyKeywords.forEach(keyword => { if (fullSearchText.includes(keyword)) { isFatty = true; detectedWords.push(keyword); }});
+
+            // 1차 검사: 초고위험 메뉴
+            criticalKeywords.forEach(k => { 
+                if(fullSearchText.includes(k)) { riskLevel = 2; detectedWords.push(k); } 
+            });
+
+            // 2차 검사: 일반 위험 메뉴 (초고위험이 아닐 때만)
+            if(riskLevel === 0) {
+                cautionKeywords.forEach(k => { 
+                    if(fullSearchText.includes(k)) { riskLevel = 1; detectedWords.push(k); } 
+                });
+            }
 
             const finalHeaderHtml = `<div class="p-5 border border-zinc-200 rounded-lg bg-zinc-50 mb-6"><p class="font-bold text-xs text-zinc-400 mb-1 tracking-wider uppercase">Analysis Target: ${dateLabel} / ${mealLabel}</p>${menuDisplayHtml}</div>`;
 
-            if (isFatty) {
-                badge.innerHTML = `<span class="bg-black text-white px-2 py-1 font-mono font-bold rounded text-[10px] animate-pulse">HIGH RISK</span>`;
+            if (riskLevel === 2) {
+                badge.innerHTML = `<span class="bg-black text-white px-2 py-1 font-mono font-bold rounded text-[10px] animate-pulse">CRITICAL RISK</span>`;
                 content.innerHTML = `
                     ${finalHeaderHtml}
-                    <p class="text-black font-extrabold border-l-4 border-black pl-3 mb-5">지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 포함. 섬유 표면 고착화 위험.</p>
+                    <p class="text-black font-extrabold border-l-4 border-black pl-3 mb-5">고농도 지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 감지. 섬유 고착화 극위험.</p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                        <div class="p-4 border border-rose-200 bg-rose-50 rounded-lg">
+                            <p class="text-[10px] font-bold text-rose-600 uppercase tracking-widest mb-1">Strict Prohibition</p>
+                            <p class="font-bold text-rose-900 text-[13px] break-keep">체육복 / 아우터 절대 착용 금지</p>
+                            <p class="text-xs text-rose-700 mt-2 break-keep">해당 메뉴 비산 시 폴리에스터(100%) 섬유의 소수성 인력에 의해 잔류 취기가 강력하게 고착됩니다. 식사 전 반드시 탈의하십시오.</p>
+                        </div>
                         <div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg">
                             <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Recommendation</p>
                             <p class="font-bold text-emerald-900 text-[13px] break-keep">교복 셔츠 단독 착용</p>
-                            <p class="text-xs text-emerald-700 mt-2 break-keep">Poly 75% / Rayon 25%<br>친수성 혼방으로 악취 고착에 상대적으로 안전합니다.</p>
-                        </div>
-                        <div class="p-4 border border-amber-200 bg-amber-50 rounded-lg">
-                            <p class="text-[10px] font-bold text-amber-600 uppercase tracking-widest mb-1">Caution</p>
-                            <p class="font-bold text-amber-900 text-[13px] break-keep">교복 자켓 및 가디건</p>
-                            <p class="text-xs text-amber-700 mt-2 break-keep">Wool 50~60% 혼방<br>다공성 구조로 인해 악취 잔류성이 존재하므로 주의 요망.</p>
-                        </div>
-                        <div class="p-4 border border-rose-200 bg-rose-50 rounded-lg">
-                            <p class="text-[10px] font-bold text-rose-600 uppercase tracking-widest mb-1">Prohibition</p>
-                            <p class="font-bold text-rose-900 text-[13px] break-keep">생활체육복 착용 금지</p>
-                            <p class="text-xs text-rose-700 mt-2 break-keep">Poly 100%<br>소수성 인력으로 인해 89.16%의 극강 흡착률을 보입니다.</p>
+                            <p class="text-xs text-emerald-700 mt-2 break-keep">그나마 친수성(Rayon 25%)을 띠는 셔츠가 반데르발스 인력 형성을 최소화합니다.</p>
                         </div>
                     </div>
 
                     <div class="p-5 bg-zinc-900 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div>
-                            <p class="font-bold text-white text-sm">공간 경고: Z6 구역 (Dead Zone) 착석 금지</p>
-                            <p class="text-xs text-zinc-400 mt-1.5 break-keep">CO₂ 최고 2395ppm 기록. 유분 분자 체류 시간이 가장 긴 구역입니다.</p>
+                            <p class="font-bold text-white text-sm">공간 경고: Z6 구역 (Dead Zone) 절대 접근 금지</p>
+                            <p class="text-xs text-zinc-400 mt-1.5 break-keep">다량의 유분 분자가 기류 단락 구역에 정체되어 심각한 악취 오염을 유발합니다.</p>
                         </div>
                         <button onclick="scrollToSection1()" class="px-4 py-3 bg-white text-black font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-zinc-200 transition-colors whitespace-nowrap">View Z6 Map →</button>
+                    </div>
+                `;
+            } else if (riskLevel === 1) {
+                badge.innerHTML = `<span class="bg-amber-100 text-amber-900 border border-amber-300 px-2 py-1 font-mono font-bold rounded text-[10px]">CAUTION</span>`;
+                content.innerHTML = `
+                    ${finalHeaderHtml}
+                    <p class="text-black font-extrabold border-l-4 border-amber-400 pl-3 mb-5">일반 지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 감지. 부분적 섬유 흡착 주의.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                        <div class="p-4 border border-zinc-200 bg-white rounded-lg">
+                            <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Caution</p>
+                            <p class="font-bold text-zinc-900 text-[13px] break-keep">교복 자켓 및 가디건 주의</p>
+                            <p class="text-xs text-zinc-600 mt-2 break-keep">울(Wool)이 섞인 다공성 구조이므로 구이나 볶음 등 일반 악취가 오래 머물 수 있습니다.</p>
+                        </div>
+                        <div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg">
+                            <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Recommendation</p>
+                            <p class="font-bold text-emerald-900 text-[13px] break-keep">교복 셔츠 위주 착용</p>
+                            <p class="text-xs text-emerald-700 mt-2 break-keep">체육복 착용 시 냄새가 약간 밸 수 있으나 심각한 수준은 아니며, 가급적 셔츠를 권장합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-amber-200 bg-amber-50 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <p class="font-bold text-amber-900 text-sm">Z6 구역 (Dead Zone) 착석 자제</p>
+                            <p class="text-xs text-amber-700 mt-1 break-keep">장시간 착석 시 옷에 잔류취가 흡착될 확률이 높아집니다.</p>
+                        </div>
+                        <button onclick="scrollToSection1()" class="px-4 py-2 bg-amber-200 text-amber-900 font-bold text-[10px] uppercase tracking-widest rounded hover:bg-amber-300 transition-colors whitespace-nowrap">View Z6 Map →</button>
                     </div>
                 `;
             } else {
@@ -559,7 +594,7 @@
                     ${finalHeaderHtml}
                     <div class="p-5 bg-emerald-50 border border-emerald-200 rounded-xl">
                         <p class="font-bold text-emerald-900 mb-1">쾌적한 상태 유지 가능</p>
-                        <p class="text-sm text-emerald-800 break-keep">식단이 주로 수용성 메뉴로 구성되어 있어 섬유 고착화 위험이 낮습니다. 모든 종류의 의류(체육복 포함) 착용이 가능합니다.</p>
+                        <p class="text-sm text-emerald-800 break-keep">해당 식단은 수용성 메뉴 위주로 구성되어 있어 소수성 섬유(폴리에스터)와의 고착화 위험이 낮습니다. 체육복을 포함한 모든 종류의 의류를 편하게 착용하셔도 무방합니다.</p>
                     </div>
                 `;
             }
