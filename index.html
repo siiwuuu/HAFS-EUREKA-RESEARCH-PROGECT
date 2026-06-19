@@ -301,46 +301,43 @@
                 <strong class="text-zinc-900 block mb-1">Figure 6. 미생물 Quorum Sensing 억제 기전</strong>
             </p>
         </section>
-
-        <section class="research-section reveal">
-            <div class="section-number">04. Olfactory Cognition</div>
+<section class="section-divider reveal">
+            <span class="section-label">Section 04</span>
             <h2 class="section-title">인지적 하향식 정보 처리에 따른<br/>주관적 냄새 민감도 왜곡 연구</h2>
             
-            <div class="grid-row">
-                <div class="grid-label">Research Question</div>
-                <div class="grid-content">동일 농도의 물리적 악취 자극에도 학생마다 불쾌감의 편차가 발생하는 원인은 무엇이며, 사전 정보(Framing)가 인지에 어떤 영향을 미치는가?</div>
+            <div class="grid-row border-none pt-0">
+                <div class="grid-label">Research Background</div>
+                <div class="grid-content">
+                    <p class="mb-4">본 탐구는 "왜 동일한 공간에서 같은 농도의 냄새를 맡아도 학생마다 느끼는 불쾌감과 민감도에 큰 차이가 있는가?"라는 의문에서 출발했습니다. 초기에는 냄새를 맡는 물리적 거리를 변인으로 두어 실험(N=10)을 진행했으나, 거리가 멀어지면 피험자가 무의식적으로 숨을 깊게 들이쉬어 물리적 자극을 보완하려는 <strong>'보상 호흡 행동(Compensatory Breathing)'</strong>이 발생하여 물리적 통제가 완전히 무력화됨을 확인했습니다.</p>
+                    <p>또한, 소수 표본으로는 비염 등 개인의 신체적 오차를 극복할 수 없었기에, 비강에 유입되는 물리적 자극량을 기계적으로 상수로 고정하고 <strong>사전 정보(Framing)</strong>만을 변인으로 조작하는 대규모 컴퓨터 시뮬레이션 연구로 전환하였습니다.</p>
+                </div>
             </div>
 
             <div class="grid-row">
-                <div class="grid-label">Method</div>
+                <div class="grid-label">Simulation Method</div>
                 <div class="grid-content">
-                    <ul class="list-disc pl-5 space-y-3 text-zinc-700">
-                        <li>
-                            <strong class="text-zinc-900">보상 호흡 행동 (Compensatory Breathing)</strong><br>
-                            자극이 약해질 때 비강 내 유입 분자량을 일정하게 유지하기 위해 무의식적으로 흡입 압력을 높이는 생리적 기전 고찰.
-                        </li>
-                        <li>
-                            <strong class="text-zinc-900">Monte Carlo Simulation (n=100,000)</strong><br>
-                            수용체 유전적 다형성(SNP) 민감도 가중치를 가우스 난수로 생성하여 인지 왜곡 시뮬레이션 수행.
-                        </li>
-                    </ul>
+                    <p class="mb-4">물리적 자극량을 완벽히 통제하기 위해 '타공 뚜껑과 플라스틱 빨대가 결합된 불투명 컵' 모델을 고안하여 흡입 공기량과 속도를 유체역학적으로 제한했습니다. 이를 바탕으로 100명의 가상 피험자를 두 그룹으로 나누어 <strong>A그룹(긍정 프레임: 전통 시장의 고소한 참기름 향)</strong>과 <strong>B그룹(부정 프레임: 퇴식구 음식물 쓰레기 악취)</strong>으로 사전 정보를 다르게 주입했습니다.</p>
+                    <p class="mb-4">특히 현실 집단의 생물학적 다양성을 반영하기 위해, 가상 학생들의 선천적 후각 역치(민감도 가중치)를 평균 1.0, 표준편차 0.3의 <strong>가우스 정규분포 난수</strong>로 분산 처리하였습니다. 난수에 의한 통제 불가능한 오차를 상쇄하고 명확한 통계적 경향성을 도출하기 위해, <strong>몬테카를로 메서드(Monte Carlo Method)</strong>를 도입하여 100명의 실험 세트를 총 1,000회 연속 자동 실행(총 10만 번 연산)하여 평균값을 검증하였습니다.</p>
                 </div>
             </div>
 
             <div class="grid-row border-none pb-0 mb-0">
-                <div class="grid-label mt-2">Result</div>
+                <div class="grid-label text-blue-700">Result & Conclusion</div>
                 <div class="grid-content">
-                    <p class="font-bold text-xl text-black mb-3 tracking-tight">프레이밍 효과에 의한 주관적 불쾌감 증폭</p>
-                    <p class="text-zinc-600 leading-relaxed break-keep">
-                        동일한 환경 조건하에서도 사전에 부정적 프레임("잔반 악취")이 주입된 집단이 긍정적 프레임("비빔밥 향")이 주입된 집단에 비해 주관적 불쾌감 점수가 통계적으로 유의미하게 증폭됨을 확인. 물리적 환기뿐만 아니라 심리적 프레이밍 제어 전략이 동반되어야 함.
-                    </p>
+                    <h3 class="text-xl font-bold text-black mb-4 tracking-tight">프레이밍 효과에 의한 주관적 불쾌감 증폭 및 냄새 지각의 이중 메커니즘</h3>
+                    <p class="mb-4 text-zinc-700 leading-relaxed break-keep">대규모 시뮬레이션 연산 결과, 물리적으로 동일한 농도의 자극임에도 불구하고 <strong>사전에 부정적 프레임이 주입된 집단이 긍정적 프레임 집단에 비해 주관적 불쾌감 점수가 통계적으로 유의미하게 증폭</strong>됨을 확인했습니다.</p>
+                    <ul class="list-disc pl-5 space-y-3 text-sm sm:text-base text-zinc-700 break-keep mb-8">
+                        <li><strong class="text-black">생물학적 원인 (선천적 개인차):</strong> 인간은 약 400여 개의 후각 수용체 유전자를 가지며, 단일염기다형성(SNP)에 의해 수용체 구조가 달라져 동일한 환경에서도 개개인의 후각 역치에 태생적인 차이가 발생합니다.</li>
+                        <li><strong class="text-black">인지적 원인 (후천적 왜곡):</strong> 뇌는 감각 신호를 있는 그대로 수용하지 않고, 사전에 주어진 언어적 정보에 따라 감각을 다르게 가공하는 <strong>하향식 정보 처리(Top-down processing)</strong>를 거칩니다.</li>
+                    </ul>
+                    <p class="mb-6 text-zinc-700 leading-relaxed break-keep">결론적으로 급식실 냄새에 대한 학생들의 불쾌감은 유전적 민감도라는 생물학적 바탕 위에 심리적 혐오 프레임이 결합된 <strong>하향식 인지 왜곡의 결과물</strong>입니다. 냄새 문제를 완벽히 해결하려면 물리적 환기 개선과 함께, 해당 공간에 대한 학생들의 심리적 혐오 프레임을 완화하는 인지적 접근이 반드시 병행되어야 함을 증명하였습니다.</p>
+
+                    <figure class="bg-white border border-zinc-200 p-2 mt-6 rounded-lg shadow-sm">
+                        <img src="스크린샷 2026-06-19 091747.png" class="w-full h-auto object-contain zoomable-img" onclick="openModal(this.src)">
+                        <figcaption class="text-[10px] text-zinc-500 font-bold mt-3 text-center uppercase tracking-wider">Fig 7. 몬테카를로 시뮬레이션 결과 - 프레이밍 효과에 의한 지각 분포의 이동</figcaption>
+                    </figure>
                 </div>
             </div>
-
-            <div class="mt-8 bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[21/9] flex items-center justify-center p-4">
-                <img src="스크린샷 2026-06-19 091747.png" alt="시뮬레이션 데이터" class="zoomable-img w-full h-full object-contain" onclick="openModal(this.src)">
-            </div>
-            <p class="mt-3 text-[12px] font-medium text-zinc-500 text-center">Figure 7. Monte Carlo simulation results showing the impact of framing on olfactory perception.</p>
         </section>
         
         <div class="py-20 text-center text-zinc-300 text-[10px] font-bold tracking-[0.3em] uppercase border-t border-zinc-100">
