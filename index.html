@@ -39,6 +39,11 @@
         .zoomable-img { cursor: zoom-in; transition: opacity 0.2s, transform 0.2s; }
         .zoomable-img:hover { opacity: 0.8; transform: scale(1.02); }
 
+        /* Tables */
+        table { width: 100%; text-align: left; font-size: 14px; }
+        th, td { padding: 12px 16px; border-bottom: 1px solid #e5e5e5; }
+        th { font-weight: 700; color: #666; text-transform: uppercase; font-size: 12px; background: #fafafa; }
+
         @media (max-width: 768px) {
             .research-section { padding: 80px 0; }
             .section-title { font-size: 1.8rem; margin-bottom: 40px; }
@@ -78,11 +83,11 @@
             </h1>
             <div class="flex flex-col items-center gap-2">
                 <p class="font-medium text-sm sm:text-base text-zinc-800 tracking-tight">용인한국외국어대학교부설고등학교</p>
-                <p class="text-xs text-zinc-500 font-medium">MEMBER : 김민솔, 김연아, 박새온, 박시우, 이홍주</p>
+                <p class="text-xs text-zinc-500 font-medium">김민솔 김연아 박새온 박시우 이홍주</p>
             </div>
         </section>
 
-        <section class="research-section reveal" id="section-1">
+       <section class="research-section reveal" id="section-1">
             <div class="section-number">01. Ventilation Dynamics</div>
             <h2 class="section-title">공간 구조와 환기 조건에 따른<br/>휘발성 물질 체류 분석</h2>
 
@@ -142,56 +147,80 @@
                 </div>
             </div>
 
-            <div class="grid-row group cursor-pointer border-t border-zinc-200 pt-16 mt-16 mb-0 pb-0">
-                <div class="grid-label text-blue-600 transition-colors group-hover:text-blue-800">
-                    Hover to Reveal <br/><span class="text-[10px] text-zinc-400 font-normal">Deep Analysis</span>
+            <div class="mt-16 group relative bg-zinc-50 border border-zinc-200 rounded-xl overflow-hidden transition-all duration-500 hover:bg-white hover:shadow-lg">
+                <div class="p-6 cursor-pointer flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-lg text-black">Z6 데드존 완화를 위한 시뮬레이션 및 실증 분석</h3>
+                        <p class="text-xs text-zinc-500 mt-1">이곳에 마우스를 올리면 상세 데이터가 펼쳐집니다.</p>
+                    </div>
+                    <div class="text-zinc-400 group-hover:text-black transition-colors">
+                        <svg class="w-6 h-6 transform group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
                 </div>
-                <div class="grid-content">
-                    <h3 class="text-xl font-bold text-black mb-2 tracking-tight flex items-center justify-between">
-                        <span>맞통풍 구조 시뮬레이션 및 실증 반전 현상</span>
-                        <span class="text-zinc-300 group-hover:text-blue-500 group-hover:rotate-180 transition-all duration-300">▼</span>
-                    </h3>
-                    <p class="text-sm text-zinc-500 mb-4 group-hover:hidden transition-all">이곳에 마우스를 올리면 시뮬레이션 데이터와 실측 반전 결과가 나타납니다.</p>
-                    
-                    <div class="max-h-0 overflow-hidden opacity-0 group-hover:max-h-[3000px] group-hover:opacity-100 transition-all duration-700 ease-in-out">
-                        <p class="mb-4 mt-6">자연환기에서 가장 효과적이라고 알려진 전략 중 본교의 급식실에 적용할 수 있는 구조에는 맞통풍이 있다. 맞통풍은 공간의 양쪽에 개구부를 배치해 압력차로 공간을 가로지르는 기류를 형성하는 방식으로, 다른 전략으로 단면환기, 연돌효과 등도 있었으나 본 연구의 Dead zone은 오염원과 출구가 한쪽에 치우쳐 두 전략을 적용하기에 불리한 구조에 있다. 따라서 두 번째 단계에서 맞통풍을 유도함을 목표로 시뮬레이션을 실행하였다.</p>
-                        <p class="mb-6">아래 세 가지 구조가 급식실에서 맞통풍을 구현할 수 있는 구조이다.</p>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                            <div class="bg-white border border-zinc-200 p-2 text-center rounded">
-                                <img src="스크린샷 2026-06-19 112747.png" class="w-full h-auto object-contain zoomable-img" onclick="openModal(this.src)">
-                                <p class="text-[11px] font-bold text-zinc-500 mt-2">[왼쪽] Combo 1</p>
+                
+                <div class="max-h-0 opacity-0 group-hover:max-h-[3000px] group-hover:opacity-100 transition-all duration-700 ease-in-out">
+                    <div class="p-6 border-t border-zinc-200 space-y-8">
+                        <p class="text-sm text-zinc-700 leading-relaxed break-keep">
+                            자연환기에서 가장 효과적이라고 알려진 전략 중 본교의 급식실에 적용할 수 있는 구조에는 <strong>맞통풍</strong>이 있습니다. 단면환기나 연돌효과 등 다른 전략도 있었으나 본 연구의 Dead zone은 오염원과 출구가 한쪽에 치우쳐 불리한 구조입니다. 따라서 두 번째 단계에서 맞통풍 유도를 목표로 세 가지 구조 조합(Combo)에 대한 시뮬레이션을 실행하였습니다.
+                        </p>
+
+                        <div class="border border-zinc-200 rounded-lg overflow-hidden bg-white">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-zinc-100 border-b border-zinc-200 text-xs text-zinc-600">
+                                    <tr><th class="p-3">조합</th><th class="p-3 text-right">최고농도 (ppm)</th><th class="p-3 text-right">누적노출</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-zinc-200">
+                                    <tr><td class="p-3 font-bold text-zinc-600">기준</td><td class="p-3 text-right">3,168</td><td class="p-3 text-right">385,288</td></tr>
+                                    <tr class="bg-blue-50/50"><td class="p-3 font-bold text-blue-600">Combo 1</td><td class="p-3 text-right font-bold text-blue-600">1,770</td><td class="p-3 text-right font-bold text-blue-600">300,827</td></tr>
+                                    <tr><td class="p-3">Combo 2</td><td class="p-3 text-right">1,901</td><td class="p-3 text-right">331,549</td></tr>
+                                    <tr><td class="p-3">Combo 3</td><td class="p-3 text-right">1,873</td><td class="p-3 text-right">331,201</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-white border border-zinc-200 p-2 rounded-lg text-center">
+                                <p class="text-[10px] font-bold text-zinc-500 mb-2">[왼쪽] Combo 1</p>
+                                <img src="스크린샷 2026-06-19 112747.png" class="w-full object-contain zoomable-img" onclick="openModal(this.src)">
                             </div>
-                            <div class="bg-white border border-zinc-200 p-2 text-center rounded">
-                                <img src="스크린샷 2026-06-19 112851.png" class="w-full h-auto object-contain zoomable-img" onclick="openModal(this.src)">
-                                <p class="text-[11px] font-bold text-zinc-500 mt-2">[오른쪽] Combo 2</p>
+                            <div class="bg-white border border-zinc-200 p-2 rounded-lg text-center">
+                                <p class="text-[10px] font-bold text-zinc-500 mb-2">[오른쪽] Combo 2</p>
+                                <img src="스크린샷 2026-06-19 112851.png" class="w-full object-contain zoomable-img" onclick="openModal(this.src)">
                             </div>
-                            <div class="bg-white border border-zinc-200 p-2 text-center rounded sm:col-span-3 md:col-span-1">
-                                <img src="스크린샷 2026-06-19 112914.png" class="w-full h-auto object-contain zoomable-img" onclick="openModal(this.src)">
-                                <p class="text-[11px] font-bold text-zinc-500 mt-2">Combo 3</p>
+                            <div class="bg-white border border-zinc-200 p-2 rounded-lg text-center sm:col-span-3 md:col-span-1">
+                                <p class="text-[10px] font-bold text-zinc-500 mb-2">Combo 3</p>
+                                <img src="스크린샷 2026-06-19 112914.png" class="w-full object-contain zoomable-img" onclick="openModal(this.src)">
                             </div>
                         </div>
 
-                        <p class="mb-4">combo1은 27° 기준선의 벽과 창문을 동시에 개방하여, 공기가 한쪽에서 들어와 반대쪽으로 빠져나가도록 유도하는 구조이다. combo2는 27° 기준선의 벽을 개방하되 창문은 닫는 대신 21° 안쪽에 유도벽을 세워 기류를 바깥쪽 경로로 유도하고자 한 구조이다. 마지막으로 combo3은 combo1과 combo2를 결합한 것으로, 창문과 27° 벽을 모두 개방하며, 21° 유도벽을 추가한 구조이다.</p>
-
-                        <p class="mb-8"><strong>시뮬레이션 결과</strong> 세 조합 모두 기존의 구조에 비해 Z6 구역의 CO 최고농도를 낮추었으나, 세 조합 간의 뚜렷한 정도의 차이가 있었다. 맞통풍만을 구현한 combo1이 최고 농도 1,770 ppm, 누적 노출량 300,827로 가장 우수한 환기 성능을 보였다. 반면 유도벽을 설치한 combo2와 combo3은 combo1보다 최고 농도와 누적 노출량이 모두 높게 나타났다. 이는 21° 유도벽이 Dead Zone의 안쪽 배출 경로를 차단하여, 맞통풍으로 얻은 이점을 일부 상쇄하기 때문이다. 따라서 Dead Zone의 환기 개선은 기류를 인위적으로 유도하기 위해 새로운 벽을 추가하는 방향이 아니라, 막힌 출구를 개방하여 외부와 직접 연결되는 맞통풍 경로를 확보하는 방향이 가장 효과적임이 시뮬레이션을 통해 얻은 결론이다.</p>
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-zinc-700 break-keep">
+                            <li><strong>Combo 1:</strong> 27° 기준선의 벽과 창문을 동시에 개방하여 공기가 가로지르도록 유도.</li>
+                            <li><strong>Combo 2:</strong> 창문은 닫고 21° 안쪽에 유도벽을 세워 기류를 바깥쪽으로 유도.</li>
+                            <li><strong>Combo 3:</strong> 창문과 벽을 개방하며 21° 유도벽을 추가 결합.</li>
+                        </ul>
                         
-                        <div class="pt-6 border-t-2 border-dashed border-zinc-200">
-                            <h4 class="font-bold text-lg text-rose-600 mb-4">실증 모형 테스트: 시뮬레이션 결과의 뒤바뀜</h4>
-                            <p class="mb-6">그러나 이후 마지막 단계에서 세가지 구조를 모형을 통해 재현해 실제 CO의 농도 변화 양상을 측정하고, 촬영을 통해 공기흐름 시각화 데이터를 얻은 결과 <strong>시뮬레이션과는 다른 결과</strong>가 나타났다. 실측 값에서는 유도벽과 맞통풍을 모두 적용한 <strong>combo3이 가장 우수한 환기 성능</strong>을 보였으며, 맞통풍만 구현한 combo1이 그 다음, 유도벽만 적용한 combo 2가 가장 낮은 성능을 보였다. 이는 세 조합의 우열이 Combo 1 > Combo 3 > Combo 2로 나타났던 시뮬레이션 결과와 순서가 뒤바뀐 것이다.</p>
-                            
-                            <div class="mb-6 bg-white border border-zinc-200 p-2 rounded">
-                                <img src="스크린샷 2026-06-19 112931.png" class="w-full h-auto object-contain zoomable-img" onclick="openModal(this.src)">
-                                <p class="text-center text-[10px] text-zinc-500 mt-2 font-bold uppercase tracking-widest">실제 모형 CO₂ 농도 실측 데이터</p>
-                            </div>
+                        <p class="text-sm text-zinc-700 bg-zinc-100 p-4 rounded-lg break-keep">
+                            시뮬레이션 결과, 맞통풍만을 구현한 <strong>Combo 1</strong>이 가장 우수한 환기 성능을 보였습니다. 21° 유도벽이 포함된 Combo 2, 3은 배출 경로를 차단해 맞통풍 이점을 상쇄시키는 것으로 확인되었습니다.
+                        </p>
 
-                            <p>Dead Zone에서 측정한 CO 농도를 비교하면, 1분 30초 노출 직후의 최고 농도는 세 조합에서 모두 유사하게 형성되었으나 이후 감소 속도에서 뚜렷한 차이가 나타났다. combo 3은 최고 농도가 882ppm까지만 상승한 뒤 가장 빠르게 감소하여 372초 만에 초기 농도의 10% 수준으로 감소하는 반면, combo1은 957ppm에서 425초, combo2는 1,028ppm에서 513초에 걸쳐 감소하였다. 즉 실제 실측에서는 combo3이 가장 낮은 최고 농도와 가장 짧은 환기 시간을 보였다.</p>
+                        <div class="pt-6 border-t-2 border-dashed border-zinc-300">
+                            <h4 class="font-bold text-lg text-rose-600 mb-4">실증 모형 테스트: 시뮬레이션 결과의 뒤바뀜</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+                                <div class="text-sm text-zinc-700 space-y-4 break-keep">
+                                    <p>마지막 단계에서 모형을 통해 실제 CO₂ 농도를 측정한 결과, <strong>시뮬레이션과는 정반대</strong>의 결과가 나타났습니다.</p>
+                                    <p>실제 테스트에서는 유도벽과 맞통풍을 모두 적용한 <strong>Combo 3이 가장 우수한 환기 성능</strong>을 보였습니다. 시뮬레이션에서의 우열(Combo 1 > 3 > 2)이 실제에서는 (Combo 3 > 1 > 2)로 뒤바뀐 것입니다.</p>
+                                    <p>Combo 3은 882ppm까지만 상승한 뒤 가장 빠르게 감소하여 <strong>372초 만에 초기 농도의 10% 수준</strong>으로 떨어졌습니다. 반면 Combo 1은 425초, Combo 2는 513초가 소요되었습니다.</p>
+                                </div>
+                                <div class="bg-white border border-zinc-200 p-2 rounded-lg text-center shadow-sm">
+                                    <p class="text-[10px] font-bold text-zinc-500 mb-2">실제 모형 CO₂ 농도 실측 데이터</p>
+                                    <img src="스크린샷 2026-06-19 112931.png" class="w-full object-contain zoomable-img mix-blend-multiply" onclick="openModal(this.src)">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
         <section class="research-section reveal" id="section-2">
             <div class="section-number">02. Material Chemistry</div>
             <h2 class="section-title">화학적 친화도 기반<br/>섬유 구조별 흡착 메커니즘</h2>
@@ -199,94 +228,56 @@
             <div class="grid-row">
                 <div class="grid-label">Theoretical Background</div>
                 <div class="grid-content">
-                    <p class="mb-4">섬유에 악취가 잔류하는 현상은 단순히 냄새 분자가 직물 표면에 묻는 물리적 오염 수준을 넘어, 공기 중의 휘발성 유기화합물과 섬유 고분자 매트릭스 간에 발생하는 열역학적 평형 및 분자 간 상호작용의 결과이다. 특히 학교 급식실 환경에서는 조리 과정에서 발생한 트리글리세라이드 등의 미세 유분 에어로졸이 비극성 악취 분자를 운반하는 캐리어 역할을 수행한다. 공기 중으로 확산된 이 복합 물질들은 섬유 표면에 부착된 후, 자유 에너지를 최소화하려는 열역학적 기전에 따라 섬유 내부로 흡착 및 확산된다.</p>
-                    <p class="mb-4">급식실 악취를 구성하는 지방산, 알데하이드, 아민, 황화합물 등은 저마다 고유의 극성과 휘발도를 지닌다. 의류 내 냄새 원인물질인 아이소발레르산 탈착에 관한 연구(2021)에 따르면, 땀이나 음식물 조리 과정에서 발생하는 카복실산 계열의 단쇄지방산(Short-chain fatty acids, 예: 아이소발레르산 등)은 특유의 불쾌한 악취 역치가 극히 낮아, 섬유에 극소량만 흡착되어도 높은 수준의 후각적 불쾌감을 유발한다. 이러한 화합물 중 상당수는 수용성(Aqueous phase)보다 유기상(Organic phase) 및 고체 표면과의 친화도가 높은 소수성(Hydrophobic) 특성을 띠므로, 공기 중에 떠다니다 섬유 매트릭스를 만나면 쉽게 고착화되는 문제를 야기하게 된다.</p>
-                    <p class="mb-4">악취 물질이 잔류하는 정도는 섬유의 화학적 구조에 따라 뚜렷한 차이를 보인다. 천연섬유인 면(Cotton)과 목재 펄프를 원료로 한 재생섬유인 레이온(Rayon)은 분자 구조 내에 수산기(-OH)가 풍부한 셀룰로스로 이루어져 있어 강한 친수성을 띠는 섬유이다. 이는 대기 중의 물 분자와 쉽게 수소 결합을 형성하게 하지만, 상대적으로 유분성을 띠는 비극성 악취 분자와의 결합력은 떨어뜨리는 성질을 갖는다.</p>
-                    
-                    <div class="my-8">
-                        
-
-[Image of Cellulose chemical structure]
-
-                        <p class="text-sm text-zinc-500 font-bold text-center mt-2">면(Cotton) 및 레이온(Rayon) 화학 구조</p>
-                    </div>
-
-                    <p class="mb-4">반면, 합성섬유 폴리에스터(PET, Polyethylene Terephthalate)는 분자 구조 내에 에스테르기(-COO-)와 벤젠 고리를 포함하고 있어 강한 소수성을 띠게 된다. 이로 인해 소수성을 띠는 급식실의 단쇄지방산 및 유분성 악취 물질이 폴리에스터 섬유와 접촉할 경우에, 분자 간에 강한 반데르발스 힘(van der Waals forces)이 유도된다. 이때, 반데르발스 힘은 분자 간의 순간적인 전하의 차이로 인해 발생하는 인력인데, 특히 긴 탄소 사슬을 가진 유분성 악취 물질과 폴리에스터의 소수성 영역 사이에서 넓은 접촉 면적을 통해 축적되고, 섬유 내부에 악취 분자를 물리적으로 고정하는 주요 결합력으로 작용한다. 즉, 폴리에스터의 화학적 구조가 소수성 악취 분자를 강력하게 포획하는 물리화학적 트랩으로 작용하여 면 소재보다 악취를 더 빠르고 깊게 흡수하며 오래 잔류시키는 원인이 되는 것이다.</p>
-
-                    <div class="my-8">
-                        
-
-[Image of Polyethylene Terephthalate chemical structure]
-
-                        <p class="text-sm text-zinc-500 font-bold text-center mt-2">폴리에스터(PET) 화학 구조</p>
-                    </div>
-
-                    <p class="mb-4">더 나아가 섬유 내 악취 잔류는 계면 물리 흡착(Physisorption)과 고분자 사슬 내부로의 확산(Diffusion) 및 흡수(Absorption)라는 이중 동역학적 과정을 거치며 문제를 심화시킨다. 초기에는 냄새 분자가 섬유 표면의 Active Site 에 달라붙지만, 시간이 지남에 따라 농도 구배에 의해 섬유 고분자 사슬 사이의 미세 공극(Free volume) 깊숙이 침투한다. 쉽게 설명하자면 이러한 농도 구배는 악취 분자가 농도가 높은 표면에서 낮은 내부로 이동하게 만드는 구동력으로 작용한다. 결과적으로 악취 분자는 이 구배를 따라 섬유 고분자 구조 내로 침투하는 확산과정을 거치게 되며, 일단 섬유 매트릭스 내부로 확산된 분자는 물리화학적 트랩에 고정되어 탈착을 위한 높은 활성화 에너지를 요구하게 된다. 이는 왜 급식실 냄새가 단순 세탁이나 짧은 환기만으로는 쉽게 제거되지 않고 의류에 장기 잔류하는지를 증명하는 핵심적인 물리적 기전이 되는 것이다.</p>
-                    <p class="mb-4">실제 선행 연구에 따르면, 의류에 흡착된 단쇄지방산 계열의 악취가 자연 방치 상태에서 인지하기 어려운 수준(관능 강도 1등급 이하)으로 자연 탈착되기까지는 최소 7시간 이상의 긴 시간이 소요되는 것으로 나타났다.</p>
+                    <p class="mb-4">섬유에 악취가 잔류하는 현상은 단순히 냄새 분자가 직물 표면에 묻는 물리적 오염을 넘어, 휘발성 유기화합물과 섬유 고분자 매트릭스 간에 발생하는 <strong>열역학적 평형 및 분자 간 상호작용</strong>의 결과입니다.</p>
+                    <p>친수성인 면이나 레이온과 달리, 에스테르기를 지닌 <strong>폴리에스터(PET)</strong>는 강한 소수성을 띠어 비극성 유분 악취 분자와 <strong>강력한 반데르발스 힘</strong>을 형성합니다.</p>
                 </div>
             </div>
 
-            <div class="grid-row">
-                <div class="grid-label">Hypothesis</div>
-                <div class="grid-content">
-                    <p class="mb-4">결과적으로 학교 급식실 환경에서 학생들의 의류에 냄새가 깊게 배고 쉽게 빠지지 않는 현상은, 조리 과정에서 발생한 소수성 악취 화합물과 폴리에스터 고분자 구조 간의 강력한 화학적 친화력, 그리고 미세 공극 내부로의 동역학적 확산 방식이 결합하여 발생한 복합적인 재료공학적인 문제라고 볼 수 있다. 본 실험은 앞서 실시한 본교 전교생 대상 선행 설문조사 결과를 과학적으로 검증하고, 그 구체적인 원인을 규명하기 위해 설계되었다. 설문조사 결과, 학생들이 착용하는 의복 종류(교복 및 체육복)에 따라 급식실 악취의 잔류 수준에 유의미한 편차가 존재하며, 교복이 체육복보다 급식실 내 지방산계 악취에 훨씬 취약하다는 후각적 인지 데이터가 도출되었다. 이는 의복을 구성하는 주된 섬유 가닥의 화학적 구조와 기질적 특성이 악취 분자와의 상호작용을 결정짓는 핵심 변수임을 시사한다.</p>
-                    <p class="mb-4">이에 따라 본 연구에서는 폴리에스터 75%, 레이온 25% 의 교복 셔츠(친수성 대조군)와 합성 섬유인 100% 폴리에스터 체육복(소수성 실험군)을 비교 물질로 설정하였다. 또한 급식실에서 발생하는 조리유 유래의 악취를 모사하기 위해, 강력한 소수성을 띠는 장쇄불포화지방산인 올레산(Oleic acid)을 실험 모델 물질로 채택하였다. 섬유 고유의 화학적 상호작용이 유분성 악취 흡착에 미치는 영향을 확인하기 위해 다음과 같은 두 가지 가설을 수립하고 흡수 동역학 및 정량적 잔류량을 교차 검증하는 실험을 진행하려 한다.</p>
-                    <ul class="list-disc pl-5 space-y-2 mb-4">
-                        <li><strong>ⅰ) 화학적 친화도에 따른 흡수 속도 차이:</strong> 물질은 유사한 극성을 가진 표면과 더 잘 상호작용한다. 따라서 극성 물질인 물은 친수성인 면에 더 빠르게 흡수되는 반면, 비극성 유분 물질인 올레산은 소수성인 폴리에스터에 더 빠르게 흡수될 것이다.</li>
-                        <li><strong>ⅱ) 분자 간 상호작용에 따른 잔류량 차이:</strong> 소수성인 올레산은 폴리에스터의 소수성 분자 구조와 접촉할 때 강력한 반데르발스 힘 및 소수성 상호작용을 형성한다. 따라서 올레산 희석액에 시료를 침지시킨 후 에탄올로 용출하는 과정을 거쳤을 때, 면에 비해 폴리에스터의 초기 흡착량(W1 - W0)이 더 많을 뿐만 아니라, 용출 후 빠져나가지 못한 최종 잔류량(W2 - W0) 역시 더 높게 나타날 것으로 예상한다.</li>
-                    </ul>
+            <div class="mb-16">
+                <h4 class="font-bold text-lg mb-6 border-l-4 border-black pl-3 tracking-tight">ⅰ) 섬유 재질에 따른 액체 침투 속도 비교 실험</h4>
+                <div class="bg-white p-2 border border-zinc-200 mb-6 rounded-lg shadow-sm">
+                    <img src="스크린샷 2026-06-19 115356.png" class="zoomable-img w-full h-auto object-contain" onclick="openModal(this.src)">
+                    <p class="text-[10px] text-center text-zinc-500 mt-2 font-bold uppercase tracking-widest">액체 침투 속도 비교 원본 데이터</p>
                 </div>
+                <p class="text-sm text-zinc-700 leading-relaxed break-keep">
+                    <strong>결과 분석:</strong> 친수성 레이온 대비 소수성 폴리에스터는 기름 성분인 올레산을 약 <strong>3배 이상 빠르게 흡수</strong>하여 화학적 유사성 법칙(Like dissolves like)을 명확히 증명하였습니다.
+                </p>
             </div>
 
-            <div class="grid-row">
-                <div class="grid-label">Method</div>
-                <div class="grid-content">
-                    <p class="mb-4">본 실험을 위해 폴리에스터와 레이온이 혼합된 교복 셔츠 원단과 폴리에스터(PET) 재질의 체육복 원단을 실험 시료로 준비하였으며, 악취 모사 및 용출을 위한 시약으로 올레산 원액과 에탄올, 그리고 증류수를 사용하였다. 정밀한 물리적 측정을 위해 정밀 전자저울을 비롯하여 밀폐용기, 비커, 스포이트, 거름종이를 활용하였고, 흡수 속도의 시각적 기록 및 초 단위 측정을 위해 타이머와 스마트폰 촬영 장치를 동원하였다.</p>
-                    <p class="mb-4"><strong>ⅰ) 섬유 재질에 따른 액체 침투 속도 비교</strong><br/>
-                    섬유 표면의 극성 특성에 따른 액체 침투 속도를 비교하는 두 번째 실험은 오염되지 않은 새 교복 셔츠 원단과 폴리에스터 원단을 밀폐 용기에 평평하게 두고 시작한다. 정밀한 측정을 위해 스마트폰으로 타이머 화면과 함께 동영상 촬영을 시작한 뒤, 먼저 스포이트를 이용하여 폴리에스터 섬유 표면에 극성 물질인 증류수 한 방울을 떨어뜨린다. 증류수 방울이 섬유 표면에 완전히 스며들어 겉보기에 액체막이 사라지는 순간까지 소요된 시간을 측정한다. 이후 폴리에스터의 다른 위치에 비극성 물질인 순수 올레산 원액을 한 방울 떨어뜨려 유분이 섬유 내부로 완전히 흡수될 때까지의 시간을 동일한 방식으로 측정한다. 모든 적하 실험은 오차를 최소화하기 위해 섬유별로 2회씩 반복하여 평균값을 도출한다.</p>
-                    <p class="mb-4"><strong>ⅱ) 섬유 재질에 따른 악취 물질의 정량적 흡착</strong><br/>
-                    섬유 재질에 따른 악취 물질의 정량적 흡착 및 잔류량을 분석하기 위한 첫 번째 실험은 시료의 전처리와 질량 측정으로 진행했다. 교복 셔츠 원단과 폴리에스터 원단을 각각 가로세로 5 x 5 cm 크기로 균일하게 2장씩 재단한 뒤, 불순물을 제거하기 위해 에탄올로 세척하고 완전히 건조한 후, 초기 질량 W₀를 전자저울로 측정한다. 이후 비커에 올레산 원액과 에탄올을 5대 5의 부피 비율로 희석하여 총 150 ml의 악취 모사 희석액을 제조하고, 이 용액을 밀폐용기에 담아 각 시료가 완전히 잠기도록 침지시킨 후 20분간 방치한다.</p>
-                    <p class="mb-4">시간이 경과하면 시료를 꺼내어 거름종이 위에 올려두고, 혼합액 중 휘발성이 강한 에탄올 성분만 선택적으로 증발시키기 위해 5분간 자연 증발을 유도한다. 에탄올이 모두 휘발되고 섬유에 순수 올레산만 남은 상태에서 다시 질량을 측정하여 이를 W₁으로 기록한다. 또한 이 값에서 초기 질량인 W₀를 빼서 초기 흡착량을 산출한다.</p>
-                    <p class="mb-4">초기 흡착량 측정이 완료된 시료는 악취 제거 메커니즘을 확인하기 위한 세척 및 용출 과정을 거친다. 비커에 순수한 에탄올 30 ml를 채운 뒤 올레산이 흡착된 시료를 투입하고, 유리막대를 이용해 10분간 일정하게 교반하여 섬유 내부의 올레산을 유기용매인 에탄올로 씻어낸다. 용출이 끝난 시료는 다시 거름종이 위에서 표면에 남은 에탄올 성분을 완전히 증발시킨 후 최종 질량인 W₂를 측정한다. 결과적으로 W₂에서 W₀를 차감하여 세척 후에도 빠져나가지 못한 최종 잔류량을 구하고, W₁에서 W₂를 차감하여 에탄올에 씻겨 나간 용출량을 산출하여 질량 보존에 입각한 정량 분석을 완료한다.</p>
+            <div class="mb-16">
+                <h4 class="font-bold text-lg mb-6 border-l-4 border-black pl-3 tracking-tight">ⅱ) 섬유 재질에 따른 악취 물질의 정량적 흡착 및 용출 분석</h4>
+                <div class="bg-white p-2 border border-zinc-200 mb-6 rounded-lg shadow-sm">
+                    <img src="스크린샷 2026-06-19 115328.png" class="zoomable-img w-full h-auto object-contain" onclick="openModal(this.src)">
+                    <p class="text-[10px] text-center text-zinc-500 mt-2 font-bold uppercase tracking-widest">악취 물질 정량적 용출 분석 원본 데이터</p>
                 </div>
+                <p class="text-sm text-zinc-700 leading-relaxed break-keep">
+                    <strong>결과 분석:</strong> 100% 폴리에스터는 면이나 레이온에 비해 압도적으로 많은 양의 비극성 물질을 흡착하며, 치밀한 결정 구조로 인해 내부 침투 후 세척 효율이 떨어져 가장 높은 잔류율을 보입니다.
+                </p>
             </div>
 
-            <div class="grid-row">
-                <div class="grid-label">Result</div>
-                <div class="grid-content">
-                    <h3 class="text-xl font-bold text-black mb-4 tracking-tight">ⅰ) 섬유 재질에 따른 액체 침투 속도 비교</h3>
-                    <p class="mb-4">본 실험을 통해 분자 간 상호작용인 유사성 법칙을 확인할 수 있었다. 수용성을 띠는 물질은 극성 물질과 상호작용을 활발히 하며, 지용성을 띠는 물질은 무극성 물질과 활발히 한다. 본 실험에서 액체의 침투 속도는 섬유 표면에 적하된 액체가 원단 내부로 완전히 침투하여, 육안상 표면의 액막 및 정반사(반짝임)가 완전히 소멸하는 시점을 기준으로 측정하였다.</p>
-                    
-                    <div class="mb-6">
-                        <img src="스크린샷 2026-06-19 115328.png" class="w-full h-auto object-contain border border-zinc-200 p-2 bg-white zoomable-img" onclick="openModal(this.src)">
-                    </div>
-                    
-                    <p class="mb-4"><strong>1) 실험 결과 분석:</strong> 액체 침투 속도 실험 결과, 섬유의 재질과 액체의 종류에 따라 침투 시간에 극명한 차이가 발생함을 확인하였다. 친수성 기질의 레이온 25% 혼방은 극성 액체인 증류수를 평균적으로 약 59.6초 만에 흡수한 반면, 비극성 유분인 올레산은 흡수하는 데 평균적으로 107초가 소요되어 기름에 대한 현저히 낮은 상호작용력을 보였다. 반대로 소수성 섬유인 폴리에스터 100% 원단은 증류수 침투에 평균적으로 79.5초가 걸렸으나, 올레산은 불과 26.74초 만에 흡수하여 물(극성)보다 기름(무극성)을 약 3배 이상 빠르게 빨아들이는 특성을 보였다.</p>
-                    <p class="mb-8">이러한 결과는 각 원단의 섬유 조성을 뚜렷히 증명한다. 폴리에스터 100%와 비교했을 때 레이온 혼방 원단은 증류수 흡수 속도가 현저히 빠르게 나타났으며 올레산은 매우 극명한 차이로, 느리게 흡수됨을 알 수 있다. 이는 폴리에스터 100%(체육복)이 지용성, 레이온 혼방(교복 셔츠)가 수용성에 가까운 성질을 가짐을 시사한다. 더 나아가 이 실험 결과는 이후 진행한 실험 ⅱ) 에 대한 배경지식으로서 역할을 할 수 있다.</p>
-
-                    <h3 class="text-xl font-bold text-black mb-4 tracking-tight">ⅱ) 섬유 재질에 따른 악취 물질의 정량적 흡착</h3>
-                    <p class="mb-4">본 실험을 통해 섬유의 화학적 구조에 따라 악취 물질의 포집 및 세척 효율이 어떻게 달라지는지 정량적으로 확인하였다.</p>
-                    
-                    <div class="mb-6">
-                        <img src="스크린샷 2026-06-19 115356.png" class="w-full h-auto object-contain border border-zinc-200 p-2 bg-white zoomable-img" onclick="openModal(this.src)">
-                    </div>
-
-                    <p class="mb-4"><strong>1) 흡착량(%) 비교:</strong> 섬유 자체가 얼마나 많은 올레산(악취물질)을 흡수하는지를 시사한다. 폴리에스터 100%는 89.16%의 흡착량을 보였고, 레이온 25%는 37.17%의 흡착량을 보여, 약 2.4배에 달하는 수치 차이를 확인할 수 있다. 올레산 분자가 폴리에스터 표면에 접촉하면서 강한 반데르발스 힘과 소수성끼리의 상호작용을 형성하게 된다. 이 결합력으로 인해 폴리에스터는 주변에 있는 올레산의 유분 에어로졸을 빠르게 끌어당겨 섬유 표면 전반에 걸쳐 대량으로 흡착하게 되는 것이다. 반면, 대조군인 레이온 25% 혼방의 흡착률이 비교적 낮게 측정된 이유는 물과 잘 친화하는 강한 친수성 기질을 지니는 이의 특징 때문이다.</p>
-                    <p class="mb-4"><strong>2) 용출 효율(%) 비교:</strong> 흡착된 물질 중 에탄올 세척으로 얼마나 제거되었는지를 시사한다. 폴리에스터는 올레산과 강한 소수성 상호작용을 형성하여, 세척 과정에서 탈착된 오염물(올레산)이 쉽게 떨어지지 않고 비교적 높은 잔류율을 보인 것으로 판단된다. 반면, 셀룰로스 섬유인 레이온은 분자 내에 다량의 친수성 수산기를 보유하고 있기 때문에 수용성 성질을 띤다. 폴리에스터는 대표적인 결정성 합성 섬유로, 분자 사슬이 매우 규칙적이고 빽빽하게 배열된 높은 결정 구조를 가진다. 반면 레이온은 천연 원료인 셀룰로오스를 화학적으로 녹인 후 다시 뽑아낸 재생 섬유이기 때문에 분자의 배열이 느슨하고 비결정 영역이 결정 영역보다 많아 세척제가 더 쉽게 침투한다.</p>
-                    <p class="mb-4"><strong>3) 평균 잔류율(%) 비교:</strong> 세척 후에도 섬유에 남아있는 오염물의 비율을 시사한다. 폴리에스터 100% 섬유는 20.27% 의 잔류율을 가지며, 레이온 25% 혼방 섬유는 13.16%의 잔류율을 가진다.</p>
-                    <p class="mb-8"><strong>4) 실험 진행에서의 한계와 보완:</strong> 기존 실험 설계에서는 중화적정 실험을 통해 올레산 흡착 정도를 측정하려고 계획하였다. 그러나 실험 진행 중 잔류되는 올레산의 양이 미량으로, 중화적정을 통한 변화 양상 관찰이 어려울 것이라는 한계점이 발생하여 질량 변화로써 올레산 흡착 정도를 측정하는 실험으로 변경하였다. 질량법을 채택하였지만 오차를 줄이고 신뢰도를 높이기 위해 반복 실험을 통한 통계적 처리를 진행하였다.</p>
-                </div>
-            </div>
-
-            <div class="grid-row border-none pb-0 mb-0">
+            <div class="grid-row border-none pb-0 mb-0 mt-16 border-t border-zinc-200 pt-8">
                 <div class="grid-label text-rose-600">The Paradox</div>
-                <div class="grid-content">
-                    <h3 class="text-xl font-bold text-black mb-4 tracking-tight">설문조사의 역설 규명</h3>
-                    <p class="mb-4">실험에 앞서 진행했던 선행 설문조사에서는, 교복이 체육복에 비해 급식 냄새가 잘 밴다는 의견이 우세했다. 이는 실험 결과와는 상반되는 의견이었는데, 나는 이에 대해 가설을 세워 보았다.</p>
-                    <p class="mb-4"><strong>교복의 명확한 정의 부재:</strong> 실제로 본교의 교복을 연상했을 때 니트, 가디건, 자켓, 셔츠 등 여러 요소가 떠오른다. 이 연구에서 나는 ‘교복 셔츠’를 목표로 실험을 진행하였는데, 설문지에서 단순히 ‘교복’으로 명시하여 명확한 의도가 전달되지 않았을 가능성이 크다.</p>
-                    <p class="mb-4">설문조사 대상자들이 교복 가디건을 연상했다면 설문조사 결과가 실험 결과에 부합한다. 우리 학교의 가디건은 울 50%, 아크릴 50%로 구성되어 있다. 석유계 합성섬유인 아크릴은 강한 소수성 성질을 지닌다. 아크릴은 수분을 흡수하지 못하는 소수성이기 때문에 땀이 나면 섬유 표면에 액체 상태의 수분막을 형성하게 된다. 이는 박테리아가 번식하기 좋은 환경을 형성한다. 따라서 수분막 위에서 생성된 냄새 분자는 그대로 아크릴 표면에 흡착하게 되는 것이다.</p>
-                    <p class="mb-4">설문조사 대상자들이 교복 자켓을 연상했다면 역시 실험 결과와 설문조사 결과가 부합한다고 볼 수 있다. 40%를 차지하는 합성섬유 폴리에스터의 지용성이 냄새 흡착에 상당한 영향을 미치게 된다. 이는 체육복과 같은 메커니즘으로 올레산을 강하게 흡착시키는데, 수용성을 띠는 울이 60%나 차지함에도 불구하고 지용성이 우세하게 작용하는 이유는 40%를 차지하는 폴리에스터가 냄새 분자를 포획하는 역할을 정상적으로 수행하며, 직물 자체가 두껍기 때문이라고 볼 수 있다.</p>
-                    <p class="mb-4">가디건과 자켓의 경우 소재 특성상 직물이 두껍고 표면적이 넓어 물리적인 오염물 포집량이 많기 때문이라고 추측할 수 있다.</p>
+                <div class="grid-content space-y-6">
+                    <h3 class="font-bold text-xl text-black">설문조사의 역설: "교복이 체육복보다 냄새가 잘 밴다?"</h3>
+                    <p class="text-zinc-700 text-sm sm:text-base leading-relaxed break-keep">
+                        설문조사에서는 "교복이 체육복보다 냄새가 잘 밴다"는 의견이 우세했습니다. 이는 정량 실험 결과인 '폴리에스터(체육복)의 고흡착'과 모순됩니다.
+                    </p>
+                    <div class="bg-rose-50 p-5 rounded-lg border border-rose-100">
+                        <p class="font-bold text-rose-900 text-sm mb-2">원인 규명</p>
+                        <p class="text-sm text-rose-800 break-keep">
+                            학생들은 '교복'을 셔츠가 아닌 가디건이나 자켓으로 인식했습니다. 가디건(아크릴 50%)과 자켓(폴리 40%)은 소수성 합성섬유를 포함하면서, 동시에 <strong>직물이 두껍고 표면적이 매우 넓어</strong> 물리적으로 포집하는 악취 에어로졸의 절대량이 얇은 체육복을 압도하기 때문입니다.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="border border-zinc-200 bg-white p-2 rounded-lg text-center shadow-sm">
+                            <img src="cardigan-tag.png" alt="교복 가디건" class="w-full h-32 object-contain zoomable-img" onclick="openModal(this.src)">
+                            <p class="text-[10px] text-zinc-500 font-bold mt-2 uppercase tracking-wider">가디건 섬유 조성</p>
+                        </div>
+                        <div class="border border-zinc-200 bg-white p-2 rounded-lg text-center shadow-sm">
+                            <img src="jacket-tag.png" alt="교복 자켓" class="w-full h-32 object-contain zoomable-img" onclick="openModal(this.src)">
+                            <p class="text-[10px] text-zinc-500 font-bold mt-2 uppercase tracking-wider">자켓 섬유 조성</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -408,19 +399,19 @@
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">1. Detection Type</label>
                     <select id="qsiOdor" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                        <option value="1">시큼한 쉰내</option>
-                        <option value="2">암내</option>
-                        <option value="3">황변 꿉꿉함</option>
-                        <option value="4" selected>급식실 잔류 취기</option>
+                        <option value="1">시큼한 쉰내 (포도상구균 대사 땀 냄새)</option>
+                        <option value="2">암내 (코리네박테리움 피지 분해 취)</option>
+                        <option value="3">황변 꿉꿉함 (미크로코쿠스 유래)</option>
+                        <option value="4" selected>급식실 잔류 취기 (슈도모나스균 유래 음식물 바이오필름 향)</option>
                     </select>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div class="space-y-2">
                         <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">2. Perceptual Level</label>
                         <select id="qsiSeverity" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                            <option value="1">Level 1</option>
-                            <option value="2" selected>Level 2</option>
-                            <option value="3">Level 3</option>
+                            <option value="1">Level 1: Detection Threshold (가까이서 감지)</option>
+                            <option value="2" selected>Level 2: Recognition (활동 반경 내 인지)</option>
+                            <option value="3">Level 3: Saturation (주변으로 악취 비산)</option>
                         </select>
                     </div>
                     <div class="space-y-2">
@@ -436,8 +427,8 @@
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">4. Skin Sensitivity</label>
                     <select id="qsiSkinType" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                        <option value="normal">Normal</option>
-                        <option value="sensitive">Sensitive</option>
+                        <option value="normal">Normal (에탄올 기반)</option>
+                        <option value="sensitive">Sensitive (수성 기반)</option>
                     </select>
                 </div>
             </div>
@@ -451,6 +442,16 @@
                 <h3 class="text-sm font-bold tracking-widest text-black uppercase">Formula Prescription</h3>
                 <div id="qsiBadge"></div>
             </div>
+            
+            <div class="space-y-4 text-sm bg-zinc-50 border border-zinc-200 rounded-lg p-6">
+                <div><span class="text-zinc-500 w-32 inline-block font-semibold">Target Factor:</span> <strong id="out-bacteria"></strong></div>
+                <div><span class="text-zinc-500 w-32 inline-block font-semibold">Matching QSI:</span> <strong id="out-qsi" class="text-lg font-extrabold text-black"></strong></div>
+                <div class="pt-4 mt-4 border-t border-zinc-200">
+                    <p class="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2 font-mono">Mechanism of Action</p>
+                    <p id="out-principle" class="text-zinc-700 leading-relaxed font-medium break-keep"></p>
+                </div>
+            </div>
+
             <div class="border border-zinc-200 rounded-lg overflow-hidden">
                 <table class="w-full text-left text-sm border-collapse">
                     <thead class="bg-zinc-100 border-b border-zinc-200 text-[10px] uppercase tracking-wider text-zinc-500 font-mono">
@@ -587,10 +588,19 @@
         }
 
         // QSI Calculator Logic
+        const qsi_db = {
+            "1": { bacteria: "Staphylococcus", qsi: "Hamamelitannin", principle: "세균의 Agr 표적 시스템을 하향 조절하여, 땀 속 노폐물을 쉰내 물질로 전환하는 유전자 발현 신호 체계를 차단합니다." },
+            "2": { bacteria: "Corynebacterium", qsi: "Farnesol + Carvacrol", principle: "아포크린샘 피지 분해 효소 활성 신호를 교란하여, 액취증 유발 물질 생성을 근본적으로 봉쇄합니다." },
+            "3": { bacteria: "Micrococcus luteus", qsi: "Quercetin", principle: "휴면 상태의 균을 깨우는 RPF(휴면 타파 인자) 수용체를 억제하여 특유의 노란 색소 합성을 억제합니다." },
+            "4": { bacteria: "Pseudomonas aeruginosa", qsi: "Epigallocatechin Gallate (EGCG)", principle: "EGCG의 수산화기(-OH)가 LasR 수용체와 결합하여 입체 장애(Steric Hindrance)를 유발, 바이오필름을 억제합니다." }
+        };
+
         function calculateFormula() {
+            const odorChoice = document.getElementById("qsiOdor").value;
             const severity = parseInt(document.getElementById("qsiSeverity").value);
             const fabric = document.getElementById("qsiFabric").value;
             const skinType = document.getElementById("qsiSkinType").value;
+            const solution = qsi_db[odorChoice];
 
             const qsi_base_pct = 0.5 * severity;
             const neutralizer_pct = 1.2 * severity;
@@ -612,6 +622,9 @@
 
             const water_pct = 100.0 - (qsi_base_pct + neutralizer_pct + ethanol_pct + surfactant_pct);
 
+            document.getElementById("out-bacteria").innerText = solution.bacteria;
+            document.getElementById("out-qsi").innerText = solution.qsi;
+            document.getElementById("out-principle").innerText = solution.principle;
             document.getElementById("out-qsi-pct").innerText = qsi_base_pct.toFixed(1) + "%";
             document.getElementById("out-surfactant-pct").innerText = surfactant_pct.toFixed(1) + "%";
             document.getElementById("out-neutral-pct").innerText = neutralizer_pct.toFixed(1) + "%";
