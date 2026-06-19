@@ -293,147 +293,6 @@
             setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
-        // HAFS Menu Database & 진단 로직
-        const hafsMenuDB = {
-            "0601": { dateLabel: "6월 1일 (월)", breakfast: "쌀밥, 맑은오징어국, 돈사태묵은지찜, 마늘햄구이, 건세멸치조림, 석박지", lunch: "수제치킨마요덮밥, 미역장국, 치즈스테이크볼꼬지, 쫄뱅이, 단무지무침, 포기김치", dinner: "설렁탕, 쌀밥/ 잡곡밥, 돈육김치볶음, 온두부, 메추리알곤약조림, 콩나물무침, 깍두기", snack: "탱글뽀득감자핫도그, 엔요" },
-            "0602": { dateLabel: "6월 2일 (화)", breakfast: "쌀밥, 열무된장국, 닭볶음탕, 파프리카맛살조림, 참나물생채, 포기김치", lunch: "쌀밥, 김치찌개, 언양식불고기, 해물파전, 미니새송이볶음, 치커리생채, 깍두기", dinner: "쌀밥/ 잡곡밥, 대파육개장, 가자미오븐구이, 납작만두&비빔채소, 감자채볶음, 부추양파무침, 포기김치", snack: "뿌링클치킨너겟, 레몬에이드" },
-            "0603": { dateLabel: "6월 3일 (수)", breakfast: "칼슘강화밥, 쇠고기무국, 갈치카레구이, 베이컨스크램블, 돌자반, 김치볶음", lunch: "고구마영양밥&양념장, 순두부맑은국, 치즈매운등갈비, 부들어묵조림, 진미채야채무침, 포기김치", dinner: "볶음우동, 유부국, 일식돈가스, 푸실리샐러드, 양배추샐러드, 포기김치", snack: "떡꼬치&가래떡조청, 오렌지음료" },
-            "0604": { dateLabel: "6월 4일 (목)", breakfast: "쌀밥, 된장찌개, 쇠고기메란장조림, 미나리감자전, 무생채, 포기김치", lunch: "바지락칼국수, 추가밥, 갈릭닭다리구이, 순대강정, 부추생채, 배추겉절이", dinner: "쌀밥/ 잡곡밥, 건새우아욱된장국, 통마늘돼지불백, 계란찜, 양배추쌈, 멸치견과볶음, 포기김치", snack: "성북당십원빵, 우유" },
-            "0605": { dateLabel: "6월 5일 (금)", breakfast: "쌀밥, 감자양파국, 바베큐삼겹살, 두부볼간장조림, 숙주나물무침, 포기김치", lunch: "쌀밥, 콩나물국, 낙우새당면볶음, 건파래볶음, 청포묵김가루무침, 오이소박이, 포기김치", dinner: "탄탄면, 쌀밥, 후르츠탕수육, 따바오, 단무지, 포기김치, 알새우칩", snack: "우유빙수, 바바리안도넛" }
-        };
-
-        const criticalKeywords = ['튀김', '돈가스', '돈까스', '강정', '치킨', '카츠', '까스', '폭립', '백립', '핫도그', '너겟', '크로켓', '삼겹살', '마요'];
-        const cautionKeywords = ['볶음', '구이', '스테이크', '갈비', '고기', '바베큐', '떡갈비', '불고기', '만두', '탕수육', '꿔바로우', '스팸', '전', '부침', '설렁탕'];
-
-        // 데드존 경고창이 추가된 수정된 진단 함수
-        function diagnoseMenu() {
-            const dateId = document.getElementById('dateSelect').value;
-            const meal = document.getElementById('mealSelect').value;
-            
-            const selectedDayData = hafsMenuDB[dateId] || hafsMenuDB["0601"];
-            let currentMenu = selectedDayData[meal];
-            const dateLabel = selectedDayData.dateLabel;
-            const mealLabel = meal === 'breakfast' ? '조식' : meal === 'lunch' ? '중식' : '석식';
-
-            const container = document.getElementById('menuResultContainer');
-            const content = document.getElementById('menuResultContent');
-            const badge = document.getElementById('menuResultBadge');
-            container.classList.remove('hidden');
-
-            let menuDisplayHtml = `<p class="font-extrabold text-black text-lg break-keep">${currentMenu}</p>`;
-            let fullSearchText = currentMenu;
-
-            if (meal === 'dinner' && selectedDayData.snack) {
-                fullSearchText += " " + selectedDayData.snack;
-                menuDisplayHtml += `<p class="mt-2 text-zinc-800 font-bold break-keep"><span class="inline-block px-1.5 py-0.5 bg-zinc-200 text-zinc-600 rounded text-[10px] font-bold tracking-widest uppercase mr-1">야식</span> ${selectedDayData.snack}</p>`;
-            }
-
-            let riskLevel = 0; 
-            let detectedWords = [];
-            criticalKeywords.forEach(k => { if(fullSearchText.includes(k)) { riskLevel = 2; detectedWords.push(k); } });
-            if(riskLevel === 0) { cautionKeywords.forEach(k => { if(fullSearchText.includes(k)) { riskLevel = 1; detectedWords.push(k); } }); }
-
-            const finalHeaderHtml = `<div class="p-5 border border-zinc-200 rounded-lg bg-zinc-50 mb-6"><p class="font-bold text-xs text-zinc-400 mb-1 tracking-wider uppercase">Analysis Target: ${dateLabel} / ${mealLabel}</p>${menuDisplayHtml}</div>`;
-
-            if (riskLevel === 2) {
-                badge.innerHTML = `<span class="bg-black text-white px-2 py-1 font-mono font-bold rounded text-[10px] animate-pulse">CRITICAL RISK</span>`;
-                content.innerHTML = `
-                    ${finalHeaderHtml}
-                    <p class="text-black font-extrabold border-l-4 border-black pl-3 mb-5">고농도 지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 감지. 섬유 고착화 극위험.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                        <div class="p-4 border border-rose-200 bg-rose-50 rounded-lg">
-                            <p class="text-[10px] font-bold text-rose-600 uppercase tracking-widest mb-1">Strict Prohibition</p>
-                            <p class="font-bold text-rose-900 text-[13px] break-keep">체육복 / 아우터 절대 착용 금지</p>
-                            <p class="text-xs text-rose-700 mt-2 break-keep">해당 메뉴 비산 시 폴리에스터(100%) 섬유의 소수성 인력에 의해 잔류 취기가 강력하게 고착됩니다. 식사 전 반드시 탈의하십시오.</p>
-                        </div>
-                        <div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg">
-                            <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Recommendation</p>
-                            <p class="font-bold text-emerald-900 text-[13px] break-keep">교복 셔츠 단독 착용</p>
-                            <p class="text-xs text-emerald-700 mt-2 break-keep">그나마 친수성(Rayon 25%)을 띠는 셔츠가 반데르발스 인력 형성을 최소화합니다.</p>
-                        </div>
-                    </div>
-                    <div class="p-5 bg-zinc-900 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6">
-                        <div>
-                            <p class="font-bold text-white text-sm">⚠️ 공간 경고: Z6 구역 (Dead Zone) 절대 접근 금지</p>
-                            <p class="text-xs text-zinc-400 mt-1.5 break-keep">다량의 유분 분자가 기류 단락 구역에 정체되어 심각한 악취 오염을 유발합니다.</p>
-                        </div>
-                        <button onclick="scrollToSection1()" class="px-4 py-3 bg-white text-black font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-zinc-200 transition-colors whitespace-nowrap cursor-pointer">View Z6 Map →</button>
-                    </div>
-                `;
-            } else if (riskLevel === 1) {
-                badge.innerHTML = `<span class="bg-amber-100 text-amber-900 border border-amber-300 px-2 py-1 font-mono font-bold rounded text-[10px]">CAUTION</span>`;
-                content.innerHTML = `
-                    ${finalHeaderHtml}
-                    <p class="text-black font-extrabold border-l-4 border-amber-400 pl-3 mb-5">일반 지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 감지. 부분적 섬유 흡착 주의.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                        <div class="p-4 border border-zinc-200 bg-white rounded-lg">
-                            <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Caution</p>
-                            <p class="font-bold text-zinc-900 text-[13px] break-keep">교복 자켓 및 가디건 주의</p>
-                            <p class="text-xs text-zinc-600 mt-2 break-keep">울(Wool)이 섞인 다공성 구조이므로 구이나 볶음 등 일반 악취가 오래 머물 수 있습니다.</p>
-                        </div>
-                        <div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg">
-                            <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Recommendation</p>
-                            <p class="font-bold text-emerald-900 text-[13px] break-keep">교복 셔츠 위주 착용</p>
-                            <p class="text-xs text-emerald-700 mt-2 break-keep">체육복 착용 시 냄새가 약간 밸 수 있으나 심각한 수준은 아니며, 가급적 셔츠를 권장합니다.</p>
-                        </div>
-                    </div>
-                    <div class="p-4 border border-amber-200 bg-amber-50 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6">
-                        <div>
-                            <p class="font-bold text-amber-900 text-sm">⚠️ Z6 구역 (Dead Zone) 착석 자제</p>
-                            <p class="text-xs text-amber-700 mt-1 break-keep">장시간 착석 시 옷에 잔류취가 흡착될 확률이 높아집니다.</p>
-                        </div>
-                        <button onclick="scrollToSection1()" class="px-4 py-2 bg-amber-200 text-amber-900 font-bold text-[10px] uppercase tracking-widest rounded hover:bg-amber-300 transition-colors whitespace-nowrap cursor-pointer">View Z6 Map →</button>
-                    </div>
-                `;
-            } else {
-                badge.innerHTML = `<span class="bg-zinc-100 text-zinc-800 px-2 py-1 font-mono font-bold rounded text-[10px]">SAFE</span>`;
-                content.innerHTML = `
-                    ${finalHeaderHtml}
-                    <div class="p-5 bg-emerald-50 border border-emerald-200 rounded-xl">
-                        <p class="font-bold text-emerald-900 mb-1">✔️ 쾌적한 상태 유지 가능</p>
-                        <p class="text-sm text-emerald-800 break-keep mt-2">해당 식단은 수용성 메뉴 위주로 구성되어 있어 소수성 섬유(폴리에스터)와의 고착화 위험이 낮습니다. 체육복을 포함한 모든 종류의 의류를 편하게 착용하셔도 무방합니다.</p>
-                    </div>
-                `;
-            }
-            setTimeout(() => { container.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
-        }
-
-        // QSI Calculator Logic
-        function calculateFormula() {
-            const severity = parseInt(document.getElementById("qsiSeverity").value);
-            const fabric = document.getElementById("qsiFabric").value;
-            const skinType = document.getElementById("qsiSkinType").value;
-
-            const qsi_base_pct = 0.5 * severity;
-            const neutralizer_pct = 1.2 * severity;
-            let surfactant_pct = 1.5; 
-            let ethanol_pct = 5.0;
-            
-            if (fabric === 'gym') { surfactant_pct = 3.5; ethanol_pct = 8.0; } 
-            else if (fabric === 'jacket') { surfactant_pct = 2.0; ethanol_pct = 15.0; } 
-            else if (fabric === 'cardigan') { surfactant_pct = 2.5; ethanol_pct = 10.0; }
-
-            const badgeElement = document.getElementById("qsiBadge");
-            if (skinType === "sensitive") {
-                ethanol_pct = Math.min(ethanol_pct, 1.5);
-                surfactant_pct += 1.0;
-                badgeElement.innerHTML = `<span class="bg-zinc-100 text-zinc-800 px-2 py-1 font-mono font-bold rounded text-[10px]">SENSITIVE FORMULA</span>`;
-            } else {
-                badgeElement.innerHTML = `<span class="bg-black text-white px-2 py-1 font-mono font-bold rounded text-[10px]">NORMAL FORMULA</span>`;
-            }
-
-            const water_pct = 100.0 - (qsi_base_pct + neutralizer_pct + ethanol_pct + surfactant_pct);
-
-            document.getElementById("out-qsi-pct").innerText = qsi_base_pct.toFixed(1) + "%";
-            document.getElementById("out-surfactant-pct").innerText = surfactant_pct.toFixed(1) + "%";
-            document.getElementById("out-neutral-pct").innerText = neutralizer_pct.toFixed(1) + "%";
-            document.getElementById("out-ethanol-pct").innerText = ethanol_pct.toFixed(1) + "%";
-            document.getElementById("out-water-pct").innerText = water_pct.toFixed(1) + "%";
-
-            const container = document.getElementById("qsiResultContainer");
-            container.classList.remove('hidden');
-            setTimeout(() => { container.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
-        }
     </script>
                                         </tbody>
                                     </table>
@@ -660,271 +519,33 @@
         </div>
   </main>
 
-    <main id="tab-simulator" class="tab-content max-w-3xl mx-auto px-4 sm:px-6 py-24">
-        <div class="space-y-2 mb-10 text-center">
-            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">식단 맞춤 진단</h2>
-            <p class="text-zinc-500 text-sm font-medium break-keep">HAFS 식단 분석을 통해 해당 끼니에 적합한 의류 착용 및 행동 지침을 추천합니다.</p>
-        </div>
-
-        <div class="bg-white border border-zinc-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-sm">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">Date (6월 식단)</label>
-                    <select id="dateSelect" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                        <optgroup label="HAFS Menu Archive (June)">
-                            <option value="0601">6월 1일 (월요일)</option>
-                            <option value="0602">6월 2일 (화요일)</option>
-                            <option value="0603">6월 3일 (수요일)</option>
-                            <option value="0604">6월 4일 (목요일)</option>
-                            <option value="0605">6월 5일 (금요일)</option>
-                            <option value="0608">6월 8일 (월요일)</option>
-                            <option value="0609">6월 9일 (화요일)</option>
-                            <option value="0610">6월 10일 (수요일)</option>
-                            <option value="0611">6월 11일 (목요일)</option>
-                            <option value="0612">6월 12일 (금요일)</option>
-                            <option value="0615">6월 15일 (월요일)</option>
-                            <option value="0616">6월 16일 (화요일)</option>
-                            <option value="0617">6월 17일 (수요일)</option>
-                            <option value="0618">6월 18일 (목요일)</option>
-                            <option value="0619">6월 19일 (금요일)</option>
-                            <option value="0622">6월 22일 (월요일)</option>
-                            <option value="0623">6월 23일 (화요일)</option>
-                            <option value="0624">6월 24일 (수요일)</option>
-                            <option value="0625">6월 25일 (목요일)</option>
-                            <option value="0626">6월 26일 (금요일)</option>
-                            <option value="0629">6월 29일 (월요일)</option>
-                            <option value="0630">6월 30일 (화요일)</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">Meal</label>
-                    <select id="mealSelect" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                        <option value="breakfast">조식</option>
-                        <option value="lunch">중식</option>
-                        <option value="dinner" selected>석식 (+야식)</option>
-                    </select>
-                </div>
-            </div>
-
-            <button onclick="diagnoseMenu()" class="w-full bg-black text-white font-bold py-4 rounded-lg text-sm tracking-widest uppercase hover:bg-zinc-800 transition-colors cursor-pointer mt-2">
-                Analyze Menu & Get Recommendation
-            </button>
-        </div>
-
-        <div id="menuResultContainer" class="hidden mt-8 border-t-2 border-zinc-900 pt-8 space-y-6">
-            <div class="flex items-center justify-between">
-                <h3 class="text-sm font-bold tracking-widest text-black uppercase">Analysis Report</h3>
-                <div id="menuResultBadge"></div>
-            </div>
-            <div id="menuResultContent" class="space-y-4"></div>
-        </div>
-    </main>
-
-    <main id="tab-deodorant" class="tab-content max-w-3xl mx-auto px-4 sm:px-6 py-24">
-        <div class="space-y-2 mb-10 text-center">
-            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">맞춤형 QSI 솔루션</h2>
-            <p class="text-zinc-500 text-sm font-medium">취기 분자 및 미생물 대사량에 따른 정밀 소취 배합비 산출</p>
-        </div>
-
-        <div class="bg-white border border-zinc-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-sm">
-            <div class="space-y-5">
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">1. Detection Type</label>
-                    <select id="qsiOdor" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                        <option value="1">시큼한 쉰내 (땀 냄새와 비슷함-포도상구균)</option>
-                        <option value="2">암내 (상한 음식 냄새가 남-코리네박테리움)</option>
-                        <option value="3">황변 꿉꿉함 (지하실 곰팡이 냄새와 비슷함-미크로코쿠)</option>
-                        <option value="4" selected>급식실 잔류 취기 (슈도모나스균 유래 음식물 바이오필름 향)</option>
-                    </select>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div class="space-y-2">
-                        <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">2.악취 및 세균 증식 심각도</label>
-                        <select id="qsiSeverity" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                            <option value="1">Level 1:경미함(가까운 거리에서 미세 감지)</option>
-                            <option value="2" selected>Level 2: 보통(일반적인 활동 반경 1~2M 내 인지 가능)</option>
-                            <option value="3">Level 3:심각함(2M 밖에서도 냄새가 감지될 정도)</option>
-                        </select>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">3. Applied Fabric</label>
-                        <select id="qsiFabric" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                            <option value="shirt">교복 셔츠 (폴리에스터 75% / 레이온 25%)</option>
-                            <option value="jacket">교복 자켓 (울 60% / 폴리에스터 40%)</option>
-                            <option value="cardigan">교복 가디건 (울 50% / 아크릴 50%)</option>
-                            <option value="gym" selected>체육복 (폴리에스터 100%)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">4.올코올 민감도 및 피부 타입 *피부에 위해가 없도록 성분을 구성하기 위해 필요합니다!</label>
-                    <select id="qsiSkinType" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                        <option value="normal">일반 타입</option>
-                        <option value="sensitive">민감 타입(민감성 피부이거나 알코올 향에 민감함)</option>
-                    </select>
-                </div>
-            </div>
-
-            <button onclick="calculateFormula()" class="w-full bg-black text-white font-bold py-4 rounded-lg text-sm tracking-widest uppercase hover:bg-zinc-800 transition-colors mt-4 cursor-pointer">
-                Compute Lab-scale Formula
-            </button>
-        </div>
-
-        <div id="qsiResultContainer" class="hidden mt-8 border-t-2 border-zinc-900 pt-8 space-y-6">
-            <div class="flex items-center justify-between pb-4 border-b border-zinc-100">
-                <h3 class="text-sm font-bold tracking-widest text-black uppercase">Formula Prescription</h3>
-                <div id="qsiBadge"></div>
-            </div>
-            
-            <div class="space-y-4 text-sm bg-zinc-50 border border-zinc-200 rounded-lg p-6">
-                <div><span class="text-zinc-500 w-32 inline-block font-semibold">Target Factor:</span> <strong id="out-bacteria"></strong></div>
-                <div><span class="text-zinc-500 w-32 inline-block font-semibold">Matching QSI:</span> <strong id="out-qsi" class="text-lg font-extrabold text-black"></strong></div>
-                <div class="pt-4 mt-4 border-t border-zinc-200">
-                    <p class="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2 font-mono">Mechanism of Action</p>
-                    <p id="out-principle" class="text-zinc-700 leading-relaxed font-medium break-keep"></p>
-                </div>
-            </div>
-
-            <div class="border border-zinc-200 rounded-lg overflow-hidden">
-                <table class="w-full text-left text-sm border-collapse">
-                    <thead class="bg-zinc-100 border-b border-zinc-200 text-[10px] uppercase tracking-wider text-zinc-500 font-mono">
-                        <tr><th class="p-4 font-bold">Component Name</th><th class="p-4 font-bold text-right">Weight Ratio (%)</th></tr>
-                    </thead>
-                    <tbody class="divide-y divide-zinc-200 bg-white">
-                        <tr><td class="p-4 font-medium">Active QSI Solution Agent</td><td class="p-4 text-right font-mono font-bold" id="out-qsi-pct">0.0%</td></tr>
-                        <tr><td class="p-4 font-medium">Solubilizing Surfactant</td><td class="p-4 text-right font-mono font-bold" id="out-surfactant-pct">0.0%</td></tr>
-                        <tr><td class="p-4 font-medium">Chemical Odor Neutralizer</td><td class="p-4 text-right font-mono font-bold" id="out-neutral-pct">0.0%</td></tr>
-                        <tr><td class="p-4 font-medium">Purified Fermented Ethanol</td><td class="p-4 text-right font-mono font-bold" id="out-ethanol-pct">0.0%</td></tr>
-                        <tr><td class="p-4 font-medium">Ultrapure Distilled Water</td><td class="p-4 text-right font-mono font-bold" id="out-water-pct">0.0%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // ---------------------------------------------------------
-        // Core View Controllers & Modal
-        // ---------------------------------------------------------
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 80;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        setTimeout(reveal, 100);
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(sec => sec.classList.remove('active'));
-            document.getElementById('tab-' + tabId).classList.add('active');
-            
-            document.querySelectorAll('#navLinks button').forEach(lnk => {
-                lnk.classList.remove('text-black', 'border-black');
-                lnk.classList.add('text-zinc-400', 'border-transparent');
-            });
-            const activeLnk = document.getElementById('link-' + (tabId === 'home' ? 'home' : tabId));
-            if(activeLnk) {
-                activeLnk.classList.remove('text-zinc-400', 'border-transparent');
-                activeLnk.classList.add('text-black', 'border-black');
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            reveal(); 
-        }
-
-        function scrollToSection1() {
-            switchTab('home');
-            setTimeout(() => {
-                const element = document.getElementById('section-1');
-                const offset = 80; 
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = element.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }, 100);
-        }
-
-        function openModal(src) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modalImg.src = src;
-            modal.classList.remove('hidden');
-            
-            void modal.offsetWidth; 
-            
-            modal.classList.add('opacity-100');
-            modalImg.classList.add('scale-100');
-            modalImg.classList.remove('scale-95');
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modal.classList.remove('opacity-100');
-            modalImg.classList.remove('scale-100');
-            modalImg.classList.add('scale-95');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        // ---------------------------------------------------------
-        // HAFS Menu Database & Recommendation Logic
-        // ---------------------------------------------------------
+    <   // HAFS Menu Database & 진단 로직
         const hafsMenuDB = {
             "0601": { dateLabel: "6월 1일 (월)", breakfast: "쌀밥, 맑은오징어국, 돈사태묵은지찜, 마늘햄구이, 건세멸치조림, 석박지", lunch: "수제치킨마요덮밥, 미역장국, 치즈스테이크볼꼬지, 쫄뱅이, 단무지무침, 포기김치", dinner: "설렁탕, 쌀밥/ 잡곡밥, 돈육김치볶음, 온두부, 메추리알곤약조림, 콩나물무침, 깍두기", snack: "탱글뽀득감자핫도그, 엔요" },
             "0602": { dateLabel: "6월 2일 (화)", breakfast: "쌀밥, 열무된장국, 닭볶음탕, 파프리카맛살조림, 참나물생채, 포기김치", lunch: "쌀밥, 김치찌개, 언양식불고기, 해물파전, 미니새송이볶음, 치커리생채, 깍두기", dinner: "쌀밥/ 잡곡밥, 대파육개장, 가자미오븐구이, 납작만두&비빔채소, 감자채볶음, 부추양파무침, 포기김치", snack: "뿌링클치킨너겟, 레몬에이드" },
             "0603": { dateLabel: "6월 3일 (수)", breakfast: "칼슘강화밥, 쇠고기무국, 갈치카레구이, 베이컨스크램블, 돌자반, 김치볶음", lunch: "고구마영양밥&양념장, 순두부맑은국, 치즈매운등갈비, 부들어묵조림, 진미채야채무침, 포기김치", dinner: "볶음우동, 유부국, 일식돈가스, 푸실리샐러드, 양배추샐러드, 포기김치", snack: "떡꼬치&가래떡조청, 오렌지음료" },
             "0604": { dateLabel: "6월 4일 (목)", breakfast: "쌀밥, 된장찌개, 쇠고기메란장조림, 미나리감자전, 무생채, 포기김치", lunch: "바지락칼국수, 추가밥, 갈릭닭다리구이, 순대강정, 부추생채, 배추겉절이", dinner: "쌀밥/ 잡곡밥, 건새우아욱된장국, 통마늘돼지불백, 계란찜, 양배추쌈, 멸치견과볶음, 포기김치", snack: "성북당십원빵, 우유" },
-            "0605": { dateLabel: "6월 5일 (금)", breakfast: "쌀밥, 감자양파국, 바베큐삼겹살, 두부볼간장조림, 숙주나물무침, 포기김치", lunch: "쌀밥, 콩나물국, 낙우새당면볶음, 건파래볶음, 청포묵김가루무침, 오이소박이, 포기김치", dinner: "탄탄면, 쌀밥, 후르츠탕수육, 따바오, 단무지, 포기김치, 알새우칩", snack: "우유빙수, 바바리안도넛" },
-            "0608": { dateLabel: "6월 8일 (월)", breakfast: "쌀밥, 쇠고기미역국밥, 목살양념불고기, 참치오믈렛, 얼갈이생채, 포기김치", lunch: "쌀밥, 근대된장국, 왕갈비통닭, 쇠고기표고볶음, 두부조림, 도라지오이생채, 포기김치", dinner: "쌀밥/ 잡곡밥, 짜글이찌개, 스팸구이, 스크램블에그, 브로콜리, 돌자반, 열무김치", snack: "컵우동&오뎅꼬치, 구운계란" },
-            "0609": { dateLabel: "6월 9일 (화)", breakfast: "쌀밥, 북어채계란국, 떡갈비피망조림, 오징어볶음, 쑥갓나물, 포기김치", lunch: "쌀밥, 콩나물국, 주꾸미삼겹살, 스위스감자전, 탕평채, 청경채생채, 포기김치", dinner: "소시지채소볶음밥, 양송이스프, 크리미언치킨까스, 단호박범벅, 맥앤치즈,샐러드, 포기김치", snack: "가래떡떡볶이, 쿨피스" },
-            "0610": { dateLabel: "6월 10일 (수)", breakfast: "칼슘강화밥, 사골파국&소면, 훈제오리볶음, 계란장조림, 양념깻잎지, 포기김치", lunch: "쉬림프아라비아따, 바베큐백립, 브로콜리스프&추가밥, 치킨휭거샐러드, 부시맨브레드&버터, 오이피클, 포기김치", dinner: "쌀밥/ 잡곡밥, 큰맘할매순대국, 오징어고추장무침, 메밀전병, 도토리묵무침, 채소스틱, 포기김치", snack: "치즈볼&아이스슈, 리치코코주스" },
-            "0611": { dateLabel: "6월 11일 (목)", breakfast: "쌀밥, 팽이된장국, 해물야채볶음, 소시지케첩볶음, 가자나물, 포기김치", lunch: "쌀밥, 부대찌개, 쇠고기떡찜, 모듬버섯볶음, 조미김, 치커리생채, 포기김치or총각김치", dinner: "쌀밥/ 잡곡밥, 일식된장국, 지코바양념구이, 고구마맛탕, 양상추러드, 오이지무침, 포기김치, 오렌지", snack: "불고기치즈브레드, 액티비아" },
-            "0612": { dateLabel: "6월 12일 (금)", breakfast: "쌀밥, 순두부맑은국, 닭윙매콤조림, 달콤감자조림, 참나물무침, 포기김치", lunch: "김가루비빔밥, 덴까스장국, 국물가래떡볶이, 김말이&납작군만두, 삶은계란, 단무지, 포기김치", dinner: "야채볶음밥, 호우섬새우완탕에그누들, 인절미목화솜탕수육, 샤오롱바오, 야채피클, 포기김치", snack: "나쵸, 버터오징어, 팝콘, 아이스크림" },
-            "0615": { dateLabel: "6월 15일 (월)", breakfast: "쌀밥, 건새우아욱국, 쇠고기불고기, 햄스크램블, 깻순볶음, 포기김치", lunch: "쌀밥, 돼지고기김치찌개, 순살찜닭, 순두부&양념장, 콘치즈구이, 새우살호박볶음, 깍두기", dinner: "후리가께밥, 잔치국수, 떡갈비, 호박채소전, 오복지무침, 포기김치, 수제미숫가루", snack: "크런치치치킨강정, 요구르트" },
-            "0616": { dateLabel: "6월 16일 (화)", breakfast: "쌀밥, 쇠고기감자국, 돈육간장불고기, 명엽채볶음, 레몬미역무침, 김치볶음", lunch: "쌀밥, 한방갈비탕&당면, 계란말이, 돌자반, 호두멸치볶음, 고추지송송무침, 석박지", dinner: "쌀밥/ 잡곡밥, 장터국밥, 임연수구이, 잡채, 두부구이, 김구이, 총각김치", snack: "수제크로와상, 우유" },
-            "0617": { dateLabel: "6월 17일 (수)", breakfast: "칼슘강화밥, 짜글이찌개, 데판만조풍기, 베이컨아스파라볶음, 시금치나물, 포기김치", lunch: "자장면(블랙or빨강), 추가밥, 계란국, 꿔바로우, 단무지, 포기김치, 후식(뽀로로요구르트)", dinner: "쌀밥/ 잡곡밥, 돈까스김치나베, 프리타타, 양배추샐러드, 무피클, 열무김치, 오렌지", snack: "프렌치토스트, 망고주스" },
-            "0618": { dateLabel: "6월 18일 (목)", breakfast: "쌀밥, 들깨무국, 고구마닭갈비, 알어묵조림, 도토리묵야채무침, 포기김치", lunch: "스팸김치볶음밥, 미소장국, 새우볼꼬치&머스타드소스, 버섯크림뇨끼, 치커리유자샐러드, 깍두기", dinner: "쌀밥/ 잡곡밥, 소고기미역국, 오븐불고기, 채소전, 알감자조림, 오리엔탈참나물무침, 포기김치", snack: "크림떡볶이, 복숭아주스" },
-            "0619": { dateLabel: "6월 19일 (금)", breakfast: "쌀밥, 감자양파국, 해물떡찜, 맛살야채볶음, 미나리초장무침, 포기김치", lunch: "쌀밥, 어묵국, 양념치킨, 굴소스두부조림, 소면김치무침, 쪽파무생채, 포기김치", dinner: "장어덮밥, 일식된장국, 고구마튀김, 들기름막국수, 양배추샐러드, 산고추지, 포기김치", snack: "수제크로플, 연세베리요거트" },
-            "0622": { dateLabel: "6월 22일 (월)", breakfast: "쌀밥, 시금치고추장국, 닭고기장조림, 꼬마연두부&양념장, 무나물볶음, 포기김치", lunch: "쌀밥, 된장찌개, 돈육수육&쌈장, 계란찜, 파채콩나물무침, 부추양파와사비생채, 포기김치", dinner: "냉모밀, 쌀밥, 치즈돈가스, 고구마범벅, 샐러드, 단무지, 포기김치", snack: "타코야끼, 카프리썬" },
-            "0623": { dateLabel: "6월 23일 (화)", breakfast: "쌀밥, 얼큰버섯찌개, 코다리감자조림, 그릴소시지&머스타드, 참나물생채, 포기김치", lunch: "셀프김밥, 유부된장국, 포기김치", dinner: "쌀밥/ 잡곡밥, 사골파국, 닭볶음탕, 연근튀김, 어묵볶음, 깻잎지무침, 포기김치", snack: "스테프치폴레핫도그, 청귤주스" },
-            "0624": { dateLabel: "6월 24일 (수)", breakfast: "칼슘강화밥, 시래기된장국, 돈육두루치기, 스크램블에그, 숙주나물무침, 포기김치", lunch: "알리오올리오, 추가밥, 콘스프, 바베큐닭다리구이, 크런치웨지감자튀김, 오이피클&할라피뇨, 포기김치", dinner: "쌀밥/ 잡곡밥, 부대찌개, 언양식불고기, 두부계란부침, 마카로니샐러드, 미역줄기볶음, 깍두기", snack: "치킨너겟, 포도주스" },
-            "0625": { dateLabel: "6월 25일 (목)", breakfast: "쌀밥, 오징어쑥갓국, 수제떡갈비, 메추리알조림, 오이생채, 포기김치", lunch: "쌀밥, 조랭이떡국, 깐풍육, 애호박전, 파래김&양념장, 우엉조림, 포기김치", dinner: "불닭마요덮밥, 불닭볶음, 미소장국, 크로켓, 궁채무침, 포기김치", snack: "토마토바질베이글, 두유" },
-            "0626": { dateLabel: "6월 26일 (금)", breakfast: "쌀밥, 육개장, 낙지굴소스볶음, 마늘햄구이, 양송이피망조림, 포기김치", lunch: "쌀밥, 미역국, 돼지갈비구이, 느타리버섯잡채, 기치오징어전, 단호박꿀찜, 포기김치, 롤케익(크림or딸기)", dinner: "투움바파스타, 쌀밥, 양송이스프, 바베큐폭립, 양상추샐러드, 블루베리무피클, 포기김치", snack: "꿀떡, 수박화채" },
-            "0629": { dateLabel: "6월 29일 (월)", breakfast: "쌀밥, 호박새우젓국, 갈릭돈육찹스테이크, 잡채어묵조림, 쑥갓생채, 포기김치", lunch: "미나리삼겹비빔밥, 시래기된장국, 오징어다리튀김, 리코타풍기샐러드, 포기김치, 짜요짜요(딸기or포도)", dinner: "쌀밥/ 잡곡밥, 짬뽕순두부찌개, 모듬장조림, 새서미두부까스, 새송이버섯볶음, 오이무침, 포기김치", snack: "컵자장면, 야쿠르트제로" },
-            "0630": { dateLabel: "6월 30일 (화)", breakfast: "쌀밥, 돼지국밥, 수제완자전, 고추참치볶음, 치커리생채, 포기김치", lunch: "쌀밥, 근대고추장국, 파닭, 마파두부조림, 감자채볶음, 실곤약냉채, 포기김치", dinner: "김치말이국수, 쌀밥, 불고기, 청포묵무침, 아몬드멸치볶음, 무말랭이무침, 열무김치", snack: "찹쌀도넛, 매실주스" }
+            "0605": { dateLabel: "6월 5일 (금)", breakfast: "쌀밥, 감자양파국, 바베큐삼겹살, 두부볼간장조림, 숙주나물무침, 포기김치", lunch: "쌀밥, 콩나물국, 낙우새당면볶음, 건파래볶음, 청포묵김가루무침, 오이소박이, 포기김치", dinner: "탄탄면, 쌀밥, 후르츠탕수육, 따바오, 단무지, 포기김치, 알새우칩", snack: "우유빙수, 바바리안도넛" }
         };
 
         const criticalKeywords = ['튀김', '돈가스', '돈까스', '강정', '치킨', '카츠', '까스', '폭립', '백립', '핫도그', '너겟', '크로켓', '삼겹살', '마요'];
         const cautionKeywords = ['볶음', '구이', '스테이크', '갈비', '고기', '바베큐', '떡갈비', '불고기', '만두', '탕수육', '꿔바로우', '스팸', '전', '부침', '설렁탕'];
 
+        // 데드존 경고창이 추가된 수정된 진단 함수
         function diagnoseMenu() {
             const dateId = document.getElementById('dateSelect').value;
             const meal = document.getElementById('mealSelect').value;
-            const selectedDayData = hafsMenuDB[dateId];
+            
+            const selectedDayData = hafsMenuDB[dateId] || hafsMenuDB["0601"];
             let currentMenu = selectedDayData[meal];
             const dateLabel = selectedDayData.dateLabel;
             const mealLabel = meal === 'breakfast' ? '조식' : meal === 'lunch' ? '중식' : '석식';
+
             const container = document.getElementById('menuResultContainer');
             const content = document.getElementById('menuResultContent');
             const badge = document.getElementById('menuResultBadge');
-            
             container.classList.remove('hidden');
+
             let menuDisplayHtml = `<p class="font-extrabold text-black text-lg break-keep">${currentMenu}</p>`;
             let fullSearchText = currentMenu;
 
@@ -942,30 +563,72 @@
 
             if (riskLevel === 2) {
                 badge.innerHTML = `<span class="bg-black text-white px-2 py-1 font-mono font-bold rounded text-[10px] animate-pulse">CRITICAL RISK</span>`;
-                content.innerHTML = `${finalHeaderHtml}<p class="text-black font-extrabold border-l-4 border-black pl-3 mb-5">고농도 지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 감지. 섬유 고착화 극위험.</p><div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6"><div class="p-4 border border-rose-200 bg-rose-50 rounded-lg"><p class="text-[10px] font-bold text-rose-600 uppercase tracking-widest mb-1">Strict Prohibition</p><p class="font-bold text-rose-900 text-[13px] break-keep">체육복 / 아우터 절대 착용 금지</p><p class="text-xs text-rose-700 mt-2 break-keep">해당 메뉴 비산 시 폴리에스터(100%) 섬유의 소수성 인력에 의해 잔류 취기가 강력하게 고착됩니다. 식사 전 반드시 탈의하십시오.</p></div><div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg"><p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Recommendation</p><p class="font-bold text-emerald-900 text-[13px] break-keep">교복 셔츠 단독 착용</p><p class="text-xs text-emerald-700 mt-2 break-keep">그나마 친수성(Rayon 25%)을 띠는 셔츠가 반데르발스 인력 형성을 최소화합니다.</p></div></div><div class="p-5 bg-zinc-900 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"><div><p class="font-bold text-white text-sm">⚠️ 공간 경고: Z6 구역 (Dead Zone) 절대 접근 금지</p><p class="text-xs text-zinc-400 mt-1.5 break-keep">다량의 유분 분자가 기류 단락 구역에 정체되어 심각한 악취 오염을 유발합니다.</p></div><button onclick="scrollToSection1()" class="px-4 py-3 bg-white text-black font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-zinc-200 transition-colors whitespace-nowrap">View Z6 Map →</button></div>`;
+                content.innerHTML = `
+                    ${finalHeaderHtml}
+                    <p class="text-black font-extrabold border-l-4 border-black pl-3 mb-5">고농도 지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 감지. 섬유 고착화 극위험.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                        <div class="p-4 border border-rose-200 bg-rose-50 rounded-lg">
+                            <p class="text-[10px] font-bold text-rose-600 uppercase tracking-widest mb-1">Strict Prohibition</p>
+                            <p class="font-bold text-rose-900 text-[13px] break-keep">체육복 / 아우터 절대 착용 금지</p>
+                            <p class="text-xs text-rose-700 mt-2 break-keep">해당 메뉴 비산 시 폴리에스터(100%) 섬유의 소수성 인력에 의해 잔류 취기가 강력하게 고착됩니다. 식사 전 반드시 탈의하십시오.</p>
+                        </div>
+                        <div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg">
+                            <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Recommendation</p>
+                            <p class="font-bold text-emerald-900 text-[13px] break-keep">교복 셔츠 단독 착용</p>
+                            <p class="text-xs text-emerald-700 mt-2 break-keep">그나마 친수성(Rayon 25%)을 띠는 셔츠가 반데르발스 인력 형성을 최소화합니다.</p>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-zinc-900 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6">
+                        <div>
+                            <p class="font-bold text-white text-sm">⚠️ 공간 경고: Z6 구역 (Dead Zone) 절대 접근 금지</p>
+                            <p class="text-xs text-zinc-400 mt-1.5 break-keep">다량의 유분 분자가 기류 단락 구역에 정체되어 심각한 악취 오염을 유발합니다.</p>
+                        </div>
+                        <button onclick="scrollToSection1()" class="px-4 py-3 bg-white text-black font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-zinc-200 transition-colors whitespace-nowrap cursor-pointer">View Z6 Map →</button>
+                    </div>
+                `;
             } else if (riskLevel === 1) {
                 badge.innerHTML = `<span class="bg-amber-100 text-amber-900 border border-amber-300 px-2 py-1 font-mono font-bold rounded text-[10px]">CAUTION</span>`;
-                content.innerHTML = `${finalHeaderHtml}<p class="text-black font-extrabold border-l-4 border-amber-400 pl-3 mb-5">일반 지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 감지. 부분적 섬유 흡착 주의.</p><div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6"><div class="p-4 border border-zinc-200 bg-white rounded-lg"><p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Caution</p><p class="font-bold text-zinc-900 text-[13px] break-keep">교복 자켓 및 가디건 주의</p><p class="text-xs text-zinc-600 mt-2 break-keep">울(Wool)이 섞인 다공성 구조이므로 구이나 볶음 등 일반 악취가 오래 머물 수 있습니다.</p></div><div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg"><p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Recommendation</p><p class="font-bold text-emerald-900 text-[13px] break-keep">교복 셔츠 위주 착용</p><p class="text-xs text-emerald-700 mt-2 break-keep">체육복 착용 시 냄새가 약간 밸 수 있으나 심각한 수준은 아니며, 가급적 셔츠를 권장합니다.</p></div></div><div class="p-4 border border-amber-200 bg-amber-50 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"><div><p class="font-bold text-amber-900 text-sm">⚠️ Z6 구역 (Dead Zone) 착석 자제</p><p class="text-xs text-amber-700 mt-1 break-keep">장시간 착석 시 옷에 잔류취가 흡착될 확률이 높아집니다.</p></div><button onclick="scrollToSection1()" class="px-4 py-2 bg-amber-200 text-amber-900 font-bold text-[10px] uppercase tracking-widest rounded hover:bg-amber-300 transition-colors whitespace-nowrap">View Z6 Map →</button></div>`;
+                content.innerHTML = `
+                    ${finalHeaderHtml}
+                    <p class="text-black font-extrabold border-l-4 border-amber-400 pl-3 mb-5">일반 지용성 메뉴(<span class="text-zinc-500">${detectedWords.join(', ')}</span>) 감지. 부분적 섬유 흡착 주의.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                        <div class="p-4 border border-zinc-200 bg-white rounded-lg">
+                            <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Caution</p>
+                            <p class="font-bold text-zinc-900 text-[13px] break-keep">교복 자켓 및 가디건 주의</p>
+                            <p class="text-xs text-zinc-600 mt-2 break-keep">울(Wool)이 섞인 다공성 구조이므로 구이나 볶음 등 일반 악취가 오래 머물 수 있습니다.</p>
+                        </div>
+                        <div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg">
+                            <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Recommendation</p>
+                            <p class="font-bold text-emerald-900 text-[13px] break-keep">교복 셔츠 위주 착용</p>
+                            <p class="text-xs text-emerald-700 mt-2 break-keep">체육복 착용 시 냄새가 약간 밸 수 있으나 심각한 수준은 아니며, 가급적 셔츠를 권장합니다.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 border border-amber-200 bg-amber-50 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6">
+                        <div>
+                            <p class="font-bold text-amber-900 text-sm">⚠️ Z6 구역 (Dead Zone) 착석 자제</p>
+                            <p class="text-xs text-amber-700 mt-1 break-keep">장시간 착석 시 옷에 잔류취가 흡착될 확률이 높아집니다.</p>
+                        </div>
+                        <button onclick="scrollToSection1()" class="px-4 py-2 bg-amber-200 text-amber-900 font-bold text-[10px] uppercase tracking-widest rounded hover:bg-amber-300 transition-colors whitespace-nowrap cursor-pointer">View Z6 Map →</button>
+                    </div>
+                `;
             } else {
                 badge.innerHTML = `<span class="bg-zinc-100 text-zinc-800 px-2 py-1 font-mono font-bold rounded text-[10px]">SAFE</span>`;
-                content.innerHTML = `${finalHeaderHtml}<div class="p-5 bg-emerald-50 border border-emerald-200 rounded-xl"><p class="font-bold text-emerald-900 mb-1">✔️ 쾌적한 상태 유지 가능</p><p class="text-sm text-emerald-800 break-keep">해당 식단은 수용성 메뉴 위주로 구성되어 있어 소수성 섬유(폴리에스터)와의 고착화 위험이 낮습니다. 체육복을 포함한 모든 종류의 의류를 편하게 착용하셔도 무방합니다.</p></div>`;
+                content.innerHTML = `
+                    ${finalHeaderHtml}
+                    <div class="p-5 bg-emerald-50 border border-emerald-200 rounded-xl">
+                        <p class="font-bold text-emerald-900 mb-1">✔️ 쾌적한 상태 유지 가능</p>
+                        <p class="text-sm text-emerald-800 break-keep mt-2">해당 식단은 수용성 메뉴 위주로 구성되어 있어 소수성 섬유(폴리에스터)와의 고착화 위험이 낮습니다. 체육복을 포함한 모든 종류의 의류를 편하게 착용하셔도 무방합니다.</p>
+                    </div>
+                `;
             }
             setTimeout(() => { container.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
         }
-        // QSI Calculator Logic
-        const qsi_db = {
-            "1": { bacteria: "Staphylococcus", qsi: "Hamamelitannin", principle: "세균의 Agr 표적 시스템을 하향 조절하여, 땀 속 노폐물을 쉰내 물질로 전환하는 유전자 발현 신호 체계를 차단합니다." },
-            "2": { bacteria: "Corynebacterium", qsi: "Farnesol + Carvacrol", principle: "아포크린샘 피지 분해 효소 활성 신호를 교란하여, 액취증 유발 물질 생성을 근본적으로 봉쇄합니다." },
-            "3": { bacteria: "Micrococcus luteus", qsi: "Quercetin", principle: "휴면 상태의 균을 깨우는 RPF(휴면 타파 인자) 수용체를 억제하여 특유의 노란 색소 합성을 억제합니다." },
-            "4": { bacteria: "Pseudomonas aeruginosa", qsi: "Epigallocatechin Gallate (EGCG)", principle: "EGCG의 수산화기(-OH)가 LasR 수용체와 결합하여 입체 장애(Steric Hindrance)를 유발, 바이오필름을 억제합니다." }
-        };
 
+        // QSI Calculator Logic
         function calculateFormula() {
-            const odorChoice = document.getElementById("qsiOdor").value;
             const severity = parseInt(document.getElementById("qsiSeverity").value);
             const fabric = document.getElementById("qsiFabric").value;
             const skinType = document.getElementById("qsiSkinType").value;
-            const solution = qsi_db[odorChoice];
 
             const qsi_base_pct = 0.5 * severity;
             const neutralizer_pct = 1.2 * severity;
@@ -987,9 +650,6 @@
 
             const water_pct = 100.0 - (qsi_base_pct + neutralizer_pct + ethanol_pct + surfactant_pct);
 
-            document.getElementById("out-bacteria").innerText = solution.bacteria;
-            document.getElementById("out-qsi").innerText = solution.qsi;
-            document.getElementById("out-principle").innerText = solution.principle;
             document.getElementById("out-qsi-pct").innerText = qsi_base_pct.toFixed(1) + "%";
             document.getElementById("out-surfactant-pct").innerText = surfactant_pct.toFixed(1) + "%";
             document.getElementById("out-neutral-pct").innerText = neutralizer_pct.toFixed(1) + "%";
@@ -1000,6 +660,6 @@
             container.classList.remove('hidden');
             setTimeout(() => { container.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
         }
-    </script>
+           </script>
 </body>
 </html>
