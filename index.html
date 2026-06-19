@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HAFS EUREKA RESEARCH </title>
+    <title>HAFS EUREKA RESEARCH PAPER</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
@@ -23,7 +23,7 @@
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Nature Paper Layout Classes */
+        /* Nature Paper Layout Classes (모던 폰트 기준 여백 미세조정) */
         .hero-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 20px; }
         .research-section { min-height: 100vh; padding: 140px 0; border-top: 1px solid #e5e5e5; }
         .section-number { font-size: 12px; font-weight: 700; letter-spacing: 0.25em; color: #888; margin-bottom: 24px; text-transform: uppercase; }
@@ -34,9 +34,11 @@
         .grid-label { font-size: 13px; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 0.05em; }
         .grid-content { font-size: 1.05rem; color: #444; font-weight: 400; break-keep: all; text-align: justify; }
 
+        /* Scroll Reveal Animation */
         .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .research-section { padding: 80px 0; }
             .section-title { font-size: 1.8rem; margin-bottom: 40px; }
@@ -63,6 +65,7 @@
     </nav>
 
     <main id="tab-home" class="tab-content active max-w-4xl mx-auto px-5 sm:px-8">
+        
         <section class="hero-section text-center reveal">
             <p class="text-[11px] sm:text-xs font-semibold text-zinc-400 mb-6 uppercase tracking-widest">HAFS Eureka Research Project</p>
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-8 break-keep tracking-tight">
@@ -77,11 +80,23 @@
         <section class="research-section reveal">
             <div class="section-number">01. Ventilation Dynamics</div>
             <h2 class="section-title">공간 구조와 환기 조건에 따른<br/>휘발성 물질 체류 분석</h2>
+
             <div class="grid-row">
                 <div class="grid-label">Research Question</div>
                 <div class="grid-content">급식실 내 특정 구역에서 휘발성 물질이 환기되지 못하고 장시간 체류하는 유체역학적 원인은 무엇인가?</div>
             </div>
-            <div class="grid-row border-none">
+
+            <div class="grid-row">
+                <div class="grid-label">Method</div>
+                <div class="grid-content">
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Smoke Tester를 이용한 기류(Airflow) 시각화 및 단락 현상 관찰</li>
+                        <li>NDIR 센서를 활용한 구역별 이산화탄소(CO₂) 정량 측정</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-row border-none pb-0 mb-0">
                 <div class="grid-label mt-2">Result</div>
                 <div class="grid-content">
                     <div class="result-value">2,395 <span class="text-2xl font-semibold text-zinc-400 font-normal tracking-normal">ppm</span></div>
@@ -89,19 +104,60 @@
                     <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed">배기구 배치 불량으로 인한 기류 정체 구역(Dead Zone)임을 실증하였으며, 해당 구역 내 유분성 악취 분자의 체류 시간이 극대화됨을 확인.</p>
                 </div>
             </div>
-            <div class="mt-8 bg-zinc-50 aspect-[21/9] flex items-center justify-center border border-zinc-200 rounded-lg overflow-hidden">
-                <span class="font-mono text-xs font-medium text-zinc-400">[Smoke Test 실험 사진 삽입]</span>
+
+            <div class="pt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                <div class="space-y-2">
+                    <div class="bg-zinc-50 border border-zinc-200 rounded-lg overflow-hidden aspect-[4/3]">
+                        <img src="스크린샷 2026-06-19 091611.png" alt="스모크 테스트 모형" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-[11px] text-zinc-500 leading-relaxed break-keep">
+                        <strong class="text-zinc-700">[그림 1] 아크릴 모형 스모크 테스트</strong><br>
+                        실제 급식실 구조를 축소한 모형입니다. 기류 단락으로 인해 특정 구역에 연기가 정체되는 현상을 가시화했습니다.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="bg-zinc-50 border border-zinc-200 rounded-lg overflow-hidden aspect-[4/3]">
+                        <img src="스크린샷 2026-06-19 091718.png" alt="시뮬레이션 평면도" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-[11px] text-zinc-500 leading-relaxed break-keep">
+                        <strong class="text-zinc-700">[그림 2] 시뮬레이션 평면도 및 Z6 구역</strong><br>
+                        붉은색으로 표시된 Z6 구역이 환기 시스템의 영향을 받지 못하는 치명적인 사각지대(Dead Zone)로 도출되었습니다.
+                    </p>
+                </div>
+
+                <div class="space-y-2 sm:col-span-2 mt-2">
+                    <div class="bg-zinc-50 border border-zinc-200 rounded-lg overflow-hidden aspect-[21/9] sm:aspect-[3/1]">
+                        <img src="스크린샷 2026-06-19 091706.png" alt="CO2 농도 그래프" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-[11px] text-zinc-500 leading-relaxed break-keep">
+                        <strong class="text-zinc-700">[그림 3] Z6 구역 vs 전체 평균 CO₂ 농도 변화</strong><br>
+                        Baseline 측정 결과, Z6 구역(붉은 선)이 전체 평균(검은 선)을 크게 웃도는 높은 농도를 장시간 유지하는 것을 데이터로 확인했습니다.
+                    </p>
+                </div>
             </div>
         </section>
 
         <section class="research-section reveal">
             <div class="section-number">02. Material Chemistry</div>
             <h2 class="section-title">화학적 친화도 기반<br/>섬유 구조별 흡착 메커니즘</h2>
+
             <div class="grid-row">
                 <div class="grid-label">Research Question</div>
                 <div class="grid-content">학생들이 착용하는 의류 재질(친수성 vs 소수성)에 따라 유분성 악취 물질의 고착화 경향성은 어떻게 달라지는가?</div>
             </div>
-            <div class="grid-row border-none">
+
+            <div class="grid-row">
+                <div class="grid-label">Method</div>
+                <div class="grid-content">
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Polyester (생활체육복), Cotton, Rayon 혼방 (교복 셔츠) 재질 분석</li>
+                        <li>지용성 악취 입자의 표면 장력 및 반데르발스 인력 모델링</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-row border-none pb-0 mb-0">
                 <div class="grid-label mt-2">Result</div>
                 <div class="grid-content">
                     <div class="result-value">89.16 <span class="text-3xl font-semibold text-zinc-400 font-normal">%</span></div>
@@ -109,22 +165,42 @@
                     <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed">친수성인 레이온 혼방에 비해 소수성 폴리에스터가 지용성 식단(튀김, 볶음류) 제공 시 분자 간 강력한 인력을 형성하여 압도적으로 높은 악취 잔류를 유발함.</p>
                 </div>
             </div>
+
+            <div class="mt-8 bg-zinc-50 aspect-[21/9] flex items-center justify-center border border-zinc-200 rounded-lg overflow-hidden">
+                <span class="font-mono text-xs font-medium text-zinc-400">[섬유 구조 비교 및 흡착 테스트 사진 삽입]</span>
+            </div>
         </section>
 
         <section class="research-section reveal">
             <div class="section-number">03. Microbial Mechanism</div>
             <h2 class="section-title">생물학적 악취 2차 변질 및<br/>Quorum Sensing 억제</h2>
+
             <div class="grid-row">
                 <div class="grid-label">Research Question</div>
                 <div class="grid-content">섬유에 흡착된 유기물이 미생물에 의해 산패되어 발생하는 2차 잔류취를 근본적으로 제어할 수 있는 방법론은 무엇인가?</div>
             </div>
-            <div class="grid-row border-none">
+
+            <div class="grid-row">
+                <div class="grid-label">Method</div>
+                <div class="grid-content">
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>슈도모나스(Pseudomonas), 포도상구균 배양 및 Biofilm 형성 억제 관찰</li>
+                        <li>세균 집단 정족수 인식(Quorum Sensing) 신호 체계 분석</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-row border-none pb-0 mb-0">
                 <div class="grid-label mt-2">Result</div>
                 <div class="grid-content">
                     <p class="text-3xl md:text-4xl font-extrabold text-black mb-3 tracking-tight">LasR Receptor Blocking</p>
                     <p class="font-bold text-lg text-black mt-2 tracking-tight">신호 물질 수용체의 입체 장애(Steric Hindrance) 유발</p>
                     <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed">녹차 추출 성분(EGCG) 등의 다환성 화합물이 LasR 수용체에 결합하여 미생물의 군집 형성과 악취 유발 대사 물질 생성을 원천적으로 차단함.</p>
                 </div>
+            </div>
+            
+            <div class="mt-8 bg-zinc-50 aspect-[21/9] flex items-center justify-center border border-zinc-200 rounded-lg overflow-hidden">
+                <span class="font-mono text-xs font-medium text-zinc-400">[미생물 배양 및 QSI 결합 구조 사진 삽입]</span>
             </div>
         </section>
         
@@ -187,7 +263,7 @@
                     </select>
                 </div>
             </div>
-            <button onclick="diagnoseMenu()" class="w-full bg-black text-white font-bold py-4 rounded-lg text-sm tracking-widest uppercase hover:bg-zinc-800 transition-colors">
+            <button onclick="diagnoseMenu()" class="w-full bg-black text-white font-bold py-4 rounded-lg text-sm tracking-widest uppercase hover:bg-zinc-800 transition-colors cursor-pointer">
                 Run Analysis
             </button>
         </div>
@@ -247,7 +323,7 @@
                 </div>
             </div>
 
-            <button onclick="calculateFormula()" class="w-full bg-black text-white font-bold py-4 rounded-lg text-sm tracking-widest uppercase hover:bg-zinc-800 transition-colors mt-4">
+            <button onclick="calculateFormula()" class="w-full bg-black text-white font-bold py-4 rounded-lg text-sm tracking-widest uppercase hover:bg-zinc-800 transition-colors mt-4 cursor-pointer">
                 Calculate Formula
             </button>
         </div>
