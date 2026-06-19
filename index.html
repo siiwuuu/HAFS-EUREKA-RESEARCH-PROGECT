@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HAFS EUREKA RESEARCH PAPER</title>
+    <title>HAFS EUREKA RESEARCH(INTEGRATED)</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
         
-        /* Original Modern Font Settings + Nature Style Base */
         body { 
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; 
             background: #ffffff; 
@@ -23,7 +22,6 @@
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Nature Paper Layout Classes (모던 폰트 기준 여백 미세조정) */
         .hero-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 20px; }
         .research-section { min-height: 100vh; padding: 140px 0; border-top: 1px solid #e5e5e5; }
         .section-number { font-size: 12px; font-weight: 700; letter-spacing: 0.25em; color: #888; margin-bottom: 24px; text-transform: uppercase; }
@@ -34,11 +32,9 @@
         .grid-label { font-size: 13px; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 0.05em; }
         .grid-content { font-size: 1.05rem; color: #444; font-weight: 400; break-keep: all; text-align: justify; }
 
-        /* Scroll Reveal Animation */
         .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             .research-section { padding: 80px 0; }
             .section-title { font-size: 1.8rem; margin-bottom: 40px; }
@@ -50,16 +46,16 @@
 <body class="antialiased">
 
     <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-zinc-100">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center h-auto sm:h-16 py-3 sm:py-0 gap-3 sm:gap-0">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center h-auto sm:h-16 py-3 sm:py-0 gap-3 sm:gap-0">
             <div class="font-bold text-sm tracking-tight cursor-pointer flex items-center gap-2" onclick="switchTab('home')">
                 <span class="text-zinc-900">HAFS EUREKA</span>
                 <span class="w-[1px] h-3 bg-zinc-300"></span>
-                <span class="font-medium text-xs text-zinc-400 tracking-wider">PORTFOLIO</span>
+                <span class="font-medium text-xs text-zinc-400 tracking-wider">PROJECT</span>
             </div>
-            <div id="navLinks" class="flex gap-4 sm:gap-6 text-[11px] font-bold tracking-wider uppercase w-full sm:w-auto overflow-x-auto hide-scrollbar justify-center sm:justify-end">
-                <button onclick="switchTab('home')" id="link-home" class="py-2 text-black border-b-2 border-black transition-all">Research Paper</button>
-                <button onclick="switchTab('simulator')" id="link-simulator" class="py-2 text-zinc-400 border-b-2 border-transparent hover:text-black transition-all whitespace-nowrap">Diagnosis Tool</button>
-                <button onclick="switchTab('deodorant')" id="link-deodorant" class="py-2 text-zinc-400 border-b-2 border-transparent hover:text-black transition-all whitespace-nowrap">QSI Solution</button>
+            <div id="navLinks" class="flex gap-4 sm:gap-6 text-[10px] sm:text-[11px] font-bold tracking-wider uppercase w-full sm:w-auto overflow-x-auto hide-scrollbar justify-center sm:justify-end">
+                <button onclick="switchTab('home')" id="link-home" class="py-2 text-black border-b-2 border-black transition-all">개요 및 연구</button>
+                <button onclick="switchTab('simulator')" id="link-simulator" class="py-2 text-zinc-400 border-b-2 border-transparent hover:text-black transition-all whitespace-nowrap">식단 맞춤 진단</button>
+                <button onclick="switchTab('deodorant')" id="link-deodorant" class="py-2 text-zinc-400 border-b-2 border-transparent hover:text-black transition-all whitespace-nowrap">맞춤형 QSI 솔루션</button>
             </div>
         </div>
     </nav>
@@ -68,32 +64,22 @@
         
         <section class="hero-section text-center reveal">
             <p class="text-[11px] sm:text-xs font-semibold text-zinc-400 mb-6 uppercase tracking-widest">HAFS Eureka Research Project</p>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-8 break-keep tracking-tight">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-8 break-keep tracking-tight text-zinc-900">
                 급식실 내 휘발성 물질의 확산 및 잔류 동역학과<br class="hidden md:block"/> 구조·환기 조건에 따른 분과별 탈취 전략 분석
             </h1>
             <div class="flex flex-col items-center gap-2">
                 <p class="font-medium text-sm sm:text-base text-zinc-800 tracking-tight">용인한국외국어대학교부설고등학교</p>
-                <p class="text-xs text-zinc-500 font-medium">MEMBER : 김민솔, 김연아, 박새온, 박시우, 이홍주</p>
+                <p class="text-xs text-zinc-500 font-medium">김민솔, 김연아, 박새온, 박시우, 이홍주</p>
             </div>
         </section>
 
-        <section class="research-section reveal">
+        <section class="research-section reveal" id="section-1">
             <div class="section-number">01. Ventilation Dynamics</div>
             <h2 class="section-title">공간 구조와 환기 조건에 따른<br/>휘발성 물질 체류 분석</h2>
 
             <div class="grid-row">
                 <div class="grid-label">Research Question</div>
                 <div class="grid-content">급식실 내 특정 구역에서 휘발성 물질이 환기되지 못하고 장시간 체류하는 유체역학적 원인은 무엇인가?</div>
-            </div>
-
-            <div class="grid-row">
-                <div class="grid-label">Method</div>
-                <div class="grid-content">
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li>Smoke Tester를 이용한 기류(Airflow) 시각화 및 단락 현상 관찰</li>
-                        <li>NDIR 센서를 활용한 구역별 이산화탄소(CO₂) 정량 측정</li>
-                    </ul>
-                </div>
             </div>
 
             <div class="grid-row border-none pb-0 mb-0">
@@ -105,34 +91,34 @@
                 </div>
             </div>
 
-            <div class="pt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                <div class="space-y-2">
-                    <div class="bg-zinc-50 border border-zinc-200 rounded-lg overflow-hidden aspect-[4/3]">
-                        <img src="스크린샷 2026-06-19 091611.png" alt="스모크 테스트 모형" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+            <div class="pt-12 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
+                <div class="space-y-4">
+                    <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[4/3] flex items-center justify-center p-2">
+                        <img src="fig1.png" alt="스모크 테스트 모형" id="fig1" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-[11px] text-zinc-500 leading-relaxed break-keep">
-                        <strong class="text-zinc-700">[그림 1] 아크릴 모형 스모크 테스트</strong><br>
-                        실제 급식실 구조를 축소한 모형입니다. 기류 단락으로 인해 특정 구역에 연기가 정체되는 현상을 가시화했습니다.
+                    <p class="text-sm text-zinc-600 leading-snug">
+                        <strong class="text-zinc-900 block mb-1">Figure 1. 아크릴 모형 스모크 테스트 가시화</strong>
+                        실제 급식실 평면 구조를 1/N 축소한 아크릴 모형 내부에서 기류 단락 현상에 의해 특정 구역에 연기가 정체되는 양상을 가시화함.
                     </p>
                 </div>
 
-                <div class="space-y-2">
-                    <div class="bg-zinc-50 border border-zinc-200 rounded-lg overflow-hidden aspect-[4/3]">
-                        <img src="스크린샷 2026-06-19 091718.png" alt="시뮬레이션 평면도" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                <div class="space-y-4">
+                    <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[4/3] flex items-center justify-center p-2">
+                        <img src="fig2.png" alt="시뮬레이션 평면도" id="fig2" class="w-full h-full object-contain border border-zinc-200 shadow-sm">
                     </div>
-                    <p class="text-[11px] text-zinc-500 leading-relaxed break-keep">
-                        <strong class="text-zinc-700">[그림 2] 시뮬레이션 평면도 및 Z6 구역</strong><br>
-                        붉은색으로 표시된 Z6 구역이 환기 시스템의 영향을 받지 못하는 치명적인 사각지대(Dead Zone)로 도출되었습니다.
+                    <p class="text-sm text-zinc-600 leading-snug">
+                        <strong class="text-zinc-900 block mb-1">Figure 2. 유체 시뮬레이션 기반 Z6 사각지대 도출</strong>
+                        환기 기류의 사각지대(Dead Zone)로 도출된 붉은색 Z6 구역. 이 구역은 기류의 유입-유출 경로에서 소외되어 악취 분자의 체류 시간이 가장 김.
                     </p>
                 </div>
 
-                <div class="space-y-2 sm:col-span-2 mt-2">
-                    <div class="bg-zinc-50 border border-zinc-200 rounded-lg overflow-hidden aspect-[21/9] sm:aspect-[3/1]">
-                        <img src="스크린샷 2026-06-19 091706.png" alt="CO2 농도 그래프" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                <div class="space-y-4 sm:col-span-2">
+                    <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[21/9] flex items-center justify-center p-4">
+                        <img src="fig3.png" alt="CO2 농도 그래프" id="fig3" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-[11px] text-zinc-500 leading-relaxed break-keep">
-                        <strong class="text-zinc-700">[그림 3] Z6 구역 vs 전체 평균 CO₂ 농도 변화</strong><br>
-                        Baseline 측정 결과, Z6 구역(붉은 선)이 전체 평균(검은 선)을 크게 웃도는 높은 농도를 장시간 유지하는 것을 데이터로 확인했습니다.
+                    <p class="text-sm text-zinc-600 leading-snug text-center">
+                        <strong class="text-zinc-900 block mb-1 text-base">Figure 3. Z6 구역 vs 전체 평균 CO₂ 정량 농도 비교 분석</strong>
+                        Z6 구역(Red line)의 농도가 타 구역(Z1~Z5) 및 전체 평균(Black line) 대비 월등히 높은 수치를 보이며 환기 불량 상태를 정량적으로 입증함.
                     </p>
                 </div>
             </div>
@@ -141,136 +127,134 @@
         <section class="research-section reveal">
             <div class="section-number">02. Material Chemistry</div>
             <h2 class="section-title">화학적 친화도 기반<br/>섬유 구조별 흡착 메커니즘</h2>
-
             <div class="grid-row">
-                <div class="grid-label">Research Question</div>
-                <div class="grid-content">학생들이 착용하는 의류 재질(친수성 vs 소수성)에 따라 유분성 악취 물질의 고착화 경향성은 어떻게 달라지는가?</div>
+                <div class="grid-label">Subject</div>
+                <div class="grid-content">HAFS 교복 및 체육복 섬유 조성별 유분성 악취 물질 고착화 경향성</div>
             </div>
-
-            <div class="grid-row">
-                <div class="grid-label">Method</div>
-                <div class="grid-content">
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li>Polyester (생활체육복), Cotton, Rayon 혼방 (교복 셔츠) 재질 분석</li>
-                        <li>지용성 악취 입자의 표면 장력 및 반데르발스 인력 모델링</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="grid-row border-none pb-0 mb-0">
-                <div class="grid-label mt-2">Result</div>
+            <div class="grid-row border-none">
+                <div class="grid-label">Result</div>
                 <div class="grid-content">
                     <div class="result-value">89.16 <span class="text-3xl font-semibold text-zinc-400 font-normal">%</span></div>
-                    <p class="font-bold text-lg text-black mt-2 tracking-tight">소수성 폴리에스터 섬유의 초기 흡착률 기록</p>
-                    <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed">친수성인 레이온 혼방에 비해 소수성 폴리에스터가 지용성 식단(튀김, 볶음류) 제공 시 분자 간 강력한 인력을 형성하여 압도적으로 높은 악취 잔류를 유발함.</p>
+                    <p class="font-bold text-lg text-black mt-2">소수성 폴리에스터 100% 섬유(체육복)의 압도적 흡착률</p>
+                    <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed">폴리에스터 함량이 높을수록 지용성 악취 물질과 강력한 반데르발스 인력을 형성함. 셔츠(75% Poly) 대비 체육복(100% Poly)에서 세탁 후에도 잔류하는 악취 분자량이 유의미하게 높음.</p>
                 </div>
-            </div>
-
-            <div class="mt-8 bg-zinc-50 aspect-[21/9] flex items-center justify-center border border-zinc-200 rounded-lg overflow-hidden">
-                <span class="font-mono text-xs font-medium text-zinc-400">[섬유 구조 비교 및 흡착 테스트 사진 삽입]</span>
             </div>
         </section>
 
         <section class="research-section reveal">
             <div class="section-number">03. Microbial Mechanism</div>
             <h2 class="section-title">생물학적 악취 2차 변질 및<br/>Quorum Sensing 억제</h2>
+            <div class="grid-row border-none">
+                <div class="grid-label">Analysis</div>
+                <div class="grid-content">
+                    <p class="text-2xl font-extrabold text-black mb-4">LasR Receptor Steric Hindrance</p>
+                    <p class="text-zinc-600 leading-relaxed">녹차 유래 EGCG 분자가 미생물 신호 물질 수용체에 입체 장애를 유발하여 바이오필름 형성을 억제함. 이는 단순 향 마스킹이 아닌 생물학적 원인 차단의 소취 전략임.</p>
+                </div>
+            </div>
+        </section>
 
+        <section class="research-section reveal">
+            <div class="section-number">04. Olfactory Cognition</div>
+            <h2 class="section-title">인지적 하향식 정보 처리에 따른<br/>주관적 냄새 민감도 왜곡 연구</h2>
+            
             <div class="grid-row">
                 <div class="grid-label">Research Question</div>
-                <div class="grid-content">섬유에 흡착된 유기물이 미생물에 의해 산패되어 발생하는 2차 잔류취를 근본적으로 제어할 수 있는 방법론은 무엇인가?</div>
+                <div class="grid-content">동일 농도의 냄새에도 학생마다 불쾌감이 다른 원인은 무엇이며, 사전 정보가 인지에 어떤 영향을 주는가?</div>
             </div>
 
             <div class="grid-row">
-                <div class="grid-label">Method</div>
+                <div class="grid-label">Key Concept</div>
                 <div class="grid-content">
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li>슈도모나스(Pseudomonas), 포도상구균 배양 및 Biofilm 형성 억제 관찰</li>
-                        <li>세균 집단 정족수 인식(Quorum Sensing) 신호 체계 분석</li>
-                    </ul>
+                    <strong class="text-zinc-900 block mb-2">보상 호흡 행동 (Compensatory Breathing)</strong>
+                    물리적 자극이 약해질 때 대뇌가 자율신경계에 명령을 내려 흡입 압력을 조절, 비강 내 유입 분자량을 일정하게 유지하려는 능동적 탐색 과정. 이로 인해 물리적 거리 조절을 통한 변인 통제가 인간 피험자에게는 무력화됨을 확인.
                 </div>
             </div>
 
-            <div class="grid-row border-none pb-0 mb-0">
-                <div class="grid-label mt-2">Result</div>
+            <div class="grid-row border-none">
+                <div class="grid-label">Simulation</div>
                 <div class="grid-content">
-                    <p class="text-3xl md:text-4xl font-extrabold text-black mb-3 tracking-tight">LasR Receptor Blocking</p>
-                    <p class="font-bold text-lg text-black mt-2 tracking-tight">신호 물질 수용체의 입체 장애(Steric Hindrance) 유발</p>
-                    <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed">녹차 추출 성분(EGCG) 등의 다환성 화합물이 LasR 수용체에 결합하여 미생물의 군집 형성과 악취 유발 대사 물질 생성을 원천적으로 차단함.</p>
+                    <p class="font-bold text-lg text-black mb-3">Monte Carlo Simulation (n=100,000)</p>
+                    <p class="text-zinc-600 mb-6 italic leading-relaxed text-sm">"생물학적 수용체 SNP(유전적 차이)에 따른 민감도 가중치를 정규분포 가우스 난수로 생성하여 1,000회 반복 시뮬레이션 수행"</p>
+                    <div class="bg-zinc-800 text-zinc-100 p-6 rounded-xl border-l-4 border-emerald-400">
+                        <p class="font-bold text-emerald-400 mb-2 font-mono text-xs uppercase tracking-widest">Main Finding</p>
+                        <p class="text-[1.05rem] leading-relaxed break-keep">
+                            동일 자극 조건에서 <strong>부정 프레임("잔반 악취")</strong>이 주입된 집단이 긍정 프레임("비빔밥 향") 집단보다 주관적 불쾌감 점수가 통계적으로 유의미하게 <strong>증폭</strong>됨. 냄새 문제는 물리적 환경뿐 아니라 심리적 인지 왜곡의 결과물임.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="mt-8 bg-zinc-50 aspect-[21/9] flex items-center justify-center border border-zinc-200 rounded-lg overflow-hidden">
-                <span class="font-mono text-xs font-medium text-zinc-400">[미생물 배양 및 QSI 결합 구조 사진 삽입]</span>
             </div>
         </section>
         
-        <div class="py-20 text-center text-zinc-400 text-xs font-bold tracking-widest uppercase border-t border-zinc-100">
-            End of Research Paper
+        <div class="py-20 text-center text-zinc-300 text-[10px] font-bold tracking-[0.3em] uppercase border-t border-zinc-100">
+            End of Research Portfolio
         </div>
     </main>
 
     <main id="tab-simulator" class="tab-content max-w-3xl mx-auto px-4 sm:px-6 py-24">
         <div class="space-y-2 mb-10 text-center">
-            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900">Diagnosis Tool</h2>
-            <p class="text-zinc-500 text-sm font-medium">HAFS 6월 식단표(석식/야식 포함)를 분석하여 맞춤형 의류/행동 지침을 제공합니다.</p>
+            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">식단 맞춤 진단</h2>
+            <p class="text-zinc-500 text-sm font-medium">HAFS 6월 식단표를 기반으로 한 의류 혼용률 맞춤 분석기</p>
         </div>
 
         <div class="bg-white border border-zinc-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-sm">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="space-y-2">
-                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">Date (6월 식단)</label>
-                    <select id="dateSelect" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none">
-                        <optgroup label="1주차">
+                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">Analysis Date</label>
+                    <select id="dateSelect" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
+                        <optgroup label="HAFS Menu Archive (June)">
                             <option value="0601">6월 1일 (월요일)</option>
                             <option value="0602">6월 2일 (화요일)</option>
                             <option value="0603">6월 3일 (수요일)</option>
                             <option value="0604">6월 4일 (목요일)</option>
                             <option value="0605">6월 5일 (금요일)</option>
-                        </optgroup>
-                        <optgroup label="2주차">
                             <option value="0608">6월 8일 (월요일)</option>
                             <option value="0609">6월 9일 (화요일)</option>
                             <option value="0610">6월 10일 (수요일)</option>
                             <option value="0611">6월 11일 (목요일)</option>
                             <option value="0612">6월 12일 (금요일)</option>
-                        </optgroup>
-                        <optgroup label="3주차">
                             <option value="0615">6월 15일 (월요일)</option>
                             <option value="0616">6월 16일 (화요일)</option>
                             <option value="0617">6월 17일 (수요일)</option>
                             <option value="0618">6월 18일 (목요일)</option>
                             <option value="0619">6월 19일 (금요일)</option>
-                        </optgroup>
-                        <optgroup label="4주차">
                             <option value="0622">6월 22일 (월요일)</option>
                             <option value="0623">6월 23일 (화요일)</option>
                             <option value="0624">6월 24일 (수요일)</option>
                             <option value="0625">6월 25일 (목요일)</option>
                             <option value="0626">6월 26일 (금요일)</option>
-                        </optgroup>
-                        <optgroup label="5주차">
                             <option value="0629">6월 29일 (월요일)</option>
                             <option value="0630">6월 30일 (화요일)</option>
                         </optgroup>
                     </select>
                 </div>
                 <div class="space-y-2">
-                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">Meal Type</label>
-                    <select id="mealSelect" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none">
-                        <option value="breakfast">조식</option>
-                        <option value="lunch">중식</option>
-                        <option value="dinner" selected>석식 (야식 포함)</option>
+                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">Meal</label>
+                    <select id="mealSelect" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
+                        <option value="breakfast">조식 (Breakfast)</option>
+                        <option value="lunch">중식 (Lunch)</option>
+                        <option value="dinner" selected>석식 (Dinner/Snack)</option>
                     </select>
                 </div>
             </div>
+            
+            <div class="space-y-2 pt-2">
+                <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">Current Clothing (착용 의류)</label>
+                <select id="uniformTypeSelect" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
+                    <option value="shirt">교복 셔츠 (Poly 75%, Rayon 25%) - 표준 친수성</option>
+                    <option value="jacket">교복 자켓 (Wool 60%, Poly 40%) - 흡습성/잔류성</option>
+                    <option value="cardigan">교복 가디건 (Wool 50%, Acrylic 50%) - 다공성 구조</option>
+                    <option value="gym" selected>생활체육복 (Polyester 100%) - 고흡착 소수성</option>
+                </select>
+            </div>
+
             <button onclick="diagnoseMenu()" class="w-full bg-black text-white font-bold py-4 rounded-lg text-sm tracking-widest uppercase hover:bg-zinc-800 transition-colors cursor-pointer">
-                Run Analysis
+                Analyze Adsorption Risk
             </button>
         </div>
 
         <div id="menuResultContainer" class="hidden mt-8 border-t-2 border-zinc-900 pt-8 space-y-6">
             <div class="flex items-center justify-between">
-                <h3 class="text-sm font-bold tracking-widest text-black uppercase">Analysis Result</h3>
+                <h3 class="text-sm font-bold tracking-widest text-black uppercase">Analysis Report</h3>
                 <div id="menuResultBadge"></div>
             </div>
             <div id="menuResultContent" class="space-y-4"></div>
@@ -279,81 +263,82 @@
 
     <main id="tab-deodorant" class="tab-content max-w-3xl mx-auto px-4 sm:px-6 py-24">
         <div class="space-y-2 mb-10 text-center">
-            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900">QSI Formula Calculator</h2>
-            <p class="text-zinc-500 text-sm font-medium">주취 유형과 피부 타입에 따른 최적의 화학적 배합 비율을 산출합니다.</p>
+            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">맞춤형 QSI 솔루션</h2>
+            <p class="text-zinc-500 text-sm font-medium">취기 분자 및 미생물 대사량에 따른 정밀 소취 배합비 산출</p>
         </div>
 
         <div class="bg-white border border-zinc-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-sm">
             <div class="space-y-5">
                 <div class="space-y-2">
-                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">1. Target Odor (주취 유형)</label>
-                    <select id="qsiOdor" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none">
-                        <option value="1">시큼한 쉰내 (포도상구균 대사 산물)</option>
-                        <option value="2">암내 (코리네박테리움 분해 산물)</option>
-                        <option value="3">꿉꿉한 냄새 및 황변 (미크로코쿠스)</option>
-                        <option value="4">급식실 잔류 취기 (슈도모나스균 유래)</option>
+                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">1. Detection Type</label>
+                    <select id="qsiOdor" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
+                        <option value="1">시큼한 쉰내 (Staphylococcus 유래)</option>
+                        <option value="2">암내 (Corynebacterium 유래)</option>
+                        <option value="3">황변 꿉꿉함 (Micrococcus 유래)</option>
+                        <option value="4" selected>급식실 잔류 취기 (Cafeteria-origin Biofilm)</option>
                     </select>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">2. Severity (심각도)</label>
-                        <select id="qsiSeverity" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none">
-                            <option value="1">경미함 (Mild)</option>
-                            <option value="2" selected>보통 (Moderate)</option>
-                            <option value="3">심각함 (Severe)</option>
+                        <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">2. Perceptual Level (감각 인지 강도)</label>
+                        <select id="qsiSeverity" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
+                            <option value="1">Level 1: Detection Threshold (가까이서만 감지됨)</option>
+                            <option value="2" selected>Level 2: Recognition (활동 반경 내 확실히 인지)</option>
+                            <option value="3">Level 3: Saturation Point (주변으로 악취 비산함)</option>
                         </select>
                     </div>
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">3. Fabric (의류 재질)</label>
-                        <select id="qsiFabric" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none">
-                            <option value="1">Polyester (생활체육복)</option>
-                            <option value="2">Cotton Blend (교복 셔츠)</option>
-                            <option value="3">Wool Blend (교복 자켓)</option>
+                        <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">3. Applied Fabric</label>
+                        <select id="qsiFabric" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
+                            <option value="shirt">셔츠 (P75/R25)</option>
+                            <option value="jacket">자켓 (W60/P40)</option>
+                            <option value="cardigan">가디건 (W50/A50)</option>
+                            <option value="gym" selected>체육복 (Poly 100%)</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="space-y-2">
-                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider">4. Skin Type (피부 타입)</label>
-                    <select id="qsiSkinType" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none">
-                        <option value="normal">Normal (일반/알코올 베이스)</option>
-                        <option value="sensitive">Sensitive (민감성/저자극 수성)</option>
+                    <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">4. Skin Sensitivity</label>
+                    <select id="qsiSkinType" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
+                        <option value="normal">Normal (Ethanol-based safe)</option>
+                        <option value="sensitive">Sensitive (Water-based mild formula)</option>
                     </select>
                 </div>
             </div>
 
             <button onclick="calculateFormula()" class="w-full bg-black text-white font-bold py-4 rounded-lg text-sm tracking-widest uppercase hover:bg-zinc-800 transition-colors mt-4 cursor-pointer">
-                Calculate Formula
+                Compute Lab-scale Formula
             </button>
         </div>
 
         <div id="qsiResultContainer" class="hidden mt-8 border-t-2 border-zinc-900 pt-8 space-y-6">
             <div class="flex items-center justify-between pb-4 border-b border-zinc-100">
-                <h3 class="text-sm font-bold tracking-widest text-black uppercase">Prescription Report</h3>
+                <h3 class="text-sm font-bold tracking-widest text-black uppercase">Formula Prescription</h3>
                 <div id="qsiBadge"></div>
             </div>
             
             <div class="space-y-4 text-sm bg-zinc-50 border border-zinc-200 rounded-lg p-6">
-                <div><span class="text-zinc-500 w-24 inline-block font-semibold">Target Pathogen:</span> <strong id="out-bacteria"></strong></div>
-                <div><span class="text-zinc-500 w-24 inline-block font-semibold">Active QSI:</span> <strong id="out-qsi" class="text-lg font-extrabold text-black"></strong></div>
+                <div><span class="text-zinc-500 w-32 inline-block font-semibold">Target Factor:</span> <strong id="out-bacteria"></strong></div>
+                <div><span class="text-zinc-500 w-32 inline-block font-semibold">Matching QSI:</span> <strong id="out-qsi" class="text-lg font-extrabold text-black"></strong></div>
                 <div class="pt-4 mt-4 border-t border-zinc-200">
-                    <p class="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2">Mechanism</p>
+                    <p class="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2 font-mono">Mechanism of Action</p>
                     <p id="out-principle" class="text-zinc-700 leading-relaxed font-medium"></p>
                 </div>
             </div>
 
             <div class="border border-zinc-200 rounded-lg overflow-hidden">
                 <table class="w-full text-left text-sm border-collapse">
-                    <thead class="bg-zinc-50 border-b border-zinc-200 text-xs uppercase tracking-wider text-zinc-500">
-                        <tr><th class="p-4 font-bold">Component</th><th class="p-4 font-bold text-right">Ratio (%)</th></tr>
+                    <thead class="bg-zinc-100 border-b border-zinc-200 text-[10px] uppercase tracking-wider text-zinc-500 font-mono">
+                        <tr><th class="p-4 font-bold">Component Name</th><th class="p-4 font-bold text-right">Weight Ratio (%)</th></tr>
                     </thead>
                     <tbody class="divide-y divide-zinc-200 bg-white">
-                        <tr><td class="p-4 font-medium">Active QSI Agent</td><td class="p-4 text-right font-mono font-bold" id="out-qsi-pct">0.0%</td></tr>
-                        <tr><td class="p-4 font-medium">Surfactant (가용화제)</td><td class="p-4 text-right font-mono font-bold" id="out-surfactant-pct">0.0%</td></tr>
-                        <tr><td class="p-4 font-medium">Neutralizer (화학적 소취제)</td><td class="p-4 text-right font-mono font-bold" id="out-neutral-pct">0.0%</td></tr>
-                        <tr><td class="p-4 font-medium">Ethanol (휘발 용매)</td><td class="p-4 text-right font-mono font-bold" id="out-ethanol-pct">0.0%</td></tr>
-                        <tr><td class="p-4 font-medium">Purified Water (초순수)</td><td class="p-4 text-right font-mono font-bold" id="out-water-pct">0.0%</td></tr>
+                        <tr><td class="p-4 font-medium">Active QSI Solution Agent</td><td class="p-4 text-right font-mono font-bold" id="out-qsi-pct">0.0%</td></tr>
+                        <tr><td class="p-4 font-medium">Solubilizing Surfactant</td><td class="p-4 text-right font-mono font-bold" id="out-surfactant-pct">0.0%</td></tr>
+                        <tr><td class="p-4 font-medium">Chemical Odor Neutralizer</td><td class="p-4 text-right font-mono font-bold" id="out-neutral-pct">0.0%</td></tr>
+                        <tr><td class="p-4 font-medium">Purified Fermented Ethanol</td><td class="p-4 text-right font-mono font-bold" id="out-ethanol-pct">0.0%</td></tr>
+                        <tr><td class="p-4 font-medium">Ultrapure Distilled Water</td><td class="p-4 text-right font-mono font-bold" id="out-water-pct">0.0%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -361,12 +346,15 @@
     </main>
 
     <script>
+        // ---------------------------------------------------------
+        // Core View Controllers
+        // ---------------------------------------------------------
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
+                var elementVisible = 80;
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
@@ -383,17 +371,25 @@
                 lnk.classList.remove('text-black', 'border-black');
                 lnk.classList.add('text-zinc-400', 'border-transparent');
             });
-            const activeLnk = document.getElementById('link-' + tabId);
-            activeLnk.classList.remove('text-zinc-400', 'border-transparent');
-            activeLnk.classList.add('text-black', 'border-black');
-            
+            const activeLnk = document.getElementById('link-' + (tabId === 'home' ? 'home' : tabId));
+            if(activeLnk) {
+                activeLnk.classList.remove('text-zinc-400', 'border-transparent');
+                activeLnk.classList.add('text-black', 'border-black');
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
             reveal(); 
         }
 
-        // ==========================================
-        // 탭 2: 수동 데이터베이스 연동부 (석식+야식 완벽 이식)
-        // ==========================================
+        function scrollToSection1() {
+            switchTab('home');
+            setTimeout(() => {
+                document.getElementById('section-1').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        // ---------------------------------------------------------
+        // HAFS Menu Database (Integrated Dinner & Snacks)
+        // ---------------------------------------------------------
         const hafsMenuDB = {
             "0601": { dateLabel: "6월 1일 (월)", breakfast: "쌀밥, 맑은오징어국, 돈사태묵은지찜, 마늘햄구이, 건세멸치조림, 석박지", lunch: "수제치킨마요덮밥, 미역장국, 치즈스테이크볼꼬지, 쫄뱅이, 단무지무침, 포기김치", dinner: "설렁탕, 쌀밥/ 잡곡밥, 돈육김치볶음, 온두부, 메추리알곤약조림, 콩나물무침, 깍두기", snack: "탱글뽀득감자핫도그, 엔요" },
             "0602": { dateLabel: "6월 2일 (화)", breakfast: "쌀밥, 열무된장국, 닭볶음탕, 파프리카맛살조림, 참나물생채, 포기김치", lunch: "쌀밥, 김치찌개, 언양식불고기, 해물파전, 미니새송이볶음, 치커리생채, 깍두기", dinner: "쌀밥/ 잡곡밥, 대파육개장, 가자미오븐구이, 납작만두&비빔채소, 감자채볶음, 부추양파무침, 포기김치", snack: "뿌링클치킨너겟, 레몬에이드" },
@@ -414,16 +410,20 @@
             "0623": { dateLabel: "6월 23일 (화)", breakfast: "쌀밥, 얼큰버섯찌개, 코다리감자조림, 그릴소시지&머스타드, 참나물생채, 포기김치", lunch: "셀프김밥, 유부된장국, 포기김치", dinner: "쌀밥/ 잡곡밥, 사골파국, 닭볶음탕, 연근튀김, 어묵볶음, 깻잎지무침, 포기김치", snack: "스테프치폴레핫도그, 청귤주스" },
             "0624": { dateLabel: "6월 24일 (수)", breakfast: "칼슘강화밥, 시래기된장국, 돈육두루치기, 스크램블에그, 숙주나물무침, 포기김치", lunch: "알리오올리오, 추가밥, 콘스프, 바베큐닭다리구이, 크런치웨지감자튀김, 오이피클&할라피뇨, 포기김치", dinner: "쌀밥/ 잡곡밥, 부대찌개, 언양식불고기, 두부계란부침, 마카로니샐러드, 미역줄기볶음, 깍두기", snack: "치킨너겟, 포도주스" },
             "0625": { dateLabel: "6월 25일 (목)", breakfast: "쌀밥, 오징어쑥갓국, 수제떡갈비, 메추리알조림, 오이생채, 포기김치", lunch: "쌀밥, 조랭이떡국, 깐풍육, 애호박전, 파래김&양념장, 우엉조림, 포기김치", dinner: "불닭마요덮밥, 불닭볶음, 미소장국, 크로켓, 궁채무침, 포기김치", snack: "토마토바질베이글, 두유" },
-            "0626": { dateLabel: "6월 26일 (금)", breakfast: "쌀밥, 육개장, 낙지굴소스볶음, 마늘햄구이, 양송이피망조림, 포기김치", lunch: "쌀밥, 미역국, 돼지갈비구이, 느타리버섯잡채, 김치오징어전, 단호박꿀찜, 포기김치, 롤케익(크림or딸기)", dinner: "투움바파스타, 쌀밥, 양송이스프, 바베큐폭립, 양상추샐러드, 블루베리무피클, 포기김치", snack: "꿀떡, 수박화채" },
+            "0626": { dateLabel: "6월 26일 (금)", breakfast: "쌀밥, 육개장, 낙지굴소스볶음, 마늘햄구이, 양송이피망조림, 포기김치", lunch: "쌀밥, 미역국, 돼지갈비구이, 느타리버섯잡채, 기치오징어전, 단호박꿀찜, 포기김치, 롤케익(크림or딸기)", dinner: "투움바파스타, 쌀밥, 양송이스프, 바베큐폭립, 양상추샐러드, 블루베리무피클, 포기김치", snack: "꿀떡, 수박화채" },
             "0629": { dateLabel: "6월 29일 (월)", breakfast: "쌀밥, 호박새우젓국, 갈릭돈육찹스테이크, 잡채어묵조림, 쑥갓생채, 포기김치", lunch: "미나리삼겹비빔밥, 시래기된장국, 오징어다리튀김, 리코타풍기샐러드, 포기김치, 짜요짜요(딸기or포도)", dinner: "쌀밥/ 잡곡밥, 짬뽕순두부찌개, 모듬장조림, 새서미두부까스, 새송이버섯볶음, 오이무침, 포기김치", snack: "컵자장면, 야쿠르트제로" },
             "0630": { dateLabel: "6월 30일 (화)", breakfast: "쌀밥, 돼지국밥, 수제완자전, 고추참치볶음, 치커리생채, 포기김치", lunch: "쌀밥, 근대고추장국, 파닭, 마파두부조림, 감자채볶음, 실곤약냉채, 포기김치", dinner: "김치말이국수, 쌀밥, 불고기, 청포묵무침, 아몬드멸치볶음, 무말랭이무침, 열무김치", snack: "찹쌀도넛, 매실주스" }
         };
 
-        const fattyKeywords = ['튀김', '볶음', '전', '삼겹살', '돈가스', '돈까스', '강정', '치킨', '구이', '카츠', '까스', '스테이크', '마요', '갈비', '고기', '바베큐', '만두', '탕수육', '꿔바로우', '폭립', '백립', '핫도그', '너겟'];
+        const fattyKeywords = ['튀김', '볶음', '전', '삼겹살', '돈가스', '돈까스', '강정', '치킨', '구이', '카츠', '까스', '스테이크', '마요', '갈비', '고기', '바베큐', '만두', '탕수육', '꿔바로우', '폭립', '백립', '핫도그', '너겟', '스팸', '설렁탕', '부침'];
 
+        // ---------------------------------------------------------
+        // Uniform Adsorption Simulator Logic
+        // ---------------------------------------------------------
         function diagnoseMenu() {
             const dateId = document.getElementById('dateSelect').value;
             const meal = document.getElementById('mealSelect').value;
+            const uniformType = document.getElementById('uniformTypeSelect').value;
             
             const selectedDayData = hafsMenuDB[dateId];
             let currentMenu = selectedDayData[meal];
@@ -433,10 +433,8 @@
             const container = document.getElementById('menuResultContainer');
             const content = document.getElementById('menuResultContent');
             const badge = document.getElementById('menuResultBadge');
-            
             container.classList.remove('hidden');
 
-            // 야식 데이터 병합 및 UI 태그 추가 (석식 선택시에만 야식 노출)
             let menuDisplayHtml = `<p class="font-extrabold text-black text-lg break-keep">${currentMenu}</p>`;
             let fullSearchText = currentMenu;
 
@@ -447,46 +445,59 @@
 
             let isFatty = false; 
             let detectedWords = [];
-            fattyKeywords.forEach(keyword => { 
-                if (fullSearchText.includes(keyword)) { 
-                    isFatty = true; 
-                    detectedWords.push(keyword); 
-                }
-            });
+            fattyKeywords.forEach(keyword => { if (fullSearchText.includes(keyword)) { isFatty = true; detectedWords.push(keyword); }});
 
-            const finalHeaderHtml = `
-                <div class="p-5 border border-zinc-200 rounded-lg bg-zinc-50 mb-6">
-                    <p class="font-bold text-xs text-zinc-400 mb-1 tracking-wider uppercase">DATE: ${dateLabel} / MEAL: ${mealLabel}</p>
-                    ${menuDisplayHtml}
-                </div>
-            `;
+            // Logic: Weighting by Uniform Type
+            let riskLevel = "SAFE";
+            let riskDesc = "";
+            let adsorptionValue = 0;
+
+            if (uniformType === 'shirt') adsorptionValue = isFatty ? 65.4 : 12.5;
+            else if (uniformType === 'jacket') adsorptionValue = isFatty ? 82.1 : 28.3;
+            else if (uniformType === 'cardigan') adsorptionValue = isFatty ? 78.5 : 22.1;
+            else if (uniformType === 'gym') adsorptionValue = isFatty ? 89.16 : 41.2;
+
+            if (adsorptionValue > 80) riskLevel = "CRITICAL";
+            else if (adsorptionValue > 50) riskLevel = "HIGH";
+            else riskLevel = "SAFE";
+
+            const finalHeaderHtml = `<div class="p-5 border border-zinc-200 rounded-lg bg-zinc-50 mb-6"><p class="font-bold text-xs text-zinc-400 mb-1 tracking-wider uppercase">Analysis Target: ${dateLabel} / ${mealLabel}</p>${menuDisplayHtml}</div>`;
 
             if (isFatty) {
-                badge.innerHTML = `<span class="bg-black text-white px-2 py-1 font-mono font-bold rounded text-[10px]">HIGH RISK</span>`;
+                badge.innerHTML = `<span class="bg-black text-white px-2 py-1 font-mono font-bold rounded text-[10px] animate-pulse">${riskLevel} RISK</span>`;
                 content.innerHTML = `
                     ${finalHeaderHtml}
-                    <p class="text-black font-extrabold border-l-4 border-black pl-3 mb-4">지용성 메뉴(${detectedWords.join(', ')}) 포함. 폴리에스터 섬유 고착화 위험.</p>
-                    <ul class="list-disc pl-5 space-y-2 text-sm text-zinc-700 font-medium">
-                        <li><strong>안전:</strong> 친수성 레이온 혼방 (교복 셔츠 등) 단독 착용 권장</li>
-                        <li><strong>위험:</strong> 소수성 폴리에스터 (체육복/외투) 착용 금지 (89.16% 흡착률)</li>
-                        <li class="text-rose-600 font-extrabold">공간 경고: Z6 구역 (Dead Zone) 착석 금지 (CO₂ 2395ppm)</li>
-                    </ul>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="p-4 bg-zinc-900 text-zinc-100 rounded-xl">
+                            <p class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-1 font-mono">Adsorption Rate</p>
+                            <p class="text-3xl font-extrabold">${adsorptionValue}%</p>
+                        </div>
+                        <div class="p-4 border border-zinc-200 rounded-xl flex items-center justify-center">
+                            <p class="text-sm font-bold text-zinc-800 text-center">선택하신 의류는 지용성 분자에 대해 매우 취약한 소수성 인력을 가집니다.</p>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-rose-50 border border-rose-200 rounded-xl space-y-3">
+                        <p class="font-bold text-rose-900 flex items-center gap-2">⚠️ 지용성 입자(${detectedWords.join(', ')}) 고착 주의</p>
+                        <p class="text-sm text-rose-800 leading-relaxed break-keep">해당 식단은 공기 중으로 다량의 소수성 유분 분자를 비산시킵니다. 선택하신 의류의 폴리에스터/아크릴 조성은 이 분자들을 강력하게 포집합니다.</p>
+                        <button onclick="scrollToSection1()" class="text-xs font-bold text-rose-600 underline cursor-pointer">기류 단락(Dead Zone) 지도 확인하기 →</button>
+                    </div>
                 `;
             } else {
                 badge.innerHTML = `<span class="bg-zinc-100 text-zinc-800 px-2 py-1 font-mono font-bold rounded text-[10px]">SAFE</span>`;
                 content.innerHTML = `
                     ${finalHeaderHtml}
-                    <p class="text-black font-extrabold border-l-4 border-zinc-300 pl-3 mb-4">수용성 메뉴 중심. 악취 흡착 위험도 낮음.</p>
-                    <p class="text-sm text-zinc-700 font-medium">의류 재질에 따른 고착화 위험도가 미미하므로 제한 없이 착용 가능합니다. 식사 후 가벼운 환기를 권장합니다.</p>
+                    <div class="p-5 bg-emerald-50 border border-emerald-200 rounded-xl">
+                        <p class="font-bold text-emerald-900 mb-1">✔️ 쾌적한 상태 유지 가능</p>
+                        <p class="text-sm text-emerald-800">식단이 주로 수용성 메뉴로 구성되어 있어 섬유 고착화 위험이 낮습니다. 일상적인 복장으로 식사가 가능합니다.</p>
+                    </div>
                 `;
             }
-            
             setTimeout(() => { container.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
         }
 
-        // ==========================================
-        // 탭 3: QSI Algorithm 계산 로직
-        // ==========================================
+        // ---------------------------------------------------------
+        // QSI Calculator Logic
+        // ---------------------------------------------------------
         const qsi_db = {
             "1": { bacteria: "Staphylococcus", qsi: "Hamamelitannin", principle: "세균의 Agr 표적 시스템을 하향 조절하여, 땀 속 노폐물을 쉰내 물질로 전환하는 유전자 발현 신호 체계를 차단합니다." },
             "2": { bacteria: "Corynebacterium", qsi: "Farnesol + Carvacrol", principle: "아포크린샘 피지 분해 효소 활성 신호를 교란하여, 액취증 유발 물질 생성을 근본적으로 봉쇄합니다." },
@@ -502,15 +513,19 @@
             const solution = qsi_db[odorChoice];
 
             const qsi_base_pct = 0.5 * severity;
-            const neutralizer_pct = 1.0 * severity;
-            let surfactant_pct = 1.5; let ethanol_pct = 5.0;
+            const neutralizer_pct = 1.2 * severity;
+            let surfactant_pct = 1.5; 
+            let ethanol_pct = 5.0;
             
-            if (fabric === '1') { surfactant_pct = 3.0; ethanol_pct = 5.0; } 
-            else if (fabric === '3') { surfactant_pct = 2.0; ethanol_pct = 15.0; } 
+            // Fabric Logic
+            if (fabric === 'gym') { surfactant_pct = 3.5; ethanol_pct = 8.0; } 
+            else if (fabric === 'jacket') { surfactant_pct = 2.0; ethanol_pct = 15.0; } 
+            else if (fabric === 'cardigan') { surfactant_pct = 2.5; ethanol_pct = 10.0; }
 
             const badgeElement = document.getElementById("qsiBadge");
             if (skinType === "sensitive") {
-                if (ethanol_pct > 5.0) { ethanol_pct = 1.5; surfactant_pct += 1.0; } else { ethanol_pct = 1.0; }
+                ethanol_pct = Math.min(ethanol_pct, 1.5);
+                surfactant_pct += 1.0;
                 badgeElement.innerHTML = `<span class="bg-zinc-100 text-zinc-800 px-2 py-1 font-mono font-bold rounded text-[10px]">SENSITIVE FORMULA</span>`;
             } else {
                 badgeElement.innerHTML = `<span class="bg-black text-white px-2 py-1 font-mono font-bold rounded text-[10px]">NORMAL FORMULA</span>`;
