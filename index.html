@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HAFS EUREKA RESEARCH PAPER</title>
+    <title>HAFS EUREKA RESEARCH</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
@@ -36,6 +36,10 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* Image hover effects */
+        .zoomable-img { cursor: zoom-in; transition: opacity 0.2s, transform 0.2s; }
+        .zoomable-img:hover { opacity: 0.8; transform: scale(1.02); }
+
         @media (max-width: 768px) {
             .research-section { padding: 80px 0; }
             .section-title { font-size: 1.8rem; margin-bottom: 40px; }
@@ -54,23 +58,28 @@
                 <span class="font-medium text-xs text-zinc-400 tracking-wider">PROJECT</span>
             </div>
             <div id="navLinks" class="flex gap-4 sm:gap-6 text-[10px] sm:text-[11px] font-bold tracking-wider uppercase w-full sm:w-auto overflow-x-auto hide-scrollbar justify-center sm:justify-end">
-                <button onclick="switchTab('home')" id="link-home" class="py-2 text-black border-b-2 border-black transition-all">Research Paper</button>
-                <button onclick="switchTab('simulator')" id="link-simulator" class="py-2 text-zinc-400 border-b-2 border-transparent hover:text-black transition-all whitespace-nowrap">Diagnosis Tool</button>
-                <button onclick="switchTab('deodorant')" id="link-deodorant" class="py-2 text-zinc-400 border-b-2 border-transparent hover:text-black transition-all whitespace-nowrap">QSI Solution</button>
+                <button onclick="switchTab('home')" id="link-home" class="py-2 text-black border-b-2 border-black transition-all">개요 및 연구</button>
+                <button onclick="switchTab('simulator')" id="link-simulator" class="py-2 text-zinc-400 border-b-2 border-transparent hover:text-black transition-all whitespace-nowrap">식단 맞춤 진단</button>
+                <button onclick="switchTab('deodorant')" id="link-deodorant" class="py-2 text-zinc-400 border-b-2 border-transparent hover:text-black transition-all whitespace-nowrap">맞춤형 QSI 솔루션</button>
             </div>
         </div>
     </nav>
+
+    <div id="imageModal" class="fixed inset-0 z-[100] bg-black/90 hidden flex items-center justify-center cursor-zoom-out opacity-0 transition-opacity duration-300" onclick="closeModal()">
+        <img id="modalImage" src="" alt="Zoomed Image" class="max-w-[95%] max-h-[95vh] object-contain scale-95 transition-transform duration-300">
+        <div class="absolute top-6 right-6 text-white text-sm tracking-widest uppercase font-bold bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">Click anywhere to close</div>
+    </div>
 
     <main id="tab-home" class="tab-content active max-w-4xl mx-auto px-5 sm:px-8">
         
         <section class="hero-section text-center reveal">
             <p class="text-[11px] sm:text-xs font-semibold text-zinc-400 mb-6 uppercase tracking-widest">HAFS Eureka Research Project</p>
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-8 break-keep tracking-tight text-zinc-900">
-                급식실 내 휘발성 물질의 확산 및 잔류 동역학과<br class="hidden md:block"/> 구조·환기 조건에 따른 분과별 탈취 전략 분석
+                급식실 내 휘발성 물질의 확산<br class="hidden md:block"/> 및 잔류 동역학과<br class="hidden md:block"/> 구조·환기 조건에 따른 분과별 탈취 전략 분석
             </h1>
             <div class="flex flex-col items-center gap-2">
                 <p class="font-medium text-sm sm:text-base text-zinc-800 tracking-tight">용인한국외국어대학교부설고등학교</p>
-                <p class="text-xs text-zinc-500 font-medium">MEMBER : 김민솔, 김연아, 박새온, 박시우, 이홍주</p>
+                <p class="text-xs text-zinc-500 font-medium">김민솔, 김연아, 박새온, 박시우, 이홍주</p>
             </div>
         </section>
 
@@ -87,15 +96,15 @@
                 <div class="grid-label mt-2">Result</div>
                 <div class="grid-content">
                     <div class="result-value">2,395 <span class="text-2xl font-semibold text-zinc-400 font-normal tracking-normal">ppm</span></div>
-                    <p class="font-bold text-lg text-black mt-2 tracking-tight">Z6 구역에서 평균의 2배에 달하는 최고 농도 기록</p>
-                    <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed">배기구 배치 불량으로 인한 기류 정체 구역(Dead Zone)임을 실증하였으며, 해당 구역 내 유분성 악취 분자의 체류 시간이 극대화됨을 확인.</p>
+                    <p class="font-bold text-lg text-black mt-2 tracking-tight">Z6 구역 이산화탄소(CO₂) 최고 농도 기록</p>
+                    <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed break-keep">급식실 내 기류 정체를 정량적으로 확인하기 위해 추적 지표인 이산화탄소(CO₂) 농도를 측정한 결과, 배기구 배치 불량으로 인한 기류 정체 구역(Dead Zone)인 Z6 구역에서 평균의 2배에 달하는 수치가 관측되었습니다. 이는 해당 구역 내 유분성 악취 분자의 체류 시간이 극대화됨을 실증합니다.</p>
                 </div>
             </div>
 
             <div class="pt-12 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
                 <div class="space-y-4">
                     <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[4/3] flex items-center justify-center p-2">
-                        <img src="스크린샷 2026-06-19 091611.png" alt="스모크 테스트 모형" class="w-full h-full object-contain">
+                        <img src="스크린샷 2026-06-19 091611.png" alt="스모크 테스트 모형" class="zoomable-img w-full h-full object-contain" onclick="openModal(this.src)">
                     </div>
                     <p class="text-sm text-zinc-600 leading-snug break-keep">
                         <strong class="text-zinc-900 block mb-1">Figure 1. 아크릴 모형 스모크 테스트 가시화</strong>
@@ -105,7 +114,7 @@
 
                 <div class="space-y-4">
                     <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[4/3] flex items-center justify-center p-2">
-                        <img src="스크린샷 2026-06-19 091718.png" alt="시뮬레이션 평면도" class="w-full h-full object-contain">
+                        <img src="스크린샷 2026-06-19 091718.png" alt="시뮬레이션 평면도" class="zoomable-img w-full h-full object-contain" onclick="openModal(this.src)">
                     </div>
                     <p class="text-sm text-zinc-600 leading-snug break-keep">
                         <strong class="text-zinc-900 block mb-1">Figure 2. 유체 시뮬레이션 기반 Z6 사각지대 도출</strong>
@@ -113,12 +122,22 @@
                     </p>
                 </div>
 
-                <div class="space-y-4 sm:col-span-2">
-                    <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[21/9] flex items-center justify-center p-4">
-                        <img src="스크린샷 2026-06-19 091706.png" alt="CO2 농도 그래프" class="w-full h-full object-contain">
+                <div class="space-y-4">
+                    <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[4/3] flex items-center justify-center p-2">
+                        <img src="스크린샷 2026-06-19 091655.png" alt="Z6 구역 CO2 측정" class="zoomable-img w-full h-full object-contain" onclick="openModal(this.src)">
                     </div>
-                    <p class="text-sm text-zinc-600 leading-snug text-center break-keep">
-                        <strong class="text-zinc-900 block mb-1 text-base">Figure 3. Z6 구역 vs 전체 평균 CO₂ 정량 농도 비교 분석</strong>
+                    <p class="text-sm text-zinc-600 leading-snug break-keep">
+                        <strong class="text-zinc-900 block mb-1">Figure 3. Z6 구역 실제 CO₂ 측정 환경</strong>
+                        기류 정체 구역(Z6)에서의 실제 환기율 저하를 정량화하기 위해 측정기를 배치하여 데이터를 수집하는 모습.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[4/3] flex items-center justify-center p-4">
+                        <img src="스크린샷 2026-06-19 091706.png" alt="CO2 농도 그래프" class="zoomable-img w-full h-full object-contain" onclick="openModal(this.src)">
+                    </div>
+                    <p class="text-sm text-zinc-600 leading-snug break-keep">
+                        <strong class="text-zinc-900 block mb-1">Figure 4. Z6 구역 vs 전체 평균 CO₂ 정량 농도 비교 분석</strong>
                         Z6 구역(Red line)의 농도가 전체 평균(Black line) 대비 월등히 높은 수치를 보이며 환기 불량 상태를 정량적으로 입증함.
                     </p>
                 </div>
@@ -132,12 +151,24 @@
                 <div class="grid-label">Subject</div>
                 <div class="grid-content">HAFS 교복 및 체육복 섬유 조성별 유분성 악취 물질 고착화 경향성</div>
             </div>
-            <div class="grid-row border-none">
+            <div class="grid-row border-none pb-0 mb-0">
                 <div class="grid-label">Result</div>
                 <div class="grid-content">
                     <div class="result-value">89.16 <span class="text-3xl font-semibold text-zinc-400 font-normal">%</span></div>
                     <p class="font-bold text-lg text-black mt-2">소수성 폴리에스터 100% 섬유(체육복)의 압도적 흡착률</p>
                     <p class="mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed break-keep">폴리에스터 함량이 높을수록 지용성 악취 물질과 강력한 반데르발스 인력을 형성함. 셔츠(Poly 75%) 대비 체육복(Poly 100%)에서 세탁 후에도 잔류하는 악취 분자량이 유의미하게 높음.</p>
+                </div>
+            </div>
+
+            <div class="pt-12 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
+                <div class="space-y-4">
+                    <div class="bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[4/3] flex items-center justify-center p-2">
+                        <img src="스크린샷 2026-06-19 091635.png" alt="섬유 흡착 실험" class="zoomable-img w-full h-full object-contain" onclick="openModal(this.src)">
+                    </div>
+                    <p class="text-sm text-zinc-600 leading-snug break-keep">
+                        <strong class="text-zinc-900 block mb-1">Figure 5. 섬유별 유분 흡착도 비교 분석</strong>
+                        교복 및 체육복 섬유 조성에 따른 지용성 물질 고착화 차이를 시각적으로 확인.
+                    </p>
                 </div>
             </div>
         </section>
@@ -153,8 +184,11 @@
                 </div>
             </div>
             <div class="mt-8 bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[21/9] flex items-center justify-center p-4">
-                <img src="스크린샷 2026-06-19 091629.png" alt="미생물 메커니즘" class="w-full h-full object-contain">
+                <img src="스크린샷 2026-06-19 091629.png" alt="미생물 메커니즘" class="zoomable-img w-full h-full object-contain" onclick="openModal(this.src)">
             </div>
+            <p class="mt-3 text-sm text-zinc-600 leading-snug text-center break-keep">
+                <strong class="text-zinc-900 block mb-1">Figure 6. 미생물 Quorum Sensing 억제 기전</strong>
+            </p>
         </section>
 
         <section class="research-section reveal">
@@ -193,9 +227,9 @@
             </div>
 
             <div class="mt-8 bg-zinc-50 border border-zinc-100 rounded-xl overflow-hidden aspect-[21/9] flex items-center justify-center p-4">
-                <img src="스크린샷 2026-06-19 091747.png" alt="시뮬레이션 데이터" class="w-full h-full object-contain">
+                <img src="스크린샷 2026-06-19 091747.png" alt="시뮬레이션 데이터" class="zoomable-img w-full h-full object-contain" onclick="openModal(this.src)">
             </div>
-            <p class="mt-3 text-[12px] font-medium text-zinc-500 text-center">Figure 4. Monte Carlo simulation results showing the impact of framing on olfactory perception.</p>
+            <p class="mt-3 text-[12px] font-medium text-zinc-500 text-center">Figure 7. Monte Carlo simulation results showing the impact of framing on olfactory perception.</p>
         </section>
         
         <div class="py-20 text-center text-zinc-300 text-[10px] font-bold tracking-[0.3em] uppercase border-t border-zinc-100">
@@ -205,7 +239,7 @@
 
     <main id="tab-simulator" class="tab-content max-w-3xl mx-auto px-4 sm:px-6 py-24">
         <div class="space-y-2 mb-10 text-center">
-            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">Diagnosis Tool</h2>
+            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">식단 맞춤 진단</h2>
             <p class="text-zinc-500 text-sm font-medium break-keep">HAFS 식단 분석을 통해 해당 끼니에 적합한 의류 착용 및 행동 지침을 추천합니다.</p>
         </div>
 
@@ -266,7 +300,7 @@
 
     <main id="tab-deodorant" class="tab-content max-w-3xl mx-auto px-4 sm:px-6 py-24">
         <div class="space-y-2 mb-10 text-center">
-            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">QSI Solution</h2>
+            <h2 class="text-2xl font-extrabold tracking-tight text-zinc-900 uppercase">맞춤형 QSI 솔루션</h2>
             <p class="text-zinc-500 text-sm font-medium">취기 분자 및 미생물 대사량에 따른 정밀 소취 배합비 산출</p>
         </div>
 
@@ -275,10 +309,10 @@
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">1. Detection Type</label>
                     <select id="qsiOdor" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                        <option value="1">시큼한 쉰내 (포도상구 대사 땀냄새)</option>
-                        <option value="2">암내 (코리네박테리 피지 분해 취)</option>
-                        <option value="3">황변 꿉꿉함 (미크로코쿠 유래)</option>
-                        <option value="4" selected>급식실 잔류 취기 (슈도모나스균 유음식물 바이오필름 향)</option>
+                        <option value="1">시큼한 쉰내 (포도상구균 대사 땀 냄새)</option>
+                        <option value="2">암내 (코리네박테리움 피지 분해 취)</option>
+                        <option value="3">황변 꿉꿉함 (미크로코쿠스 유래)</option>
+                        <option value="4" selected>급식실 잔류 취기 (슈도모나스균 유래 음식물 바이오필름 향)</option>
                     </select>
                 </div>
 
@@ -297,7 +331,7 @@
                             <option value="shirt">교복 셔츠 (폴리에스터 75% / 레이온 25%)</option>
                             <option value="jacket">교복 자켓 (울 60% / 폴리에스터 40%)</option>
                             <option value="cardigan">교복 가디건 (울 50% / 아크릴 50%)</option>
-                            <option value="gym" selected>체육복 (폴리에스터 100%)</option>
+                            <option value="gym" selected>체육복 (폴리에스 100%)</option>
                         </select>
                     </div>
                 </div>
@@ -305,8 +339,8 @@
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-zinc-800 uppercase tracking-wider font-mono">4. Skin Sensitivity</label>
                     <select id="qsiSkinType" class="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black text-sm appearance-none cursor-pointer">
-                        <option value="normal">Normal (Ethanol-based safe)</option>
-                        <option value="sensitive">Sensitive (Water-based mild formula)</option>
+                        <option value="normal">Normal (에탄올 기반 급속 휘발 포뮬러 가능)</option>
+                        <option value="sensitive">Sensitive (저자극 수성 포뮬러 조정)</option>
                     </select>
                 </div>
             </div>
@@ -350,7 +384,7 @@
 
     <script>
         // ---------------------------------------------------------
-        // Core View Controllers
+        // Core View Controllers & Modal
         // ---------------------------------------------------------
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
@@ -387,7 +421,7 @@
             switchTab('home');
             setTimeout(() => {
                 const element = document.getElementById('section-1');
-                const offset = 80; // 네비게이션 바 높이 고려
+                const offset = 80; 
                 const bodyRect = document.body.getBoundingClientRect().top;
                 const elementRect = element.getBoundingClientRect().top;
                 const elementPosition = elementRect - bodyRect;
@@ -398,6 +432,32 @@
                     behavior: 'smooth'
                 });
             }, 100);
+        }
+
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            
+            // Trigger reflow to apply transition
+            void modal.offsetWidth; 
+            
+            modal.classList.add('opacity-100');
+            modalImg.classList.add('scale-100');
+            modalImg.classList.remove('scale-95');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.remove('opacity-100');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
         }
 
         // ---------------------------------------------------------
@@ -431,7 +491,7 @@
         const fattyKeywords = ['튀김', '볶음', '전', '삼겹살', '돈가스', '돈까스', '강정', '치킨', '구이', '카츠', '까스', '스테이크', '마요', '갈비', '고기', '바베큐', '만두', '탕수육', '꿔바로우', '폭립', '백립', '핫도그', '너겟', '스팸', '설렁탕', '부침'];
 
         // ---------------------------------------------------------
-        // Recommendation Logic (의류 선택 없이 자동 추천)
+        // Recommendation Logic
         // ---------------------------------------------------------
         function diagnoseMenu() {
             const dateId = document.getElementById('dateSelect').value;
